@@ -21,7 +21,7 @@ import club from '../data/club.json';
         </div>
         <p class="leise" style="margin-top:1rem">Weitere Nummer laut Restaurantbote: <a href="tel:+491602421600">0160 2421600</a> · <a href="https://restaurant-termuehlen.de" rel="noopener">restaurant-termuehlen.de</a></p>
       </div>
-      <div class="tabelle-huelle">
+      <div class="tabelle-huelle" tabindex="0">
         <table>
           <caption>Öffnungszeiten</caption>
           <tbody>{z.restaurant.tage.map((t) => <tr data-tag={t.tag}><th scope="row">{t.tag}</th><td>{t.zeit}</td></tr>)}</tbody>

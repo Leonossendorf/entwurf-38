@@ -84,8 +84,8 @@ p, ul, ol { margin: 0 0 1em; }
 /* Knöpfe */
 .knopf { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 3rem; padding: 0.75rem 1.35rem; border-radius: var(--radius); border: 2px solid transparent; font-family: var(--schrift-titel); font-weight: 700; font-size: 0.98rem; letter-spacing: 0.01em; text-decoration: none; cursor: pointer; transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s; }
 .knopf svg { width: 1.2em; height: 1.2em; flex: none; }
-.knopf--voll { background: var(--gruen); color: #fff; }
-.knopf--voll:hover { background: #5a7a29; color: #fff; }
+.knopf--voll { background: #4c6d1e; color: #fff; }
+.knopf--voll:hover { background: #3c5716; color: #fff; }
 .knopf--dunkel { background: var(--petrol); color: #fff; }
 .knopf--dunkel:hover { background: var(--tief); color: #fff; }
 .knopf--rand { border-color: currentColor; color: var(--petrol); background: transparent; }
@@ -445,3 +445,11 @@ html[data-bewegung='aus'] .einblenden { opacity: 1; transform: none; transition:
 }
 html[data-bewegung='aus'] *, html[data-bewegung='aus'] *::before, html[data-bewegung='aus'] *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 @media print { .kopf, .fuss, .held__medien, .status, .filter { display: none !important; } }
+.abschnitt--dunkel .termine__monatstitel { color: #c1d0d4; border-color: rgba(255, 255, 255, 0.4); }
+.abschnitt--dunkel .termine__quelle { color: #c1d0d4; }
+.abschnitt--dunkel .termine__leer { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.3); }
+.abschnitt--dunkel .filter button { background: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.45); }
+.abschnitt--dunkel .filter button[aria-pressed='true'] { background: #fff; color: var(--petrol); border-color: #fff; }
+.abschnitt--dunkel .knopf--voll, .abschnitt--dunkel .knopf--voll:hover { color: #fff; }
+.zwei-spalten--termine { grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); }
+@media (max-width: 900px) { .zwei-spalten--termine { grid-template-columns: 1fr; } .zwei-spalten--termine aside .karte { position: static !important; } }

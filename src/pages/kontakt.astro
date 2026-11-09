@@ -23,7 +23,7 @@ import z from '../data/oeffnungszeiten.json';
             <li><a href={club.instagram} rel="noopener" style="display:inline-flex;gap:.5rem;align-items:center"><Symbol name="instagram" />Instagram</a></li>
           </ul>
         </div>
-        <div class="tabelle-huelle">
+        <div class="tabelle-huelle" tabindex="0">
           <table><caption>Service-Pavillon</caption><tbody>{z.servicePavillon.tage.map((t) => <tr data-tag={t.tag}><th scope="row">{t.tag}</th><td>{t.zeit}</td></tr>)}</tbody></table>
         </div>
       </div>

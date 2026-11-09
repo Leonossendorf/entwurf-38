@@ -22,7 +22,7 @@ import club from '../data/club.json';
         </div>
         <p style="margin-top:1rem"><a href={`mailto:${club.mailService}`}>{club.mailService}</a></p>
       </div>
-      <div class="tabelle-huelle">
+      <div class="tabelle-huelle" tabindex="0">
         <table>
           <caption>Öffnungszeiten</caption>
           <tbody>{z.servicePavillon.tage.map((t) => <tr data-tag={t.tag}><th scope="row">{t.tag}</th><td>{t.zeit}</td></tr>)}</tbody>
