@@ -1,0 +1,39 @@
+{
+  "gruppen": [
+    {
+      "id": "spielen",
+      "titel": "Spielen",
+      "links": [
+        { "titel": "Der Platz", "text": "18 Bahnen, Übungsanlagen, Natur", "href": "/platz/" },
+        { "titel": "Gäste und Greenfee", "text": "Preise, Partnerclubs, Hotel", "href": "/gaeste/" },
+        { "titel": "Startzeit buchen", "text": "Online in PC CADDIE", "href": "https://www.pccaddie.net/clubs/0493312/app.php?cat=tt_timetable_course", "extern": true },
+        { "titel": "Service-Pavillon", "text": "Shop, Fitting, Anmeldung", "href": "/service-pavillon/" },
+        { "titel": "Restaurant", "text": "Termühlen im Clubhaus", "href": "/restaurant/" }
+      ]
+    },
+    {
+      "id": "lernen",
+      "titel": "Golf lernen",
+      "links": [
+        { "titel": "Golf entdecken", "text": "Kostenlos ausprobieren", "href": "/golf-entdecken/" },
+        { "titel": "Platzreife", "text": "Der Kurs zur Spielberechtigung", "href": "/platzreife/" },
+        { "titel": "Golfschule", "text": "Golflehrer, Einzelstunden, Kurse", "href": "/golfschule/" },
+        { "titel": "Kinder und Jugend", "text": "Training dienstags und donnerstags", "href": "/kinder-und-jugend/" }
+      ]
+    },
+    {
+      "id": "club",
+      "titel": "Club",
+      "links": [
+        { "titel": "Mitglied werden", "text": "So einfach geht der Einstieg", "href": "/mitgliedschaft/" },
+        { "titel": "Damengolf und Herrengolf", "text": "Dienstags und mittwochs", "href": "/damen-und-herrengolf/" },
+        { "titel": "Mannschaften", "text": "Ligen und Teams", "href": "/mannschaften/" },
+        { "titel": "Wettspiele", "text": "Captains-Becher, Rosen Pokal, Team-Cup", "href": "/wettspiele/" },
+        { "titel": "Aktuelles und Bilder", "text": "Neues aus dem Club", "href": "/aktuelles/" },
+        { "titel": "Vorstand und Geschichte", "text": "Ansprechpartner, Chronik, KG", "href": "/club/" },
+        { "titel": "Sponsoren", "text": "Unsere Partner", "href": "/sponsoren/" },
+        { "titel": "Downloads", "text": "Satzung, Formulare, Magazine", "href": "/downloads/" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Symbol from '../components/Symbol.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import Bild from '../components/Bild.astro';
+import g from '../data/greenfee.json';
+import club from '../data/club.json';
+---
+<Basis titel="Gäste und Greenfee" beschreibung="Greenfee-Preise, Startzeit buchen, Greenfeeverbund Münsterland, Hospitality Chain und Partnerhotel des Golfclub Euregio.">
+  <Seitenkopf titel="Gäste und Greenfee" text="Herzlich willkommen auf dem Platz. Hier finden Sie Preise, Partnerclubs und unser Partnerhotel." bild="luftbild-abendsonne" bildAlt="" bereich={{ titel: 'Spielen' }} />
+
+  <section class="abschnitt">
+    <div class="innen zwei-spalten">
+      <div>
+        <Text name="gaeste" />
+        <div class="knopfreihe">
+          <a class="knopf knopf--voll" href={club.pccaddie.startzeit} rel="noopener"><Symbol name="start" />Startzeit online buchen</a>
+          <a class="knopf knopf--rand" href={`tel:${club.telefonLink}`}><Symbol name="telefon" />{club.telefon}</a>
+        </div>
+      </div>
+      <div class="karte">
+        <h2 class="fahne" style="font-size:1.3rem">Gut zu wissen</h2>
+        <p>{g.hinweis}</p>
+        <p style="margin:0"><a href="/#platzstatus">Heute auf dem Platz: Carts, Trolleys und Range</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt--weiss" aria-labelledby="preise-titel">
+    <div class="innen">
+      <h2 class="fahne" id="preise-titel">Greenfee</h2>
+      <div class="tabelle-huelle">
+        <table>
+          <caption class="visuell-versteckt">Greenfee pro Person</caption>
+          <thead><tr><th scope="col">Pro Person</th><th scope="col" class="zahl">{g.spalten[0]}</th><th scope="col" class="zahl">{g.spalten[1]}</th></tr></thead>
+          <tbody>{g.preise.map((p) => <tr><th scope="row">{p.leistung}</th><td class="zahl">{p.woche}</td><td class="zahl">{p.wochenende}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <h3 style="margin-top:2rem">Golf Cart</h3>
+      <div class="tabelle-huelle">
+        <table>
+          <caption class="visuell-versteckt">Gebühren für Golf Carts</caption>
+          <thead><tr><th scope="col">Cart</th><th scope="col" class="zahl">Preis</th></tr></thead>
+          <tbody>{g.carts.map((p) => <tr><th scope="row">{p.leistung}</th><td class="zahl">{p.preis}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  {[g.verbund, g.hospitality].map((v, i) => (
+    <section class:list={['abschnitt', { 'abschnitt--weiss': i === 1 }]} aria-labelledby={`verbund-${i}`}>
+      <div class="innen">
+        <h2 class="fahne" id={`verbund-${i}`}>{v.titel}</h2>
+        <p class="einleitung">{v.text}</p>
+        <p class="leise">Bevor Sie als Mitglied einen Partnerclub besuchen, rufen Sie dort bitte kurz an: für die Startzeit, die Greenfee und die Regeln vor Ort.</p>
+        <ul class="raster raster--3" style="list-style:none;padding:0">
+          {v.clubs.map((c) => <li class="karte"><strong>{c.name}</strong><br /><a href={`tel:${c.telefon.replace(/[^\d+]/g, '').replace(/^0/, '+49')}`}>{c.telefon}</a> · <a href={c.web} rel="noopener">Website</a></li>)}
+        </ul>
+      </div>
+    </section>
+  ))}
+
+  <section class="abschnitt" aria-labelledby="hotel-titel">
+    <div class="innen zwei-spalten zwei-spalten--mitte">
+      <div>
+        <h2 class="fahne" id="hotel-titel">Übernachten</h2>
+        <Text name="hotel" />
+      </div>
+      <figure class="foto foto--breit"><Bild name="wiese-abendlicht" alt="Blühende Wiese am Rand des Platzes im Abendlicht" sizes="(max-width: 900px) 100vw, 45vw" /></figure>
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular titel="Frage zur Greenfee oder Startzeit" vorwahl="Startzeit oder Greenfee" /></div></section>
+</Basis>

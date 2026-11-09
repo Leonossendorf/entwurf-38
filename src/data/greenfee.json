@@ -1,0 +1,60 @@
+{
+  "hinweis": "Gilt für Golferinnen und Golfer mit voller Spielberechtigung. Bitte Clubausweis mit Handicap-Index und Heimatclub mitbringen. An Wochenenden und Feiertagen gilt eine Stammvorgabe von 108 je Flight.",
+  "spalten": ["Montag bis Freitag", "Wochenende und Feiertage"],
+  "preise": [
+    { "leistung": "18 Loch, mit Übungsbahnen und Driving Range", "woche": "60 €", "wochenende": "70 €" },
+    { "leistung": "9 Loch, mit Übungsbahnen und Driving Range", "woche": "35 €", "wochenende": "40 €" },
+    { "leistung": "Driving Range mit Übungsbahnen", "woche": "12,50 €", "wochenende": "12,50 €" },
+    { "leistung": "Driving Range ohne Übungsbahnen", "woche": "7 €", "wochenende": "7 €" },
+    { "leistung": "Jugendliche bis 18 Jahre", "woche": "15 €", "wochenende": "25 €" },
+    { "leistung": "Schüler bis 21 und Studierende bis 30 Jahre (mit Ausweis)", "woche": "25 €", "wochenende": "30 €" },
+    { "leistung": "Gäste von Mitgliedern", "woche": "40 €", "wochenende": "50 €" }
+  ],
+  "carts": [
+    { "leistung": "Golf Cart für Gäste, 18 Loch", "preis": "40 €" },
+    { "leistung": "Golf Cart für Gäste, 9 Loch", "preis": "20 €" },
+    { "leistung": "Golf Cart für Mitglieder, 18 Loch", "preis": "20 €" },
+    { "leistung": "Golf Cart für Mitglieder, 9 Loch", "preis": "10 €" }
+  ],
+  "verbund": {
+    "titel": "Greenfeeverbund Münsterland",
+    "text": "Spielerinnen und Spieler aus den Partnerclubs zahlen für 18 Loch die Hälfte: 30 € unter der Woche, 35 € am Wochenende und an Feiertagen. Für Jugendliche, Studierende und 9-Loch-Runden gibt es keine weitere Ermäßigung.",
+    "clubs": [
+      { "name": "Golf- und Landclub Ahaus", "telefon": "02567 405", "web": "https://www.glc-ahaus.de" },
+      { "name": "GC Aldruper Heide (Greven)", "telefon": "02571 97095", "web": "https://www.golfclub-aldruper-heide.de" },
+      { "name": "GC Brückhausen", "telefon": "02582 5645", "web": "https://www.gc-brueckhausen.de" },
+      { "name": "Golf- und Landclub Coesfeld", "telefon": "02541 5957", "web": "https://www.golfclub-coesfeld.de" },
+      { "name": "GC Emstal (Lingen)", "telefon": "0591 63837", "web": "https://www.gc-emstal.de" },
+      { "name": "Golfanlage Gut Drechen", "telefon": "02385 913500", "web": "https://www.golf-gutdrechen.de" },
+      { "name": "GC Gut Hahues zu Telgte", "telefon": "02504 72326", "web": "https://www.golfclub-telgte.de" },
+      { "name": "GC Habichtswald", "telefon": "05456 96013", "web": "https://www.golfclub-habichtswald.de" },
+      { "name": "GC Münsterland (Bagno)", "telefon": "02551 833550", "web": "https://www.gc-muensterland.de" },
+      { "name": "GC Münster-Tinnen", "telefon": "02536 3301011", "web": "https://www.gc-tinnen.de" },
+      { "name": "GC Münster-Wilkinghege", "telefon": "0251 214090", "web": "https://golfclub-wilkinghege.de" },
+      { "name": "Golf- und Landclub Nordkirchen", "telefon": "02596 9191", "web": "https://golfclub-nordkirchen.de" },
+      { "name": "GC Osnabrück-Dütetal", "telefon": "05404 998610", "web": "https://golf-duetetal.de" },
+      { "name": "GSC Rheine-Mesum", "telefon": "05975 9490", "web": "https://www.gc-rheine.de" },
+      { "name": "GC Schloß Vornholz", "telefon": "02524 5799", "web": "https://www.golfclub-schloss-vornholz.de" },
+      { "name": "GC Schultenhof-Peckeloh", "telefon": "05423 42872", "web": "https://golfclub-peckeloh.de" },
+      { "name": "GC Stahlberg im Lippetal", "telefon": "02527 8191", "web": "https://www.golfclub-stahlberg.de" },
+      { "name": "GC Tecklenburger Land", "telefon": "05455 1035", "web": "https://www.golfclub-tecklenburg.de" },
+      { "name": "Warendorfer GC an der Ems", "telefon": "02586 1792", "web": "https://www.warendorfer-golfclub.de" },
+      { "name": "GC Wasserburg-Anholt", "telefon": "02874 915120", "web": "https://www.golfclub-anholt.de" },
+      { "name": "GC Wasserschloß Westerwinkel", "telefon": "02599 759323", "web": "https://gc-westerwinkel.de" },
+      { "name": "GC Widukind-Land", "telefon": "05228 7050", "web": "https://widukindland.de" }
+    ]
+  },
+  "hospitality": {
+    "titel": "Hospitality Chain",
+    "text": "Gäste aus den Partnerclubs in den Niederlanden zahlen für 18 Loch 50 € unter der Woche und 60 € am Wochenende und an Feiertagen. Für 9-Loch-Runden gilt der normale 9-Loch-Preis.",
+    "clubs": [
+      { "name": "Drentse GC de Gelpenberg", "telefon": "+31 591 371929", "web": "https://dgcdegelpenberg.nl" },
+      { "name": "GC Driene", "telefon": "+31 74 2508466", "web": "https://www.golfclubdriene.nl" },
+      { "name": "Twentsche GC", "telefon": "+31 74 3841167", "web": "https://twentschegolfclub.nl" },
+      { "name": "GC 't Zelle", "telefon": "+31 575 467533", "web": "https://www.gczelle.nl" },
+      { "name": "Weleveld Golf", "telefon": "+31 74 2661743", "web": "https://www.weleveldgolf.nl" },
+      { "name": "GC de Koepel", "telefon": "+31 546 574070", "web": "https://www.golfclubdekoepel.nl" },
+      { "name": "GC Zwolle", "telefon": "+31 38 4534270", "web": "https://www.golfclubzwolle.nl" }
+    ]
+  }
+}

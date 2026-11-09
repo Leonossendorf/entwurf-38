@@ -1,0 +1,53 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import Seitenkopf from '../../components/Seitenkopf.astro';
+import Bild from '../../components/Bild.astro';
+import Symbol from '../../components/Symbol.astro';
+import Kontaktformular from '../../components/Kontaktformular.astro';
+import d from '../../data/club-daten.json';
+import bilder from '../../data/bilder.json';
+import { getCollection } from 'astro:content';
+const neues = (await getCollection('aktuelles')).sort((a, b) => b.data.datum.getTime() - a.data.datum.getTime());
+const gross = (n: string) => { const b = (bilder as any)[n]; return `/bilder/${n}-${b.breiten[b.breiten.length - 1]}.webp`; };
+---
+<Basis titel="Aktuelles und Bilder" beschreibung="Neuigkeiten und Bilder aus dem Golfclub Euregio Bad Bentheim.">
+  <Seitenkopf titel="Aktuelles und Bilder" text="Neues aus dem Club, Ergebnisse und Eindrücke aus der Saison." bild="galerie-clubmeisterschaften-2026" bildAlt="" bereich={{ titel: 'Club' }} />
+  <section class="abschnitt" aria-labelledby="neu-titel">
+    <div class="innen">
+      <h2 class="fahne" id="neu-titel">Neuigkeiten</h2>
+      <div class="raster raster--2">
+        {neues.map((n) => (
+          <article class="karte" style="display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:1.2rem;align-items:start">
+            {n.data.bild && <div class="foto foto--quadrat"><Bild name={n.data.bild} alt="" sizes="(max-width: 900px) 40vw, 18vw" /></div>}
+            <div>
+              <p class="leise" style="margin-bottom:.3rem">{n.data.datum.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+              <h3><a href={`/aktuelles/${n.id}/`}>{n.data.titel}</a></h3>
+              <p style="margin:0">{n.data.kurz}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss" aria-labelledby="bilder-titel">
+    <div class="innen">
+      <h2 class="fahne" id="bilder-titel">Bilder der Saison 2026</h2>
+      <ul class="galerie">
+        {d.galerie.map((g) => (
+          <li>
+            <button type="button" data-gross={gross(g.bild)} data-alt={`${g.titel}, ${g.datum}`} data-text={`${g.titel} · ${g.datum}`}>
+              <span class="foto" style="display:block"><Bild name={g.bild} alt={`${g.titel} am ${g.datum}, zum Vergrößern antippen`} sizes="(max-width: 700px) 100vw, 30vw" /></span>
+              <span class="galerie__text">{g.titel}<small>{g.datum}</small></span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  <dialog class="leuchtkasten" id="leuchtkasten" aria-label="Großansicht">
+    <button type="button" class="schliessen"><Symbol name="x" />Schließen</button>
+    <img src="" alt="" />
+    <p></p>
+  </dialog>
+  <section class="abschnitt"><div class="innen innen--schmal"><Kontaktformular titel="Foto oder Bericht schicken" themen={['Foto oder Bericht', 'Allgemeine Frage']} /></div></section>
+</Basis>

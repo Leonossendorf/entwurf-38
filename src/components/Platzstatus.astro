@@ -1,0 +1,28 @@
+---
+import Symbol from './Symbol.astro';
+import daten from '../data/platzstatus.json';
+import { ZUSTAENDE, KACHELN } from '../lib/platzstatus.js';
+interface Props { hell?: boolean; id?: string; ueberschrift?: 'h2' | 'h3' }
+const { hell = false, id, ueberschrift = 'h2' } = Astro.props;
+const z = ZUSTAENDE[daten.greenState as keyof typeof ZUSTAENDE] ?? ZUSTAENDE['01'];
+const Titel = ueberschrift;
+---
+<section class:list={['status', { 'status--hell': hell }]} id={id} aria-labelledby={`${id ?? 'status'}-titel`}>
+  <div class="status__kopf">
+    <Titel class="status__titel" id={`${id ?? 'status'}-titel`}>Heute auf dem Platz</Titel>
+    <p class="status__stand">Stand: {daten.stand} Uhr</p>
+  </div>
+  <ul class="status__kacheln">
+    {KACHELN.map((k) => {
+      const ok = z[k.id as keyof typeof z];
+      return (
+        <li class:list={['kachel', ok ? 'kachel--ja' : 'kachel--nein']}>
+          <Symbol name={k.symbol} klasse="kachel__symbol" />
+          <span class="kachel__name">{k.name}</span>
+          <span class="kachel__wert"><Symbol name={ok ? 'haken' : 'kreuz'} />{ok ? k.ja : k.nein}</span>
+        </li>
+      );
+    })}
+  </ul>
+  <p class="status__demo">Demo mit dem Stand der bisherigen Seite. Später stellt der Platzwart den Zustand selbst ein.</p>
+</section>

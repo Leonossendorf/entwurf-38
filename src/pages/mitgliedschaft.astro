@@ -1,0 +1,39 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Symbol from '../components/Symbol.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import d from '../data/club-daten.json';
+const formulare = d.downloads.filter((x) => x.gruppe === 'Aufnahme' || /Beitragsordnung|Satzung/.test(x.titel));
+---
+<Basis titel="Mitglied werden" beschreibung="Mitglied im Golfclub Euregio werden: Schritt für Schritt, Beitrag erst nach der Platzreife.">
+  <Seitenkopf titel="Mitglied werden" text="Schritt für Schritt zum Golf. Wann Sie den nächsten Schritt machen, entscheiden Sie selbst." bild="luftbild-clubhaus" bildAlt="" bereich={{ titel: 'Club' }} />
+  <section class="abschnitt">
+    <div class="innen zwei-spalten">
+      <div>
+        <Text name="mitgliedschaft" />
+        <ol class="raster" style="list-style:none;padding:0;counter-reset:schritt">
+          {[
+            ['Ausprobieren', 'Kostenlos bei der Golfentdeckungsreise', '/golf-entdecken/'],
+            ['Platzreife machen', 'Kurs mit unseren Golflehrern, Abschluss mit Handicap 54', '/platzreife/'],
+            ['Mitglied werden', 'Aufnahmeformular ausfüllen, erst jetzt beginnt der Beitrag', '#formulare'],
+          ].map((s, i) => (
+            <li class="karte" style="display:grid;grid-template-columns:3rem 1fr;gap:1rem;align-items:center">
+              <span style="font-family:var(--schrift-titel);font-weight:800;font-size:2rem;color:var(--gruen)">{i + 1}</span>
+              <span><a href={s[2]}><strong>{s[0]}</strong></a><br />{s[1]}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div class="karte" id="formulare">
+        <h2 class="fahne" style="font-size:1.3rem">Formulare und Beiträge</h2>
+        <ul style="list-style:none;padding:0">
+          {formulare.map((f) => <li style="margin-bottom:.6rem"><a href={f.url} rel="noopener" style="display:inline-flex;gap:.5rem;align-items:center"><Symbol name="download" />{f.titel}<span class="visuell-versteckt"> (PDF)</span></a></li>)}
+        </ul>
+        <p class="leise" style="margin:0">Die Beitragshöhen stehen in der Beitragsordnung.</p>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular titel="Frage zur Mitgliedschaft" vorwahl="Mitgliedschaft" /></div></section>
+</Basis>

@@ -1,0 +1,19 @@
+---
+// Gibt ein Bild aus /public/bilder mit passenden Größen aus (WebP, mehrere Breiten).
+// Im Browser-Editor hochgeladene Bilder (Pfad beginnt mit /) werden direkt eingebunden.
+import bilder from '../data/bilder.json';
+interface Props { name: string; alt: string; sizes?: string; klasse?: string; laden?: 'lazy' | 'eager'; position?: string; wichtig?: boolean }
+const { name, alt, sizes = '100vw', klasse, laden = 'lazy', position, wichtig = false } = Astro.props;
+const b = (bilder as Record<string, { w: number; h: number; breiten: number[] }>)[name];
+const stil = position ? `object-position:${position}` : undefined;
+let srcset = '', src = name, breite: number | undefined, hoehe: number | undefined;
+if (b) {
+  srcset = b.breiten.map((w) => `/bilder/${name}-${w}.webp ${w}w`).join(', ');
+  breite = b.breiten[Math.min(1, b.breiten.length - 1)];
+  hoehe = Math.round((b.h / b.w) * breite);
+  src = `/bilder/${name}-${breite}.webp`;
+} else if (!name.startsWith('/')) {
+  throw new Error(`Bild fehlt: ${name}`);
+}
+---
+<img src={src} srcset={srcset || undefined} sizes={srcset ? sizes : undefined} width={breite} height={hoehe} alt={alt} class={klasse} loading={laden} decoding="async" fetchpriority={wichtig ? 'high' : undefined} style={stil} />

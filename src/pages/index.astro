@@ -1,0 +1,202 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Bild from '../components/Bild.astro';
+import Symbol from '../components/Symbol.astro';
+import Platzstatus from '../components/Platzstatus.astro';
+import Termine from '../components/Termine.astro';
+import Text from '../components/Text.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import club from '../data/club.json';
+import bahnen from '../data/bahnen.json';
+import zeiten from '../data/oeffnungszeiten.json';
+import pcc from '../data/termine-pccaddie.json';
+import eigene from '../data/termine.json';
+import { zusammenfuehren, datumTeile } from '../lib/termine.js';
+import { getCollection } from 'astro:content';
+
+const alle = zusammenfuehren(pcc.termine as any[], eigene.termine as any[]);
+const entdecken = alle.find((t) => /golfentdeck/i.test(t.titel));
+const naechstesEntdecken = entdecken ? `${datumTeile(entdecken.datum).wochentag}, ${datumTeile(entdecken.datum).tag}. ${datumTeile(entdecken.datum).monat}` : '';
+const herren = bahnen.bahnen.reduce((s, b) => s + b.herren, 0);
+const damen = bahnen.bahnen.reduce((s, b) => s + b.damen, 0);
+const neues = (await getCollection('aktuelles')).sort((a, b) => b.data.datum.getTime() - a.data.datum.getTime()).slice(0, 3);
+---
+<Basis titel="Start" startseite>
+  <section class="held" aria-labelledby="held-titel">
+    <div class="held__medien">
+      <!-- Platzhalter: Hier läuft später der Imagefilm des Clubs (Original kommt von Leon) -->
+      <Bild name="luftbild-bahnen" alt="Luftbild über die Spielbahnen des Golfclub Euregio, zwischen Wald, Wasser und Wiesen" laden="eager" wichtig position="50% 45%" />
+    </div>
+    <div class="held__schleier"></div>
+    <div class="held__oben">
+      <a class="logo" href="/" aria-label="Golfclub Euregio Bad Bentheim"><img src="/bilder/logo-weiss.webp" width="501" height="229" alt="" /></a>
+      <div class="held__oben-rechts">
+        <button type="button" class="held__menue" data-zugang-oeffnen><Symbol name="zugang" /><span class="visuell-versteckt">Barrierefreiheit einstellen</span></button>
+        <button type="button" class="held__menue" data-menue-oeffnen aria-haspopup="dialog"><Symbol name="menue" />Menü</button>
+      </div>
+    </div>
+    <p class="held__platzhalter">Platzhalter: Hier läuft später der Imagefilm</p>
+    <div class="held__inhalt">
+      <div>
+        <p class="held__ort">Bad Bentheim · Euregio</p>
+        <h1 id="held-titel">Golf im Schatten der Burg Bentheim</h1>
+        <p class="held__satz">{club.claim} 18 Bahnen an der deutsch-niederländischen Grenze, offen für Neugierige, Gäste und Mitglieder.</p>
+        <div class="knopfreihe">
+          <a class="knopf knopf--voll" href="/golf-entdecken/">Golf kostenlos ausprobieren</a>
+          <a class="knopf knopf--rand" style="color:#fff" href={club.pccaddie.startzeit} rel="noopener">Startzeit buchen</a>
+        </div>
+      </div>
+      <Platzstatus id="platzstatus" />
+    </div>
+  </section>
+
+  <section class="abschnitt" aria-labelledby="wege-titel">
+    <div class="innen">
+      <p class="dachzeile">Was haben Sie vor?</p>
+      <h2 class="fahne" id="wege-titel">Ihr Weg auf den Platz</h2>
+      <div class="wege">
+        <a class="weg einblenden" href="/golf-entdecken/">
+          <div class="weg__bild"><Bild name="wiese-abendlicht" alt="" sizes="(max-width: 900px) 40vw, 30vw" /></div>
+          <div class="weg__inhalt">
+            <span class="weg__fuer">Neu beim Golf</span>
+            <h3>Golf ausprobieren</h3>
+            <p class="weg__info">Die Golfentdeckungsreise ist kostenlos und unverbindlich. Freizeitkleidung und Sportschuhe reichen.</p>
+            {naechstesEntdecken && <span class="weg__live"><Symbol name="kalender" />Nächster Termin: {naechstesEntdecken}</span>}
+            <span class="weg__mehr">So läuft es ab</span>
+          </div>
+        </a>
+        <a class="weg einblenden" href="/gaeste/">
+          <div class="weg__bild"><Bild name="luftbild-teich" alt="" sizes="(max-width: 900px) 40vw, 30vw" /></div>
+          <div class="weg__inhalt">
+            <span class="weg__fuer">Mit Platzreife</span>
+            <h3>Als Gast spielen</h3>
+            <p class="weg__info">18 Loch ab 60 €, mit Partnerclub aus dem Greenfeeverbund Münsterland ab 30 €.</p>
+            <span class="weg__mehr">Greenfee und Startzeit</span>
+          </div>
+        </a>
+        <a class="weg einblenden" href="/termine/">
+          <div class="weg__bild"><Bild name="luftbild-clubhaus" alt="" sizes="(max-width: 900px) 40vw, 30vw" /></div>
+          <div class="weg__inhalt">
+            <span class="weg__fuer">Für Mitglieder</span>
+            <h3>Im Club dabei sein</h3>
+            <p class="weg__info">Turniere, Damen- und Herrengolf, Kurse und Feste an einem Ort, mit Anmeldung in PC CADDIE.</p>
+            <span class="weg__mehr">Alle Termine</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt--dunkel" aria-labelledby="termine-titel">
+    <div class="innen zwei-spalten">
+      <div>
+        <p class="dachzeile">Was ansteht</p>
+        <h2 class="fahne" id="termine-titel">Die nächsten Termine</h2>
+        <p>Alle Termine des Clubs an einer Stelle: Turniere, Damen- und Herrengolf, Kurse, Feste und das Restaurant. Turniere und Kurse kommen direkt aus PC CADDIE.</p>
+        <div class="knopfreihe" style="margin-top:1.5rem">
+          <a class="knopf knopf--voll" href="/termine/"><Symbol name="kalender" />Alle Termine mit Filter</a>
+          <a class="knopf knopf--rand" href="/termine/?bereich=einsteiger">Termine für Einsteiger</a>
+        </div>
+      </div>
+      <Termine anzahl={6} kompakt gruppieren={false} id="termine-start" kategorien={["turniere", "damengolf", "herrengolf", "einsteiger", "kurse", "clubleben", "restaurant"]} />
+    </div>
+  </section>
+
+  <section class="abschnitt" aria-labelledby="bahnen-titel">
+    <div class="innen">
+      <div class="zwei-spalten zwei-spalten--mitte" style="margin-bottom:2rem">
+        <div>
+          <p class="dachzeile">Bahn für Bahn</p>
+          <h2 class="fahne" id="bahnen-titel">18 Bahnen, jede mit eigenem Charakter</h2>
+          <p class="einleitung">Wiesen, Waldsäume, Hecken und Wasser: Blättern Sie durch den Platz, so wie im Birdie Book des Clubs.</p>
+        </div>
+        <div class="zahlen">
+          <div><strong>Par 72</strong><span>18 Löcher</span></div>
+          <div><strong>{herren.toLocaleString('de-DE')} m</strong><span>von Gelb</span></div>
+          <div><strong>{damen.toLocaleString('de-DE')} m</strong><span>von Rot</span></div>
+          <div><strong>1987</strong><span>gegründet</span></div>
+        </div>
+      </div>
+      <div class="bahnen-band" tabindex="0" role="region" aria-label="Die 18 Bahnen, seitlich blättern">
+        {bahnen.bahnen.map((b) => (
+          <a class="lochkarte" href={`/platz/#bahn-${b.nr}`}>
+            <span class="lochkarte__leiste">
+              <span class="lochkarte__nr"><span class="visuell-versteckt">Bahn </span>{b.nr}</span>
+              <span class="lochkarte__wert"><small>PAR</small>{b.par}</span>
+              <span class="lochkarte__wert"><small>HCP</small>{b.hcp}</span>
+            </span>
+            <span class="lochkarte__bild"><Bild name={`bahn-${String(b.nr).padStart(2, '0')}`} alt="" sizes="12rem" /></span>
+            <span class="lochkarte__laenge"><span class="tee">{b.herren} m</span><span class="tee tee--rot">{b.damen} m</span></span>
+          </a>
+        ))}
+      </div>
+      <p><a class="pfeil-link" href="/platz/">Alle Bahnen und die Übungsanlagen</a></p>
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt--weiss" aria-labelledby="clubhaus-titel">
+    <div class="innen zwei-spalten zwei-spalten--mitte">
+      <figure class="foto foto--breit einblenden"><Bild name="terrasse-clubhaus" alt="Die Terrasse des Clubhauses mit Sonnenschirmen und Blick auf das Grün" sizes="(max-width: 900px) 100vw, 55vw" /></figure>
+      <div>
+        <p class="dachzeile">Clubhaus</p>
+        <h2 class="fahne" id="clubhaus-titel">Nach der Runde auf die Terrasse</h2>
+        <p>Frank Termühlen und sein Team kochen im Clubhaus, mit Wintergarten, Kamin und großer Sonnenterrasse.</p>
+        <p><strong>Restaurant heute:</strong> <span data-heute-zeiten={JSON.stringify(zeiten.restaurant.tage)}>Montag Ruhetag, sonst ab 12 Uhr</span><br />
+        <strong>Service-Pavillon heute:</strong> <span data-heute-zeiten={JSON.stringify(zeiten.servicePavillon.tage)}>werktags ab 9 Uhr</span></p>
+        <div class="knopfreihe">
+          <a class="knopf knopf--dunkel" href="/restaurant/">Zum Restaurant</a>
+          <a class="knopf knopf--rand" href="tel:+495922777613"><Symbol name="telefon" />Tisch reservieren</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt" aria-labelledby="natur-titel">
+    <div class="innen zwei-spalten zwei-spalten--mitte">
+      <div>
+        <p class="dachzeile">Golf und Natur</p>
+        <h2 class="fahne" id="natur-titel">Ein Platz, der auch Bienen gehört</h2>
+        <p>Am Rand der Fairways blüht es, an Bahn 11 steht ein Insektenhotel, und neben Bahn 14 summen die Bienen aus den Stöcken des Clubs.</p>
+        <a class="pfeil-link" href="/platz/#natur">Mehr über die Natur auf dem Platz</a>
+      </div>
+      <div class="raster raster--2">
+        <figure class="foto foto--hoch einblenden"><Bild name="hummel" alt="Eine Hummel auf einer lila Blüte am Rand des Platzes" sizes="(max-width: 900px) 50vw, 22vw" /></figure>
+        <figure class="foto foto--hoch einblenden"><Bild name="bienenstoecke" alt="Bienenstöcke zwischen hohen Gräsern neben dem Platz" sizes="(max-width: 900px) 50vw, 22vw" position="40% 50%" /></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt--weiss" aria-labelledby="neues-titel">
+    <div class="innen">
+      <p class="dachzeile">Aus dem Club</p>
+      <h2 class="fahne" id="neues-titel">Aktuelles</h2>
+      <div class="raster raster--3">
+        {neues.map((n) => (
+          <article class="karte einblenden">
+            {n.data.bild && <div class="foto foto--breit" style="margin:-1.4rem -1.4rem 1rem"><Bild name={n.data.bild} alt="" sizes="(max-width: 900px) 100vw, 30vw" /></div>}
+            <p class="leise" style="margin-bottom:.3rem">{n.data.datum.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+            <h3><a href={`/aktuelles/${n.id}/`}>{n.data.titel}</a></h3>
+            <p style="margin:0">{n.data.kurz}</p>
+          </article>
+        ))}
+      </div>
+      <p style="margin-top:1.5rem"><a class="pfeil-link" href="/aktuelles/">Alle Neuigkeiten und Bilder</a></p>
+    </div>
+  </section>
+
+  <section class="abschnitt" aria-label="Kontakt">
+    <div class="innen zwei-spalten">
+      <Kontaktformular />
+      <div>
+        <h2 class="fahne">So finden Sie uns</h2>
+        <p>{club.name}<br />{club.strasse}, {club.ort}</p>
+        <div class="knopfreihe" style="margin-bottom:1.5rem">
+          <a class="knopf knopf--dunkel" href={club.routeLink} rel="noopener"><Symbol name="route" />Route planen</a>
+          <a class="knopf knopf--rand" href={`tel:${club.telefonLink}`}><Symbol name="telefon" />{club.telefon}</a>
+        </div>
+        <p>Der Service-Pavillon ist auch per WhatsApp erreichbar: <a href={`https://wa.me/${club.whatsappService.replace('+', '')}`} rel="noopener">{club.whatsappAnzeige}</a>.</p>
+        <p><a href={club.instagram} rel="noopener">Folgen Sie dem Club auf Instagram</a></p>
+      </div>
+    </div>
+  </section>
+</Basis>

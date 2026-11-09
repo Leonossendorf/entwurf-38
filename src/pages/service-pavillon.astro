@@ -1,0 +1,47 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Bild from '../components/Bild.astro';
+import Symbol from '../components/Symbol.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import z from '../data/oeffnungszeiten.json';
+import p from '../data/personen.json';
+import club from '../data/club.json';
+---
+<Basis titel="Service-Pavillon" beschreibung="Service-Pavillon des Golfclub Euregio: Anmeldung, Startzeiten, Shop, Fitting und Öffnungszeiten.">
+  <Seitenkopf titel="Service-Pavillon" text="Anmeldung, Startzeiten, Shop und Fitting: Ihr erster Weg auf der Anlage." bild="luftbild-clubhaus" bildAlt="" bereich={{ titel: 'Spielen' }} />
+  <section class="abschnitt">
+    <div class="innen zwei-spalten">
+      <div>
+        <Text name="service-pavillon" />
+        <div class="knopfreihe">
+          <a class="knopf knopf--voll" href={club.pccaddie.start} rel="noopener">Fitting in PC CADDIE buchen</a>
+          <a class="knopf knopf--rand" href={`https://wa.me/${club.whatsappService.replace('+', '')}`} rel="noopener"><Symbol name="whatsapp" />WhatsApp</a>
+          <a class="knopf knopf--rand" href={`tel:${club.telefonLink}`}><Symbol name="telefon" />{club.telefon}</a>
+        </div>
+        <p style="margin-top:1rem"><a href={`mailto:${club.mailService}`}>{club.mailService}</a></p>
+      </div>
+      <div class="tabelle-huelle">
+        <table>
+          <caption>Öffnungszeiten</caption>
+          <tbody>{z.servicePavillon.tage.map((t) => <tr data-tag={t.tag}><th scope="row">{t.tag}</th><td>{t.zeit}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss" aria-labelledby="team-titel">
+    <div class="innen">
+      <h2 class="fahne" id="team-titel">Das Team</h2>
+      <div class="raster raster--3">
+        {p.service.map((m) => (
+          <div class="karte" style="display:grid;grid-template-columns:5rem 1fr;gap:1rem;align-items:center">
+            {m.bild ? <div class="foto foto--quadrat" style="border-radius:50%"><Bild name={m.bild} alt={`Porträt von ${m.name}`} sizes="5rem" position="50% 30%" /></div> : <div class="foto foto--quadrat" style="border-radius:50%;display:grid;place-items:center;background:var(--petrol);color:#fff;font-family:var(--schrift-titel);font-weight:800;font-size:1.4rem" aria-hidden="true">{m.name.split(' ').map((x) => x[0]).join('')}</div>}
+            <div><strong>{m.name}</strong>{m.text && <p class="leise" style="margin:.3rem 0 0">{m.text}</p>}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt"><div class="innen innen--schmal"><Kontaktformular titel="Frage an den Service-Pavillon" themen={['Startzeit oder Greenfee', 'Shop und Ausrüstung', 'Fitting', 'Allgemeine Frage']} /></div></section>
+</Basis>

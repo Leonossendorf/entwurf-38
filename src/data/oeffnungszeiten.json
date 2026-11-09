@@ -1,0 +1,32 @@
+{
+  "servicePavillon": {
+    "titel": "Service-Pavillon",
+    "hinweis": "Jeden 1. Samstag im Monat 09:00–13:00 Uhr",
+    "tage": [
+      { "tag": "Montag", "zeit": "09:00–14:30 Uhr" },
+      { "tag": "Dienstag", "zeit": "09:00–16:00 Uhr" },
+      { "tag": "Mittwoch", "zeit": "09:00–17:00 Uhr" },
+      { "tag": "Donnerstag", "zeit": "09:00–12:00 Uhr" },
+      { "tag": "Freitag", "zeit": "09:00–17:00 Uhr" },
+      { "tag": "Samstag", "zeit": "nur am 1. Samstag im Monat, 09:00–13:00 Uhr" },
+      { "tag": "Sonntag", "zeit": "geschlossen" }
+    ]
+  },
+  "restaurant": {
+    "titel": "Restaurant Termühlen",
+    "hinweis": "Sonntags Frühstücksbuffet von 9 bis 12 Uhr",
+    "tage": [
+      { "tag": "Montag", "zeit": "Ruhetag" },
+      { "tag": "Dienstag", "zeit": "ab 12:00 Uhr, Küche bis 19:00 Uhr (Suppe, Flammkuchen, Snacks)" },
+      { "tag": "Mittwoch", "zeit": "ab 12:00 Uhr, Küche bis 21:00 Uhr" },
+      { "tag": "Donnerstag", "zeit": "ab 12:00 Uhr, Küche bis 21:00 Uhr" },
+      { "tag": "Freitag", "zeit": "ab 12:00 Uhr, Küche bis 21:00 Uhr" },
+      { "tag": "Samstag", "zeit": "ab 12:00 Uhr, Küche bis 21:00 Uhr" },
+      { "tag": "Sonntag", "zeit": "ab 09:00 Uhr, Küche bis 20:00 Uhr" }
+    ]
+  },
+  "range": {
+    "titel": "Driving Range",
+    "hinweis": "Von Mittwoch 18:00 Uhr bis Donnerstag 9:00 Uhr geschlossen. Flutlicht für das Training am Abend."
+  }
+}

@@ -1,0 +1,85 @@
+---
+import Symbol from './Symbol.astro';
+import nav from '../data/navigation.json';
+import club from '../data/club.json';
+import status from '../data/platzstatus.json';
+import { kurztext, ZUSTAENDE } from '../lib/platzstatus.js';
+interface Props { startseite?: boolean; pfad: string }
+const { startseite = false, pfad } = Astro.props;
+const aktiv = (href: string) => (href === pfad ? 'page' : undefined);
+const gruppeAktiv = (g: { links: { href: string }[] }) => g.links.some((l) => l.href === pfad);
+const offen = (ZUSTAENDE as any)[status.greenState]?.platz !== false;
+---
+<header class:list={['kopf', { 'kopf--startseite kopf--versteckt': startseite }]} id="kopf" data-startseite={startseite ? 'ja' : undefined}>
+  <div class="kopf__dienst">
+    <div class="innen">
+      <ul class="dienst__liste" aria-label="Schnellzugriff">
+        <li><a href="/#platzstatus" class="status-kurz"><span class:list={['status-kurz__punkt', { 'status-kurz__punkt--zu': !offen }]} aria-hidden="true"></span>{kurztext(status.greenState)}</a></li>
+        <li><a href={club.wetterLink} rel="noopener"><Symbol name="wetter" /><span>Wetter in Bad Bentheim<span class="wetter-live" data-wetter></span></span></a></li>
+        <li><a href={club.routeLink} rel="noopener"><Symbol name="route" />Route planen</a></li>
+      </ul>
+      <ul class="dienst__liste">
+        <li><a href={club.pccaddie.start} rel="noopener"><Symbol name="extern" />PC CADDIE</a></li>
+        <li><a href={`tel:${club.telefonLink}`}><Symbol name="telefon" />{club.telefon}</a></li>
+        <li><button type="button" data-zugang-oeffnen><Symbol name="zugang" />Barrierefreiheit</button></li>
+      </ul>
+    </div>
+  </div>
+  <div class="kopf__haupt">
+    <div class="innen">
+      <a class="logo" href="/" aria-label="Golfclub Euregio Bad Bentheim, zur Startseite">
+        <img src="/bilder/logo-weiss.webp" width="501" height="229" alt="" />
+      </a>
+      <nav class="nav" aria-label="Hauptmenü">
+        <ul class="nav__liste">
+          <li class="nav__eintrag"><a class="nav__link" href="/termine/" aria-current={aktiv('/termine/')}>Termine</a></li>
+          {nav.gruppen.map((g) => (
+            <li class="nav__eintrag">
+              <button type="button" class:list={['nav__knopf', { 'ist-aktiv': gruppeAktiv(g) }]} aria-expanded="false" aria-controls={`panel-${g.id}`}>{g.titel}<Symbol name="runter" /></button>
+              <ul class="nav__panel" id={`panel-${g.id}`} hidden>
+                {g.links.map((l) => (
+                  <li><a href={l.href} aria-current={aktiv(l.href)} rel={l.extern ? 'noopener' : undefined}>{l.titel}<small>{l.text}</small></a></li>
+                ))}
+              </ul>
+            </li>
+          ))}
+          <li class="nav__eintrag"><a class="nav__link" href="/kontakt/" aria-current={aktiv('/kontakt/')}>Kontakt</a></li>
+        </ul>
+      </nav>
+      <a class="knopf knopf--voll kopf__aktion" href={club.pccaddie.startzeit} rel="noopener">Startzeit buchen</a>
+      <button type="button" class="menue-knopf" data-menue-oeffnen aria-haspopup="dialog"><Symbol name="menue" />Menü</button>
+    </div>
+  </div>
+</header>
+
+<dialog class="menue" id="menue" aria-label="Menü">
+  <div class="menue__kopf">
+    <a class="logo" href="/" aria-label="Zur Startseite"><img src="/bilder/logo-weiss.webp" width="501" height="229" alt="" style="width:120px" /></a>
+    <button type="button" class="schliessen" data-menue-schliessen><Symbol name="x" />Schließen</button>
+  </div>
+  <div class="menue__inhalt">
+    <div class="menue__schnell">
+      <a href="/termine/"><Symbol name="kalender" />Alle Termine</a>
+      <a href={club.pccaddie.startzeit} rel="noopener"><Symbol name="start" />Startzeit buchen</a>
+      <a href="/#platzstatus"><Symbol name="flagge" />{kurztext(status.greenState)}</a>
+      <a href={club.routeLink} rel="noopener"><Symbol name="route" />Route planen</a>
+      <a href={club.wetterLink} rel="noopener"><Symbol name="wetter" />Wetter<span data-wetter></span></a>
+      <a href={`tel:${club.telefonLink}`}><Symbol name="telefon" />Anrufen</a>
+    </div>
+    {nav.gruppen.map((g) => (
+      <div class="menue__gruppe">
+        <h2>{g.titel}</h2>
+        <ul>
+          {g.links.map((l) => <li><a href={l.href} aria-current={aktiv(l.href)} rel={l.extern ? 'noopener' : undefined}>{l.titel}</a></li>)}
+        </ul>
+      </div>
+    ))}
+    <div class="menue__gruppe">
+      <h2>Mehr</h2>
+      <ul>
+        <li><a href="/kontakt/">Kontakt und Anfahrt</a></li>
+        <li><button type="button" class="schliessen" data-zugang-oeffnen style="margin-top:.5rem"><Symbol name="zugang" />Barrierefreiheit einstellen</button></li>
+      </ul>
+    </div>
+  </div>
+</dialog>

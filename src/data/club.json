@@ -1,0 +1,31 @@
+{
+  "name": "Golfclub Euregio Bad Bentheim e. V.",
+  "strasse": "Am Hauptdiek 8",
+  "ort": "48455 Bad Bentheim",
+  "telefon": "05922 9044310",
+  "telefonLink": "+4959229044310",
+  "fax": "05922 9044318",
+  "mail": "info@golfclub-euregio.de",
+  "mailService": "service@golfclub-euregio.de",
+  "whatsappService": "+491711260584",
+  "whatsappAnzeige": "0171 1260584",
+  "instagram": "https://www.instagram.com/gc_bad_bentheim/",
+  "instagramRestaurant": "https://www.instagram.com/restaurant_termuehlen/",
+  "podcast": "https://open.spotify.com/episode/5YIBbnO75ulcPImE8OwlWm",
+  "routeLink": "https://www.google.com/maps/dir/?api=1&destination=Golfclub+Euregio+Bad+Bentheim%2C+Am+Hauptdiek+8%2C+48455+Bad+Bentheim",
+  "karteLink": "https://www.openstreetmap.org/search?query=Am%20Hauptdiek%208%2C%2048455%20Bad%20Bentheim",
+  "wetterLink": "https://www.wetteronline.de/wetter/bad-bentheim",
+  "koordinaten": { "lat": 52.2995, "lon": 7.1336 },
+  "pccaddie": {
+    "startzeit": "https://www.pccaddie.net/clubs/0493312/app.php?cat=tt_timetable_course",
+    "turniere": "https://www.pccaddie.net/clubs/0493312/app.php?cat=ts_calendar",
+    "kurse": "https://www.pccaddie.net/clubs/0493312/app.php?cat=ts_calendar_course",
+    "events": "https://www.pccaddie.net/clubs/0493312/app.php?cat=ts_calendar_event",
+    "trainer": "https://www.pccaddie.net/clubs/0493312/app.php?cat=tt_timetable_trainer",
+    "startlisten": "https://www.pccaddie.net/clubs/0493312/app.php?cat=ts_startlist",
+    "ergebnisse": "https://www.pccaddie.net/clubs/0493312/app.php?cat=ts_resultlist",
+    "gutscheine": "https://www.pccaddie.net/clubs/0493312/app.php?cat=voucher",
+    "start": "https://www.pccaddie.net/clubs/0493312/app.php"
+  },
+  "claim": "Sportlicher Geist, verbunden mit idyllischer Landschaft."
+}

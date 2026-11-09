@@ -1,0 +1,24 @@
+---
+// Einfache Textseiten: Barrierefreiheit, Impressum, Datenschutz, Golf und Gesundheit
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import { getEntry } from 'astro:content';
+export function getStaticPaths() {
+  return [
+    { params: { seite: 'barrierefreiheit' }, props: { bild: '' } },
+    { params: { seite: 'impressum' }, props: { bild: '' } },
+    { params: { seite: 'datenschutz' }, props: { bild: '' } },
+    { params: { seite: 'golf-und-gesundheit' }, props: { bild: 'weg-mit-bag' } },
+  ];
+}
+const { seite } = Astro.params;
+const { bild } = Astro.props;
+const e = await getEntry('texte', seite!);
+---
+<Basis titel={e!.data.titel}>
+  <Seitenkopf titel={e!.data.titel} text={e!.data.einleitung} bild={bild || undefined} bildAlt="" />
+  <section class="abschnitt"><div class="innen"><Text name={seite!} /></div></section>
+  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular /></div></section>
+</Basis>

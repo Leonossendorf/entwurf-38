@@ -1,0 +1,95 @@
+---
+// Zentrale Terminliste: Schnappschuss beim Bauen, im Browser live aus PC CADDIE nachgeladen.
+import pcc from '../data/termine-pccaddie.json';
+import eigene from '../data/termine.json';
+import { zusammenfuehren, listeHtml, KATEGORIEN } from '../lib/termine.js';
+interface Props { anzahl?: number; kategorien?: string[]; filter?: boolean; kompakt?: boolean; gruppieren?: boolean; id?: string }
+const { anzahl = 0, kategorien = [], filter = false, kompakt = false, gruppieren = true, id = 'termine' } = Astro.props;
+let liste = zusammenfuehren(pcc.termine as any[], eigene.termine as any[]);
+if (kategorien.length) liste = liste.filter((t) => kategorien.includes(t.kategorie));
+if (anzahl) liste = liste.slice(0, anzahl);
+const vorhanden = KATEGORIEN.filter((k) => !kategorien.length || kategorien.includes(k.id));
+---
+<div class:list={['termine', { 'termine-kompakt': kompakt }]} id={id} data-termine data-anzahl={anzahl} data-kategorien={kategorien.join(',')} data-gruppieren={gruppieren ? 'ja' : 'nein'} data-eigene={JSON.stringify(eigene.termine)}>
+  {filter && (
+    <div class="termine__filter">
+      <p id={`${id}-filter-titel`} class="leise" style="margin-bottom:.6rem">Zeigen Sie nur, was Sie interessiert. Mehrere Bereiche sind möglich.</p>
+      <ul class="filter" aria-labelledby={`${id}-filter-titel`}>
+        <li><button type="button" data-filter="alle" aria-pressed="true">Alle Termine</button></li>
+        {vorhanden.map((k) => <li><button type="button" data-filter={k.id} aria-pressed="false"><span class:list={['punkt', `marke--${k.id}`]} aria-hidden="true"></span>{k.name}</button></li>)}
+      </ul>
+      <p class="visuell-versteckt" aria-live="polite" data-zaehler></p>
+    </div>
+  )}
+  <div data-liste set:html={listeHtml(liste, { gruppieren })} />
+  <p class="termine__quelle" data-quelle>Turniere, Kurse und Veranstaltungen kommen direkt aus PC CADDIE, Stand {pcc.stand ? new Date(pcc.stand).toLocaleDateString('de-DE', { timeZone: 'Europe/Berlin' }) : 'unbekannt'}. Weitere Termine pflegt der Club hier selbst.</p>
+</div>
+
+<script>
+  import { FEEDS, parseICS, zusammenfuehren, listeHtml, terminAlsIcs } from '../lib/termine.js';
+  document.querySelectorAll<HTMLElement>('[data-termine]').forEach(async (box) => {
+    const eigene = JSON.parse(box.dataset.eigene || '[]');
+    const anzahl = Number(box.dataset.anzahl || 0);
+    const nurKat = (box.dataset.kategorien || '').split(',').filter(Boolean);
+    const gruppieren = box.dataset.gruppieren === 'ja';
+    const listeEl = box.querySelector<HTMLElement>('[data-liste]')!;
+    let alle: any[] = [];
+    let auswahl = new Set<string>();
+
+    const zeichnen = () => {
+      let l = alle;
+      if (nurKat.length) l = l.filter((t) => nurKat.includes(t.kategorie));
+      if (auswahl.size) l = l.filter((t) => auswahl.has(t.kategorie));
+      if (anzahl) l = l.slice(0, anzahl);
+      listeEl.innerHTML = listeHtml(l, { gruppieren });
+      const z = box.querySelector('[data-zaehler]');
+      if (z) z.textContent = `${l.length} Termine angezeigt`;
+    };
+
+    // Filter
+    const knoepfe = [...box.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const filterSetzen = () => {
+      knoepfe.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === 'alle' ? auswahl.size === 0 : auswahl.has(b.dataset.filter!))));
+      zeichnen();
+    };
+    knoepfe.forEach((b) => b.addEventListener('click', () => {
+      const f = b.dataset.filter!;
+      if (f === 'alle') auswahl.clear();
+      else auswahl.has(f) ? auswahl.delete(f) : auswahl.add(f);
+      filterSetzen();
+      const url = new URL(location.href);
+      auswahl.size ? url.searchParams.set('bereich', [...auswahl].join(',')) : url.searchParams.delete('bereich');
+      history.replaceState(null, '', url);
+    }));
+    const vorgabe = new URL(location.href).searchParams.get('bereich');
+    if (vorgabe && knoepfe.length) vorgabe.split(',').forEach((v) => auswahl.add(v));
+
+    // "In meinen Kalender"
+    box.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.termin__kalender');
+      if (!b) return;
+      const t = alle.find((x) => x.id === b.dataset.id);
+      if (!t) return;
+      const blob = new Blob([terminAlsIcs(t)], { type: 'text/calendar' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${t.titel.replace(/[^\wäöüÄÖÜß -]/g, '').slice(0, 40).trim() || 'termin'}.ics`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    });
+
+    // Live aus PC CADDIE laden, sonst Schnappschuss behalten
+    const schnapp = await import('../data/termine-pccaddie.json');
+    alle = zusammenfuehren(schnapp.default.termine, eigene);
+    if (auswahl.size) filterSetzen();
+    try {
+      const ergebnisse = await Promise.all(FEEDS.map((f) => fetch(f.url).then((r) => (r.ok ? r.text() : Promise.reject())).then((t) => parseICS(t, f.quelle, f.link))));
+      alle = zusammenfuehren(ergebnisse.flat(), eigene);
+      const q = box.querySelector('[data-quelle]');
+      if (q) q.textContent = `Turniere, Kurse und Veranstaltungen kommen live aus PC CADDIE (eben aktualisiert). Weitere Termine pflegt der Club hier selbst.`;
+    } catch {
+      /* Schnappschuss bleibt */
+    }
+    knoepfe.length ? filterSetzen() : zeichnen();
+  });
+</script>

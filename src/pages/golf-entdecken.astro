@@ -1,0 +1,48 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Termine from '../components/Termine.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import Bild from '../components/Bild.astro';
+import club from '../data/club.json';
+---
+<Basis titel="Golf entdecken" beschreibung="Golf kostenlos und unverbindlich ausprobieren: die Golfentdeckungsreise im Golfclub Euregio Bad Bentheim.">
+  <Seitenkopf titel="Golf entdecken" text="Kostenlos und unverbindlich ausprobieren, ob Golf etwas für Sie ist." bild="wiese-abendlicht" bildAlt="" bereich={{ titel: 'Golf lernen' }} />
+  <section class="abschnitt">
+    <div class="innen zwei-spalten">
+      <Text name="golf-entdecken" />
+      <div class="karte">
+        <h2 class="fahne" style="font-size:1.3rem">Ihr Weg zum Golf</h2>
+        <ol class="haken" style="counter-reset:x">
+          <li><strong>Golfentdeckungsreise:</strong> kostenlos ausprobieren</li>
+          <li><strong>Platzreife-Kurs:</strong> die Grundlagen lernen, Abschluss mit Handicap 54</li>
+          <li><strong>Mitglied werden:</strong> den Beitrag zahlen Sie erst nach der Platzreife</li>
+        </ol>
+        <p style="margin:0"><a class="pfeil-link" href="/platzreife/">Zum Platzreife-Kurs</a></p>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--dunkel" aria-labelledby="t-titel">
+    <div class="innen zwei-spalten">
+      <div>
+        <h2 class="fahne" id="t-titel">Termine für Einsteiger</h2>
+        <p>Die nächste Golfentdeckungsreise und die Platzreife-Kurse. Anmelden können Sie sich direkt in PC CADDIE.</p>
+        <p><a class="knopf knopf--voll" href={club.pccaddie.events} rel="noopener">Zur Anmeldung</a></p>
+        <p class="leise">Fragen beantwortet der Service-Pavillon: <a href={`tel:${club.telefonLink}`}>{club.telefon}</a> oder <a href={`mailto:${club.mailService}`}>{club.mailService}</a>.</p>
+      </div>
+      <Termine kategorien={['einsteiger']} kompakt gruppieren={false} id="termine-einsteiger" />
+    </div>
+  </section>
+  <section class="abschnitt">
+    <div class="innen zwei-spalten zwei-spalten--mitte">
+      <figure class="foto foto--breit"><Bild name="weg-mit-bag" alt="Golfbag auf einem Weg, der in einen sonnigen Fairway führt" sizes="(max-width: 900px) 100vw, 50vw" /></figure>
+      <div>
+        <h2 class="fahne">Warum Golf guttut</h2>
+        <p>Vier Stunden an der frischen Luft, rund 8,5 Kilometer zu Fuß und ein Sport, der Gleichgewicht, Konzentration und Muskeln trainiert.</p>
+        <a class="pfeil-link" href="/golf-und-gesundheit/">Golf und Gesundheit</a>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular titel="Frage zum Ausprobieren" vorwahl="Golf ausprobieren" /></div></section>
+</Basis>

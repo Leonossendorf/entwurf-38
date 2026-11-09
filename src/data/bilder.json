@@ -1,0 +1,487 @@
+{
+ "luftbild-bahnen": {
+  "w": 3840,
+  "h": 2160,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "luftbild-teich": {
+  "w": 3840,
+  "h": 2160,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "luftbild-abendsonne": {
+  "w": 3840,
+  "h": 2160,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "luftbild-fairway": {
+  "w": 3840,
+  "h": 2160,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "luftbild-clubhaus": {
+  "w": 2400,
+  "h": 1350,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "abendrot-gruen": {
+  "w": 2560,
+  "h": 1920,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "wiese-abendlicht": {
+  "w": 2400,
+  "h": 1800,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "enten": {
+  "w": 2400,
+  "h": 1800,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "weg-unter-baeumen": {
+  "w": 2400,
+  "h": 1800,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "bruecke": {
+  "w": 2560,
+  "h": 1700,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "weg-mit-bag": {
+  "w": 2560,
+  "h": 1700,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "abschlag-landschaft": {
+  "w": 2560,
+  "h": 1556,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "hummel": {
+  "w": 2400,
+  "h": 3200,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "bienenstoecke": {
+  "w": 2560,
+  "h": 1700,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "rhododendron": {
+  "w": 2560,
+  "h": 1700,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "terrasse-clubhaus": {
+  "w": 2560,
+  "h": 1920,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "logo-weiss": {
+  "w": 501,
+  "h": 229,
+  "breiten": []
+ },
+ "plan-captains-becher-2026": {
+  "w": 905,
+  "h": 988,
+  "breiten": [
+   600
+  ]
+ },
+ "plan-team-cup-2026": {
+  "w": 905,
+  "h": 1000,
+  "breiten": [
+   600
+  ]
+ },
+ "plan-rosen-pokal-2026": {
+  "w": 1015,
+  "h": 961,
+  "breiten": [
+   600
+  ]
+ },
+ "person-koetterheinrich": {
+  "w": 190,
+  "h": 150,
+  "breiten": [
+   190
+  ]
+ },
+ "person-thiemann": {
+  "w": 1478,
+  "h": 1440,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "person-niehoff": {
+  "w": 190,
+  "h": 150,
+  "breiten": [
+   190
+  ]
+ },
+ "person-kudla": {
+  "w": 190,
+  "h": 150,
+  "breiten": [
+   190
+  ]
+ },
+ "person-diekel": {
+  "w": 190,
+  "h": 150,
+  "breiten": [
+   190
+  ]
+ },
+ "person-verwold": {
+  "w": 1159,
+  "h": 941,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "person-rehbock": {
+  "w": 270,
+  "h": 270,
+  "breiten": [
+   270
+  ]
+ },
+ "person-mueller": {
+  "w": 927,
+  "h": 897,
+  "breiten": [
+   480
+  ]
+ },
+ "c-trainer": {
+  "w": 1382,
+  "h": 873,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "person-busse": {
+  "w": 190,
+  "h": 150,
+  "breiten": [
+   190
+  ]
+ },
+ "person-fehlhaber": {
+  "w": 190,
+  "h": 150,
+  "breiten": [
+   190
+  ]
+ },
+ "team-clubmannschaft": {
+  "w": 1200,
+  "h": 1003,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "team-ak30-herren": {
+  "w": 2543,
+  "h": 2199,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "team-ak50": {
+  "w": 1600,
+  "h": 1200,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "team-ak70": {
+  "w": 1033,
+  "h": 704,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "galerie-clubmeisterschaften-2026": {
+  "w": 1093,
+  "h": 712,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "galerie-after-work-2026-07-17": {
+  "w": 1380,
+  "h": 1075,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "galerie-after-work-2026-07-03": {
+  "w": 1435,
+  "h": 1067,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "galerie-monatspokal-2026-06": {
+  "w": 1583,
+  "h": 1024,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "galerie-saisoneroeffnung-2026": {
+  "w": 3052,
+  "h": 1424,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "galerie-mihego-2026": {
+  "w": 1280,
+  "h": 938,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "galerie-ostermontag-2026": {
+  "w": 1240,
+  "h": 1045,
+  "breiten": [
+   480,
+   960
+  ]
+ },
+ "bahn-01": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-02": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-03": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-04": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-05": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-06": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-07": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-08": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-09": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-10": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-11": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-12": {
+  "w": 1731,
+  "h": 2422,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-13": {
+  "w": 1731,
+  "h": 2422,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-14": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-15": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-16": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-17": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ },
+ "bahn-18": {
+  "w": 1730,
+  "h": 2423,
+  "breiten": [
+   600,
+   1100
+  ]
+ }
+}

@@ -1,0 +1,60 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Termine from '../components/Termine.astro';
+import Bild from '../components/Bild.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import p from '../data/personen.json';
+import club from '../data/club.json';
+const preise = [['30 Minuten', '38 €', '35 €'], ['40 Minuten', '50 €', '47 €'], ['50 Minuten', '63 €', '58 €'], ['60 Minuten', '76 €', '70 €']];
+---
+<Basis titel="Golfschule" beschreibung="Golfschule Lars Rehbock im Golfclub Euregio: Golflehrer, Einzelunterricht, Themenkurse.">
+  <Seitenkopf titel="Golfschule" text="Lars Rehbock und Jerome Müller begleiten Sie vom ersten Schlag bis in die Mannschaft." bild="abendrot-gruen" bildAlt="" bereich={{ titel: 'Golf lernen' }} />
+  <section class="abschnitt" aria-labelledby="lehrer-titel">
+    <div class="innen">
+      <h2 class="fahne visuell-versteckt" id="lehrer-titel">Die Golflehrer</h2>
+      <div class="raster raster--2">
+        {p.golflehrer.map((l) => (
+          <article class="karte" style="display:grid;grid-template-columns:7.5rem 1fr;gap:1.2rem;align-items:start">
+            <div class="foto foto--quadrat" style="border-radius:50%"><Bild name={l.bild} alt={`Porträt von ${l.name}`} sizes="8rem" position="50% 25%" /></div>
+            <div>
+              <h3 style="margin-bottom:.2rem">{l.name}</h3>
+              <p class="leise" style="margin-bottom:.8rem">{l.titel}</p>
+              <blockquote style="margin:0 0 .8rem;font-style:italic;border-left:3px solid var(--gruen);padding-left:.8rem">„{l.zitat}“</blockquote>
+              <details><summary style="cursor:pointer;font-weight:700">Erfahrung und Erfolge</summary><ul class="haken" style="margin-top:.6rem">{l.stationen.map((s) => <li>{s}</li>)}</ul></details>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="karte" style="margin-top:1.4rem;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:1.4rem;align-items:center">
+        <div class="foto foto--breit"><Bild name={p.cTrainer.bild} alt={`Die C-Trainer ${p.cTrainer.namen}`} sizes="(max-width: 900px) 100vw, 35vw" /></div>
+        <div><h3>C-Trainer {p.cTrainer.namen}</h3><p style="margin:0">{p.cTrainer.text}</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss" aria-labelledby="preis-titel">
+    <div class="innen zwei-spalten">
+      <div>
+        <h2 class="fahne" id="preis-titel">Einzelunterricht</h2>
+        <p>Einzelunterricht ist für bis zu zwei Personen. Ab drei Personen gilt es als Gruppe: 90 € für 60 Minuten.</p>
+        <p>Sie zahlen am Trainingstag bar oder mit PayPal. Bitte sagen Sie spätestens 24 Stunden vorher ab, sonst wird die Stunde berechnet, wenn kein Ersatz gefunden wird.</p>
+        <div class="knopfreihe"><a class="knopf knopf--voll" href={club.pccaddie.trainer} rel="noopener">Stunde in PC CADDIE buchen</a></div>
+      </div>
+      <div class="tabelle-huelle">
+        <table>
+          <caption>Preise Einzelunterricht</caption>
+          <thead><tr><th scope="col">Dauer</th><th scope="col" class="zahl">Lars Rehbock</th><th scope="col" class="zahl">Jerome Müller</th></tr></thead>
+          <tbody>{preise.map((r) => <tr><th scope="row">{r[0]}</th><td class="zahl">{r[1]}</td><td class="zahl">{r[2]}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--dunkel">
+    <div class="innen zwei-spalten">
+      <div><Text name="golfschule" titel /><p><a class="knopf knopf--voll" href={club.pccaddie.kurse} rel="noopener">Kurse in PC CADDIE</a></p></div>
+      <Termine kategorien={['kurse', 'einsteiger']} kompakt gruppieren={false} id="termine-kurse" />
+    </div>
+  </section>
+  <section class="abschnitt"><div class="innen innen--schmal"><Kontaktformular titel="Frage an die Golfschule" vorwahl="Golfschule" /></div></section>
+</Basis>

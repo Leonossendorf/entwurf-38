@@ -1,0 +1,45 @@
+---
+// Kurzes Formular. Im Entwurf wird nichts verschickt; später geht es an info@golfclub-euregio.de.
+interface Props { themen?: string[]; vorwahl?: string; titel?: string; id?: string }
+const {
+  themen = ['Allgemeine Frage', 'Golf ausprobieren', 'Platzreife', 'Mitgliedschaft', 'Startzeit oder Greenfee', 'Golfschule'],
+  vorwahl = themen[0],
+  titel = 'Frage an den Club',
+  id = 'anfrage',
+} = Astro.props;
+---
+<div class="formular-huelle" id={id}>
+  <form class="formular" data-formular novalidate aria-labelledby={`${id}-titel`}>
+    <h2 class="fahne" id={`${id}-titel`}>{titel}</h2>
+    <fieldset class="feld">
+      <legend>Worum geht es?</legend>
+      <div class="chips">
+        {themen.map((t) => (
+          <label><input type="radio" name="thema" value={t} checked={t === vorwahl} /><span>{t}</span></label>
+        ))}
+      </div>
+    </fieldset>
+    <div class="zeile-2">
+      <div class="feld">
+        <label for={`${id}-name`}>Name <span class="hilfe">(Angabe optional)</span></label>
+        <input id={`${id}-name`} name="name" autocomplete="name" />
+      </div>
+      <div class="feld">
+        <label for={`${id}-kontakt`}>Telefon oder E-Mail <span class="hilfe">(damit wir antworten können)</span></label>
+        <input id={`${id}-kontakt`} name="kontakt" autocomplete="email" required aria-describedby={`${id}-fehler`} />
+      </div>
+    </div>
+    <div class="feld">
+      <label for={`${id}-nachricht`}>Ihre Nachricht <span class="hilfe">(Angabe optional)</span></label>
+      <textarea id={`${id}-nachricht`} name="nachricht"></textarea>
+    </div>
+    <p class="formular__fehler" id={`${id}-fehler`} aria-live="polite"></p>
+    <div><button class="knopf knopf--voll" type="submit">Nachricht senden</button></div>
+    <p class="formular__hinweis">Entwurf: Das Formular verschickt noch nichts. Später geht Ihre Nachricht an {`info@golfclub-euregio.de`}.</p>
+  </form>
+  <div class="bestaetigung" hidden tabindex="-1" data-bestaetigung>
+    <h3>Danke, Ihre Nachricht ist angekommen.</h3>
+    <p>So würde es auf der fertigen Seite weitergehen: Die Nachricht geht an das Team im Service-Pavillon, und Sie bekommen eine Antwort an die angegebene Adresse oder Nummer.</p>
+    <p style="margin:0"><strong>Entwurf:</strong> Es wurde nichts verschickt.</p>
+  </div>
+</div>

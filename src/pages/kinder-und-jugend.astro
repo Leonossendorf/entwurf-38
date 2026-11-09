@@ -1,0 +1,36 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Bild from '../components/Bild.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import club from '../data/club.json';
+---
+<Basis titel="Kinder und Jugend" beschreibung="Kinder- und Jugendtraining im Golfclub Euregio: dienstags und donnerstags, Einstieg jederzeit.">
+  <Seitenkopf titel="Kinder und Jugend" text="Erst einmal ausprobieren, ob es Spaß macht. Einstieg jederzeit." bild="luftbild-fairway" bildAlt="" bereich={{ titel: 'Golf lernen' }} />
+  <section class="abschnitt">
+    <div class="innen zwei-spalten">
+      <Text name="kinder-und-jugend" />
+      <div>
+        <div class="tabelle-huelle">
+          <table>
+            <caption>Trainingszeiten</caption>
+            <thead><tr><th scope="col">Gruppe</th><th scope="col">Tage</th><th scope="col">Uhrzeit</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Kinder (etwa 6 bis 10 Jahre)</th><td>Dienstag und Donnerstag</td><td>15:00–16:00 Uhr</td></tr>
+              <tr><th scope="row">Jugendliche</th><td>Dienstag und Donnerstag</td><td>16:00–17:30 Uhr</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="leise" style="margin-top:.8rem">Das Training findet fast das ganze Jahr statt.</p>
+        <div class="karte" style="margin-top:1.2rem;display:grid;grid-template-columns:5rem 1fr;gap:1rem;align-items:center">
+          <div class="foto foto--quadrat" style="border-radius:50%"><Bild name="person-verwold" alt="Porträt von Caroline Verwold" sizes="5rem" position="50% 25%" /></div>
+          <div><strong>Caroline Verwold</strong><br />Jugendwartin<br /><a href="mailto:jugendwart@golfclub-euregio.de">jugendwart@golfclub-euregio.de</a></div>
+        </div>
+        <p style="margin-top:1rem">Anmelden: <a href={`tel:${club.telefonLink}`}>{club.telefon}</a> oder <a href={`mailto:${club.mailService}`}>{club.mailService}</a></p>
+        <p><a class="pfeil-link" href="/termine/?bereich=jugend">Alle Trainingstermine</a></p>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular titel="Kind anmelden oder Frage stellen" themen={['Kindertraining', 'Jugendtraining', 'Allgemeine Frage']} /></div></section>
+</Basis>

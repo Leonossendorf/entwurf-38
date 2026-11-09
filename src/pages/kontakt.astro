@@ -1,0 +1,48 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Symbol from '../components/Symbol.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import club from '../data/club.json';
+import z from '../data/oeffnungszeiten.json';
+---
+<Basis titel="Kontakt und Anfahrt" beschreibung="Kontakt, Öffnungszeiten und Anfahrt zum Golfclub Euregio Bad Bentheim.">
+  <Seitenkopf titel="Kontakt und Anfahrt" text={`${club.name} · ${club.strasse} · ${club.ort}`} bild="weg-unter-baeumen" bildAlt="" />
+  <section class="abschnitt">
+    <div class="innen zwei-spalten">
+      <Kontaktformular titel="Schreiben Sie uns" />
+      <div class="raster">
+        <div class="karte">
+          <h2 class="fahne" style="font-size:1.3rem">Direkt erreichen</h2>
+          <ul style="list-style:none;padding:0;margin:0;display:grid;gap:.6rem">
+            <li><a href={`tel:${club.telefonLink}`} style="display:inline-flex;gap:.5rem;align-items:center"><Symbol name="telefon" />{club.telefon}</a></li>
+            <li><a href={`https://wa.me/${club.whatsappService.replace('+', '')}`} rel="noopener" style="display:inline-flex;gap:.5rem;align-items:center"><Symbol name="whatsapp" />WhatsApp {club.whatsappAnzeige}</a></li>
+            <li><a href={`mailto:${club.mail}`} style="display:inline-flex;gap:.5rem;align-items:center"><Symbol name="mail" />{club.mail}</a></li>
+            <li><a href={`mailto:${club.mailService}`} style="display:inline-flex;gap:.5rem;align-items:center"><Symbol name="mail" />{club.mailService} (Service-Pavillon)</a></li>
+            <li><a href={club.instagram} rel="noopener" style="display:inline-flex;gap:.5rem;align-items:center"><Symbol name="instagram" />Instagram</a></li>
+          </ul>
+        </div>
+        <div class="tabelle-huelle">
+          <table><caption>Service-Pavillon</caption><tbody>{z.servicePavillon.tage.map((t) => <tr data-tag={t.tag}><th scope="row">{t.tag}</th><td>{t.zeit}</td></tr>)}</tbody></table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss" id="anfahrt">
+    <div class="innen zwei-spalten">
+      <div>
+        <Text name="anfahrt" titel />
+      </div>
+      <div class="karte">
+        <h2 class="fahne" style="font-size:1.3rem">Route planen</h2>
+        <p>Am einfachsten öffnen Sie die Route direkt in Ihrer Karten-App:</p>
+        <div class="knopfreihe">
+          <a class="knopf knopf--voll" href={club.routeLink} rel="noopener"><Symbol name="route" />Mit Google Maps</a>
+          <a class="knopf knopf--rand" href={club.karteLink} rel="noopener">Mit OpenStreetMap</a>
+        </div>
+        <p class="leise" style="margin:1rem 0 0">Navi-Adresse: {club.strasse}, {club.ort}</p>
+      </div>
+    </div>
+  </section>
+</Basis>

@@ -1,0 +1,18 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import d from '../data/club-daten.json';
+---
+<Basis titel="Sponsoren" beschreibung="Die Sponsoren und Partner des Golfclub Euregio Bad Bentheim.">
+  <Seitenkopf titel="Sponsoren" text="Der Club hat viele Ziele. Dafür braucht es Menschen und Unternehmen, die sich mit uns engagieren. Danke!" bereich={{ titel: 'Club' }} />
+  <section class="abschnitt">
+    <div class="innen">
+      <ul class="raster raster--4" style="list-style:none;padding:0">
+        {d.sponsoren.map((s) => <li class="karte" style="padding:1rem 1.1rem">{s.web ? <a href={s.web} rel="noopener">{s.name}</a> : s.name}</li>)}
+      </ul>
+      <p class="leise">Im Entwurf stehen hier die Webadressen. Auf der fertigen Seite zeigen wir die Logos der Sponsoren.</p>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular titel="Sponsor werden" themen={['Sponsoring', 'Allgemeine Frage']} /></div></section>
+</Basis>

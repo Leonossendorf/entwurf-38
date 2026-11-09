@@ -1,0 +1,24 @@
+{
+  "quelle": "Bahnkarten aus dem Birdie Book des Clubs (Mediathek golfclub-euregio.de)",
+  "abschlaege": { "herren": "gelb", "damen": "rot" },
+  "bahnen": [
+    { "nr": 1, "par": 5, "hcp": 7, "herren": 441, "damen": 370 },
+    { "nr": 2, "par": 4, "hcp": 9, "herren": 331, "damen": 268 },
+    { "nr": 3, "par": 3, "hcp": 13, "herren": 173, "damen": 147 },
+    { "nr": 4, "par": 4, "hcp": 5, "herren": 301, "damen": 264 },
+    { "nr": 5, "par": 3, "hcp": 17, "herren": 130, "damen": 115 },
+    { "nr": 6, "par": 4, "hcp": 15, "herren": 299, "damen": 264 },
+    { "nr": 7, "par": 4, "hcp": 11, "herren": 300, "damen": 256, "hinweis": "Halfway House an Bahn 7 und 14" },
+    { "nr": 8, "par": 4, "hcp": 1, "herren": 395, "damen": 348 },
+    { "nr": 9, "par": 5, "hcp": 3, "herren": 487, "damen": 424 },
+    { "nr": 10, "par": 5, "hcp": 8, "herren": 456, "damen": 385 },
+    { "nr": 11, "par": 4, "hcp": 2, "herren": 375, "damen": 328, "hinweis": "Insektenhotel an Bahn 11" },
+    { "nr": 12, "par": 5, "hcp": 6, "herren": 473, "damen": 413 },
+    { "nr": 13, "par": 3, "hcp": 16, "herren": 154, "damen": 154 },
+    { "nr": 14, "par": 4, "hcp": 12, "herren": 304, "damen": 261, "hinweis": "Bienenstöcke und Blühflächen neben Bahn 14" },
+    { "nr": 15, "par": 3, "hcp": 18, "herren": 169, "damen": 150 },
+    { "nr": 16, "par": 5, "hcp": 4, "herren": 489, "damen": 428 },
+    { "nr": 17, "par": 3, "hcp": 14, "herren": 178, "damen": 151 },
+    { "nr": 18, "par": 4, "hcp": 10, "herren": 325, "damen": 285 }
+  ]
+}

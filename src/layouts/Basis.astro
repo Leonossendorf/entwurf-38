@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import Kopf from '../components/Kopf.astro';
+import Fuss from '../components/Fuss.astro';
+import Zugang from '../components/Zugang.astro';
+interface Props { titel: string; beschreibung?: string; startseite?: boolean }
+const { titel, beschreibung = 'Golfclub Euregio Bad Bentheim: 18-Loch-Platz an der deutsch-niederländischen Grenze, Golfschule, Restaurant und alle Termine an einem Ort.', startseite = false } = Astro.props;
+const pfad = Astro.url.pathname;
+const seitentitel = startseite ? 'Golfclub Euregio Bad Bentheim' : `${titel} · Golfclub Euregio Bad Bentheim`;
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{seitentitel}</title>
+    <meta name="description" content={beschreibung} />
+    <meta name="theme-color" content="#1d3843" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      // Einstellungen zur Barrierefreiheit sofort anwenden (kein Flackern)
+      try {
+        var e = JSON.parse(localStorage.getItem('gce-zugang') || '{}');
+        for (var k in e) document.documentElement.setAttribute('data-' + k, e[k]);
+      } catch (x) {}
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches && !document.documentElement.getAttribute('data-bewegung')) document.documentElement.setAttribute('data-bewegung', 'aus');
+    </script>
+  </head>
+  <body>
+    <a class="sprunglink" href="#inhalt">Zum Inhalt springen</a>
+    <Kopf startseite={startseite} pfad={pfad} />
+    <main id="inhalt" tabindex="-1">
+      <slot />
+    </main>
+    <Fuss />
+    <Zugang />
+    <script src="../scripts/seite.js"></script>
+  </body>
+</html>

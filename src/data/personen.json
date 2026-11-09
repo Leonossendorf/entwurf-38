@@ -1,0 +1,74 @@
+{
+  "vorstand": [
+    { "name": "Christian Kötterheinrich", "rolle": "Präsident", "mail": "vorstand@golfclub-euregio.de", "bild": "person-koetterheinrich" },
+    { "name": "Christoph Thiemann", "rolle": "Vizepräsident", "mail": "vorstand@golfclub-euregio.de", "bild": "person-thiemann" },
+    { "name": "Mike Lammering", "rolle": "Schatzmeister", "mail": "vorstand@golfclub-euregio.de", "bild": "" },
+    { "name": "Jens Niehoff", "rolle": "Spielführer", "mail": "spielfuehrer@golfclub-euregio.de", "bild": "person-niehoff" },
+    { "name": "Stefan Kudla", "rolle": "Schriftführer", "mail": "vorstand@golfclub-euregio.de", "bild": "person-kudla" },
+    { "name": "Rainer Diekel", "rolle": "Platzwart", "mail": "vorstand@golfclub-euregio.de", "bild": "person-diekel" },
+    { "name": "Justus Wösting", "rolle": "Pressewart", "mail": "pressewart@golfclub-euregio.de", "bild": "" },
+    { "name": "Caroline Verwold", "rolle": "Jugendwartin", "mail": "jugendwart@golfclub-euregio.de", "bild": "person-verwold" }
+  ],
+  "golflehrer": [
+    {
+      "name": "Lars Rehbock",
+      "bild": "person-rehbock",
+      "titel": "PGA Master Professional, Graduierung G1, DGV-Trainer B",
+      "zitat": "Wir passen den Schwung an die Spieler an – nicht anders herum!",
+      "stationen": [
+        "Trainer von Lukas Wessling (AK 30 Vizemeister 2024)",
+        "Trainer von Daniel Gelser (NRW-Meister Herren 2024) bis 2020, seitdem Co-Trainer",
+        "2014 Aufstieg der Damen- und Herrenmannschaft des GSC Rheine-Mesum in die Regionalliga",
+        "2014 Bundesfinale AK 16 mit der Jungenmannschaft des GSC Rheine-Mesum",
+        "2002–2007 Haupttrainer von Katharina Schallenberg (Siegerin der Internationalen Amateurmeisterschaften von Deutschland 2005 und 2006)"
+      ]
+    },
+    {
+      "name": "Jerome Müller",
+      "bild": "person-mueller",
+      "titel": "PGA Fully Qualified Golfprofessional, DOSB-Trainer B Leistungssport",
+      "zitat": "Ziel ist, Sie individuell so zu verbessern, dass Sie auf dem Platz möglichst viele Spielaufgaben lösen und mehr Spaß am Spiel haben.",
+      "stationen": [
+        "2023 PGA Fully Qualified Golfprofessional, DOSB-Trainer B Leistungssport",
+        "2018 und 2015 Deutscher Mannschaftsmeister AK 18 mit dem GC Hubbelrath",
+        "2017 Teilnahme an den Deutschen Meisterschaften",
+        "2016–2019 Teilnahme an Events der PRO GOLF TOUR",
+        "2012–2014 Kaderspieler im NRW-Landeskader",
+        "Spielertrainer der Clubmannschaft (Aufstieg 2026)"
+      ]
+    }
+  ],
+  "cTrainer": {
+    "namen": "Günter Albers und Waldemar Miotke",
+    "bild": "c-trainer",
+    "text": "Die C-Trainer betreuen Kinder und Jugendliche, die Schul-AGs, die Platzreife-Kurse und die Golfentdeckungsreisen. Dazu kommen Regelabende und das Grundlagentraining."
+  },
+  "service": [
+    { "name": "Susanne Busse", "bild": "person-busse" },
+    { "name": "Daniel Lamann", "bild": "" },
+    { "name": "Jörg Fehlhaber", "bild": "person-fehlhaber", "text": "Freitags für Materialfragen da, wechselt nach Absprache Schlägergriffe und bietet Fittings an." }
+  ],
+  "damengolf": {
+    "vormittag": [
+      { "name": "Wilma de Haas", "telefon": "+31 619 577154" },
+      { "name": "Christine Koopmann", "telefon": "+31 610 299277" },
+      { "name": "Wendy van der Laan", "telefon": "+31 651 992470" }
+    ],
+    "nachmittag": [
+      { "name": "Heike Kötterheinrich", "telefon": "+49 175 1986504" },
+      { "name": "Vani Niehoff", "telefon": "+49 170 9635686" },
+      { "name": "Wenke Oelerich", "telefon": "+49 170 1100758" }
+    ]
+  },
+  "herrengolf": {
+    "mihego": [
+      { "name": "Ben Munsterhuis", "telefon": "+31 653 320980" },
+      { "name": "Frank Uijlenbroek", "telefon": "+49 174 4921036" },
+      { "name": "Fred Veldmann", "telefon": "+31 683 578401" }
+    ],
+    "amigo": [
+      { "name": "Jan Lienkamp", "telefon": "" },
+      { "name": "Wolf-Rüdiger Oder", "telefon": "+49 171 4761771" }
+    ]
+  }
+}

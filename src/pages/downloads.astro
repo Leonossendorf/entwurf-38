@@ -1,0 +1,26 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Symbol from '../components/Symbol.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import d from '../data/club-daten.json';
+const gruppen = [...new Set(d.downloads.map((x) => x.gruppe))];
+const namen: Record<string, string> = { Club: 'Satzung und Ordnungen', Aufnahme: 'Aufnahme in den Club', Golfmagazin: 'Golfmagazin', Handicap: 'Handicap' };
+---
+<Basis titel="Downloads" beschreibung="Satzung, Beitragsordnung, Aufnahmeformulare, Golfmagazine und Handicap-Tabellen des Golfclub Euregio.">
+  <Seitenkopf titel="Downloads" text="Satzung, Ordnungen, Aufnahmeformulare, Golfmagazine und Handicap-Tabellen." bereich={{ titel: 'Club' }} />
+  <section class="abschnitt">
+    <div class="innen raster raster--2">
+      {gruppen.map((g) => (
+        <div class="karte">
+          <h2 class="fahne" style="font-size:1.3rem">{namen[g] ?? g}</h2>
+          <ul style="list-style:none;padding:0;margin:0">
+            {d.downloads.filter((x) => x.gruppe === g).map((x) => <li style="margin-bottom:.55rem"><a href={x.url} rel="noopener" style="display:inline-flex;gap:.55rem;align-items:center"><Symbol name="download" />{x.titel}<span class="visuell-versteckt"> (PDF)</span></a></li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <p class="innen leise" style="margin-top:1rem">Alle Dateien sind PDF. Ältere Dateien sind noch nicht barrierefrei aufbereitet.</p>
+  </section>
+  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular /></div></section>
+</Basis>

@@ -1,0 +1,407 @@
+{
+ "chronik": [
+  {
+   "jahr": "1987",
+   "text": "Gründung des Golfclub Euregio zusammen mit der Bentheimer Golfplatz GmbH & Co. KG"
+  },
+  {
+   "jahr": "1988",
+   "text": "Erster Spatenstich für die Golfanlage"
+  },
+  {
+   "jahr": "1989",
+   "text": "Eröffnung und erstes Wettspiel auf neun Löchern, Richtfest des ersten Clubhauses (heute Service-Pavillon)"
+  },
+  {
+   "jahr": "1990",
+   "text": "Clubhaus und Caddyhalle fertig"
+  },
+  {
+   "jahr": "1991",
+   "text": "Neun Spielbahnen fertiggestellt"
+  },
+  {
+   "jahr": "1994",
+   "text": "Eröffnung der 18-Loch-Anlage"
+  },
+  {
+   "jahr": "1996",
+   "text": "Einweihung des neuen Clubhauses mit Restaurant"
+  },
+  {
+   "jahr": "2000",
+   "text": "Umbau des Platzes, größere Driving Range, Anbau am Clubhaus"
+  },
+  {
+   "jahr": "2001",
+   "text": "Platzumbau abgeschlossen"
+  },
+  {
+   "jahr": "2006",
+   "text": "Zweite Caddyhalle"
+  },
+  {
+   "jahr": "2012",
+   "text": "Driving Range mit drei zusätzlichen Kurzbahnen"
+  },
+  {
+   "jahr": "2016",
+   "text": "Carthalle an den Caddyhallen"
+  },
+  {
+   "jahr": "2017",
+   "text": "30 Jahre Golfclub Euregio"
+  },
+  {
+   "jahr": "2018",
+   "text": "Clubrestaurant neu gestaltet, Anerkennung als gemeinnütziger Verein"
+  },
+  {
+   "jahr": "2019",
+   "text": "Proshop komplett erneuert, heute Service-Pavillon"
+  },
+  {
+   "jahr": "2020",
+   "text": "Neue Halle an der Driving Range"
+  },
+  {
+   "jahr": "2021",
+   "text": "Halfway House an den Bahnen 7 und 14, neue Beschilderung, E-Bike-Ladestation"
+  },
+  {
+   "jahr": "2023",
+   "text": "Neuer Waschplatz, Unterstand für Golfcarts, Caddy-Abstellplatz an Loch 18, neue Bepflanzung an der Terrasse"
+  },
+  {
+   "jahr": "2024",
+   "text": "Neue Pitching Area neben der Driving Range"
+  },
+  {
+   "jahr": "2025",
+   "text": "Foyer und Wintergarten im Clubhaus neu gestaltet"
+  }
+ ],
+ "mannschaften": [
+  {
+   "name": "Clubmannschaft",
+   "liga": "Niedersächsische Mannschaftsmeisterschaft, seit 2026 Gruppe 2",
+   "bild": "team-clubmannschaft",
+   "bildtext": "Hinten von links: Jerome Müller (Pro), Fabian Lacina, Olivier Lacina, Julian Storch, Stephan Selzer, Colin Tannen. Vorne von links: Jens Niehoff, Michael Biesik, Justus Wösting, Jürgen Grimmer (Captain), Tim Berlage, Marck Mulder. Es fehlen: Julian Büld, Ralph Strijland, Hans-Christian Vastert."
+  },
+  {
+   "name": "Damen AK 30",
+   "liga": "Nord Liga 4 und Nord Liga 5 (zwei Mannschaften)",
+   "bild": "",
+   "bildtext": ""
+  },
+  {
+   "name": "Herren AK 30",
+   "liga": "Nord Liga 5, Gruppe A",
+   "bild": "team-ak30-herren",
+   "bildtext": "Von links: Phillip Kolk, Falk Giebel, Julian Termühlen, Malte Büsing, Jürgen Grimmer, Ronny Konink (Captain), Stefan Gerling. Es fehlt: Thomas Proß."
+  },
+  {
+   "name": "Herren AK 30",
+   "liga": "Nord Liga 2, Gruppe A",
+   "bild": "",
+   "bildtext": ""
+  },
+  {
+   "name": "Herren AK 30",
+   "liga": "Nord Liga 5, Gruppe B",
+   "bild": "",
+   "bildtext": ""
+  },
+  {
+   "name": "AK 50",
+   "liga": "Liga 5.5",
+   "bild": "team-ak50",
+   "bildtext": "Von links: Rainer Diekel, Willi Eickmann, Thomas Niehoff, Waldemar Miotke, Frank Everding, Günter Albers, Wolfgang Aink (Captain), Arij Lambo-Bodenkamp, Christian Kötterheinrich. Es fehlt: Edwin Hüsing."
+  },
+  {
+   "name": "AK 50",
+   "liga": "Liga 50-4",
+   "bild": "",
+   "bildtext": ""
+  },
+  {
+   "name": "AK 70",
+   "liga": "Liga 70-4",
+   "bild": "team-ak70",
+   "bildtext": "Von links: Uli Neter, Hans-Georg Gärthöffner, Dr. Max Grimm, Fred Veldman, Wolfgang Pielsticker, Frank Uijlenbroek (Captain). Es fehlt: Paul van der Meché."
+  },
+  {
+   "name": "AK 70",
+   "liga": "Liga 70-1",
+   "bild": "",
+   "bildtext": ""
+  },
+  {
+   "name": "Jugendmannschaft",
+   "liga": "",
+   "bild": "",
+   "bildtext": ""
+  }
+ ],
+ "downloads": [
+  {
+   "gruppe": "Club",
+   "titel": "Satzung (Stand 22.04.2026)",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2026/09/GC_Euregio_Satzung_22042026_clean.pdf"
+  },
+  {
+   "gruppe": "Club",
+   "titel": "Beitragsordnung 2026",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2025/12/GC_Euregio_Beitragsordnung_2026.pdf"
+  },
+  {
+   "gruppe": "Club",
+   "titel": "Platz- und Spielordnung (Stand 26.11.2025)",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2025/12/GC_Euregio_Platz_Spielordnung_26112025.pdf"
+  },
+  {
+   "gruppe": "Club",
+   "titel": "Birdie Book 2025 (Platzführer)",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2025/06/Birdie_Book_NEU_fur_Homepage_2025.pdf"
+  },
+  {
+   "gruppe": "Aufnahme",
+   "titel": "Aufnahmeformular Erwachsene",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2024/12/GC_Euregio_Aufnahmeformular_Erwachsene.pdf"
+  },
+  {
+   "gruppe": "Aufnahme",
+   "titel": "Aufnahmeformular Jugendliche und junge Erwachsene",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2024/12/GC_Euregio_Aufnahmeformular_Jugendliche_Junge_Erwachsene.pdf"
+  },
+  {
+   "gruppe": "Aufnahme",
+   "titel": "Kennenlernen-Angebot",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2024/12/GC_Euregio_Kennenlernen_Angebot.pdf"
+  },
+  {
+   "gruppe": "Aufnahme",
+   "titel": "Golfen für Kinder",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2024/12/GC_Euregie_Golfen_fuer_Kinder.pdf"
+  },
+  {
+   "gruppe": "Golfmagazin",
+   "titel": "Golfmagazin Euregio 2025",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2026/02/Golfmagazin_Euregio_2025_Web.pdf"
+  },
+  {
+   "gruppe": "Golfmagazin",
+   "titel": "Golfmagazin Euregio 2024",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2025/02/Golfmagazin_2024_Seite_1-80_homepage.pdf"
+  },
+  {
+   "gruppe": "Golfmagazin",
+   "titel": "Jahresmagazin 2023",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2024/02/Golfclub_Euregio_Jahresmagazin_2023.pdf"
+  },
+  {
+   "gruppe": "Golfmagazin",
+   "titel": "Clubmagazin 2022",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2023/02/Clubmagazin_2022_Homepage_light.pdf"
+  },
+  {
+   "gruppe": "Handicap",
+   "titel": "Course Handicaps Löcher 1–18",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2025/05/GC_Euregio_Course_Handicaps_Platz_AB_1-18.pdf"
+  },
+  {
+   "gruppe": "Handicap",
+   "titel": "Course Handicaps Löcher 1–9",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2025/05/GC_Euregio_Course_Handicaps_Platz_A_1-9.pdf"
+  },
+  {
+   "gruppe": "Handicap",
+   "titel": "Course Handicaps Löcher 10–18",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2025/05/GC_Euregio_Course_Handicaps_Platz_B_10-18.pdf"
+  },
+  {
+   "gruppe": "Handicap",
+   "titel": "9-Löcher-Ergänzungstabelle (Score Differential)",
+   "url": "https://www.golfclub-euregio.de/wp-content/uploads/2024/06/9-lcher-sd-ergnzungstabelle.pdf"
+  }
+ ],
+ "sponsoren": [
+  {
+   "name": "asl-metalltechnik.de",
+   "web": "https://asl-metalltechnik.de/"
+  },
+  {
+   "name": "landhaus-buchenallee.de",
+   "web": "https://landhaus-buchenallee.de/"
+  },
+  {
+   "name": "mediterrane-gaerten-buesge.de",
+   "web": "https://mediterrane-gaerten-buesge.de/"
+  },
+  {
+   "name": "alte-stadt-apotheke-ochtrup.de",
+   "web": "https://www.alte-stadt-apotheke-ochtrup.de/"
+  },
+  {
+   "name": "arends-ebikes.de",
+   "web": "https://www.arends-ebikes.de/"
+  },
+  {
+   "name": "axa-betreuer.de",
+   "web": "https://www.axa-betreuer.de/joerg_agten"
+  },
+  {
+   "name": "bianca.de",
+   "web": "https://www.bianca.de/"
+  },
+  {
+   "name": "bloemenbeek.nl",
+   "web": "https://www.bloemenbeek.nl/en/"
+  },
+  {
+   "name": "expert.de",
+   "web": "https://www.expert.de/ochtrup"
+  },
+  {
+   "name": "fairservice.de",
+   "web": "https://www.fairservice.de/index.html"
+  },
+  {
+   "name": "franz-bueter.de",
+   "web": "https://www.franz-bueter.de/"
+  },
+  {
+   "name": "friseur-hopmann.de",
+   "web": "https://www.friseur-hopmann.de/"
+  },
+  {
+   "name": "frooters.de",
+   "web": "https://www.frooters.de/"
+  },
+  {
+   "name": "getraenke-kock.de",
+   "web": "https://www.getraenke-kock.de/"
+  },
+  {
+   "name": "hagemann.net",
+   "web": "https://www.hagemann.net/"
+  },
+  {
+   "name": "ib-bau.de",
+   "web": "https://www.ib-bau.de/"
+  },
+  {
+   "name": "jacbo.de",
+   "web": "https://www.jacbo.de/"
+  },
+  {
+   "name": "kockmann-gmbh.de",
+   "web": "https://www.kockmann-gmbh.de/"
+  },
+  {
+   "name": "koopwasserbau.de",
+   "web": "https://www.koopwasserbau.de/"
+  },
+  {
+   "name": "krone-agriculture.com",
+   "web": "https://www.krone-agriculture.com/de/"
+  },
+  {
+   "name": "ksk-steinfurt.de",
+   "web": "https://www.ksk-steinfurt.de/de/home.html"
+  },
+  {
+   "name": "kudla-elektro.de",
+   "web": ""
+  },
+  {
+   "name": "maler-scholtysik.de",
+   "web": "https://maler-scholtysik.de/"
+  },
+  {
+   "name": "malermeister-althoff.de",
+   "web": "https://www.malermeister-althoff.de/"
+  },
+  {
+   "name": "reifenscho.de",
+   "web": "https://www.reifenscho.de/"
+  },
+  {
+   "name": "rostbratwurst-oelerich.de",
+   "web": "https://www.rostbratwurst-oelerich.de/"
+  },
+  {
+   "name": "wietholt.de",
+   "web": "https://wietholt.de/"
+  },
+  {
+   "name": "theisen-gmbh.de",
+   "web": "https://www.theisen-gmbh.de/"
+  },
+  {
+   "name": "tischlerei-focke.de",
+   "web": "https://www.tischlerei-focke.de/"
+  },
+  {
+   "name": "vbga.de",
+   "web": "https://www.vbga.de/startseite.html"
+  },
+  {
+   "name": "vbol.de",
+   "web": "https://www.vbol.de/startseite.html"
+  },
+  {
+   "name": "whiskycigarsalon.com",
+   "web": "https://www.whiskycigarsalon.com/de/"
+  },
+  {
+   "name": "woltering-bedachungen.de",
+   "web": "https://www.woltering-bedachungen.de/"
+  },
+  {
+   "name": "woltering-group.de",
+   "web": "https://woltering-group.de/"
+  },
+  {
+   "name": "woonboulevardoldenzaal.nl",
+   "web": "https://www.woonboulevardoldenzaal.nl/"
+  }
+ ],
+ "galerie": [
+  {
+   "bild": "galerie-clubmeisterschaften-2026",
+   "titel": "Clubmeisterschaften",
+   "datum": "04.–06.09.2026"
+  },
+  {
+   "bild": "galerie-after-work-2026-07-17",
+   "titel": "After Work",
+   "datum": "17.07.2026"
+  },
+  {
+   "bild": "galerie-after-work-2026-07-03",
+   "titel": "After Work",
+   "datum": "03.07.2026"
+  },
+  {
+   "bild": "galerie-monatspokal-2026-06",
+   "titel": "Monatspokal",
+   "datum": "28.06.2026"
+  },
+  {
+   "bild": "galerie-saisoneroeffnung-2026",
+   "titel": "Saisoneröffnung",
+   "datum": "12.04.2026"
+  },
+  {
+   "bild": "galerie-mihego-2026",
+   "titel": "Saisonstart Herrengolf (MiHeGo)",
+   "datum": "08.04.2026"
+  },
+  {
+   "bild": "galerie-ostermontag-2026",
+   "titel": "Ostermontag-Turnier",
+   "datum": "06.04.2026"
+  }
+ ]
+}

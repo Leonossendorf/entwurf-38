@@ -1,0 +1,63 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Termine from '../components/Termine.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import club from '../data/club.json';
+const kurse = [
+  ['1', 'Montag', '23.03.–11.05.', '18:00–19:00'], ['2', 'Montag', '01.06.–20.07.', '18:00–19:00'], ['3', 'Montag', '03.08.–21.09.', '18:00–19:00'],
+  ['4', 'Donnerstag', '26.03.–14.05.', '18:00–19:00'], ['5', 'Donnerstag', '28.05.–16.07.', '18:00–19:00'], ['6', 'Donnerstag', '30.07.–17.09.', '18:00–19:00'],
+  ['7', 'Freitag', '10.04.–29.05.', '17:00–18:30'], ['8', 'Freitag', '05.06.–24.07.', '17:00–18:30'], ['9', 'Freitag', '07.08.–25.09.', '17:00–18:30'],
+  ['10', 'Samstag', '12.02.–04.04.', '10:00–11:30'], ['11', 'Samstag', '18.04.–06.06.', '10:00–11:30'], ['12', 'Samstag', '20.06.–08.08.', '10:00–11:30'],
+  ['13', 'Samstag', '22.08.–10.10.', '10:00–11:30'], ['14', 'Samstag', '24.10.–12.12.', '10:00–11:30'],
+];
+---
+<Basis titel="Platzreife" beschreibung="Der Platzreife-Kurs im Golfclub Euregio: Umfang, Preise und Termine.">
+  <Seitenkopf titel="Platzreife" text="In kurzer Zeit alles lernen, was Sie für das Spiel auf dem Platz brauchen." bild="weg-unter-baeumen" bildAlt="" bereich={{ titel: 'Golf lernen' }} />
+  <section class="abschnitt">
+    <div class="innen zwei-spalten">
+      <Text name="platzreife" />
+      <div>
+        <div class="zahlen" style="margin-bottom:1.2rem">
+          <div><strong>720 Min.</strong><span>Unterricht, aufgeteilt in Einheiten</span></div>
+          <div><strong>HCP 54</strong><span>nach bestandenem Kurs</span></div>
+        </div>
+        <div class="tabelle-huelle">
+          <table>
+            <caption>Preis pro Person</caption>
+            <tbody>
+              <tr><th scope="row">bei 2 Teilnehmenden</th><td class="zahl">600 €</td></tr>
+              <tr><th scope="row">bei 3 Teilnehmenden</th><td class="zahl">440 €</td></tr>
+              <tr><th scope="row">bei 4 Teilnehmenden</th><td class="zahl">360 €</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="leise" style="margin-top:.8rem">Gruppen können auf Anfrage eigene Termine mit der Golfschule vereinbaren.</p>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss" aria-labelledby="kurse-titel">
+    <div class="innen">
+      <h2 class="fahne" id="kurse-titel">Kurse 2026</h2>
+      <div class="tabelle-huelle">
+        <table>
+          <caption class="visuell-versteckt">Platzreife-Kurse 2026</caption>
+          <thead><tr><th scope="col">Kurs</th><th scope="col">Wochentag</th><th scope="col">Zeitraum</th><th scope="col">Uhrzeit</th></tr></thead>
+          <tbody>{kurse.map((k) => <tr><th scope="row">{k[0]}</th><td>{k[1]}</td><td>{k[2]}</td><td>{k[3]} Uhr</td></tr>)}</tbody>
+        </table>
+      </div>
+      <div class="knopfreihe" style="margin-top:1.5rem">
+        <a class="knopf knopf--voll" href={club.pccaddie.kurse} rel="noopener">In PC CADDIE anmelden</a>
+        <a class="knopf knopf--rand" href="mailto:rehbock-golfschule@web.de">Frage an die Golfschule</a>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--dunkel">
+    <div class="innen zwei-spalten">
+      <div><h2 class="fahne">Nächste Termine für Einsteiger</h2><p>Aus PC CADDIE, immer aktuell.</p></div>
+      <Termine kategorien={['einsteiger']} kompakt gruppieren={false} id="termine-platzreife" />
+    </div>
+  </section>
+  <section class="abschnitt"><div class="innen innen--schmal"><Kontaktformular titel="Frage zur Platzreife" vorwahl="Platzreife" /></div></section>
+</Basis>

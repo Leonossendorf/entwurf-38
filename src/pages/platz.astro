@@ -1,0 +1,99 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Bild from '../components/Bild.astro';
+import Text from '../components/Text.astro';
+import Platzstatus from '../components/Platzstatus.astro';
+import zeiten from '../data/oeffnungszeiten.json';
+import daten from '../data/bahnen.json';
+import club from '../data/club.json';
+const b = daten.bahnen;
+const summe = (l: typeof b, k: 'herren' | 'damen' | 'par') => l.reduce((s, x) => s + x[k], 0);
+const vorne = b.slice(0, 9), hinten = b.slice(9);
+---
+<Basis titel="Der Platz" beschreibung="Der 18-Loch-Platz des Golfclub Euregio Bad Bentheim, Bahn für Bahn, mit Übungsanlagen und Natur.">
+  <Seitenkopf titel="Der Platz" text="18 Bahnen, Par 72, eingebettet in Wiesen, Wald, Hecken und Wasser." bild="luftbild-teich" bildAlt="" bereich={{ titel: 'Spielen' }} />
+
+  <section class="abschnitt">
+    <div class="innen zwei-spalten">
+      <Text name="platz" />
+      <Platzstatus hell id="platzstatus" />
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt--weiss" aria-labelledby="karte-titel">
+    <div class="innen">
+      <h2 class="fahne" id="karte-titel">Scorekarte</h2>
+      <div class="tabelle-huelle">
+        <table>
+          <caption class="visuell-versteckt">Alle 18 Bahnen mit Par, Handicap und Länge</caption>
+          <thead><tr><th scope="col">Bahn</th><th scope="col" class="zahl">Par</th><th scope="col" class="zahl">Handicap</th><th scope="col" class="zahl">Gelb (Herren)</th><th scope="col" class="zahl">Rot (Damen)</th></tr></thead>
+          <tbody>
+            {vorne.map((x) => <tr><th scope="row"><a href={`#bahn-${x.nr}`}>Bahn {x.nr}</a></th><td class="zahl">{x.par}</td><td class="zahl">{x.hcp}</td><td class="zahl">{x.herren} m</td><td class="zahl">{x.damen} m</td></tr>)}
+            <tr style="background:var(--papier);font-weight:700"><th scope="row">Vorne 9</th><td class="zahl">{summe(vorne, 'par')}</td><td></td><td class="zahl">{summe(vorne, 'herren').toLocaleString('de-DE')} m</td><td class="zahl">{summe(vorne, 'damen').toLocaleString('de-DE')} m</td></tr>
+            {hinten.map((x) => <tr><th scope="row"><a href={`#bahn-${x.nr}`}>Bahn {x.nr}</a></th><td class="zahl">{x.par}</td><td class="zahl">{x.hcp}</td><td class="zahl">{x.herren} m</td><td class="zahl">{x.damen} m</td></tr>)}
+            <tr style="background:var(--papier);font-weight:700"><th scope="row">Hinten 9</th><td class="zahl">{summe(hinten, 'par')}</td><td></td><td class="zahl">{summe(hinten, 'herren').toLocaleString('de-DE')} m</td><td class="zahl">{summe(hinten, 'damen').toLocaleString('de-DE')} m</td></tr>
+            <tr style="background:var(--petrol);color:#fff;font-weight:700"><th scope="row">Gesamt</th><td class="zahl">{summe(b, 'par')}</td><td></td><td class="zahl">{summe(b, 'herren').toLocaleString('de-DE')} m</td><td class="zahl">{summe(b, 'damen').toLocaleString('de-DE')} m</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="leise" style="margin-top:.8rem">Quelle: Bahnkarten aus dem <a href="https://www.golfclub-euregio.de/wp-content/uploads/2025/06/Birdie_Book_NEU_fur_Homepage_2025.pdf" rel="noopener">Birdie Book 2025</a> (PDF).</p>
+    </div>
+  </section>
+
+  <section class="abschnitt" aria-labelledby="bahnen-titel">
+    <div class="innen">
+      <h2 class="fahne" id="bahnen-titel">Bahn für Bahn</h2>
+      <nav aria-label="Zu einer Bahn springen"><ul class="bahnen-nav">{b.map((x) => <li><a href={`#bahn-${x.nr}`} aria-label={`Bahn ${x.nr}`}>{x.nr}</a></li>)}</ul></nav>
+      {b.map((x) => (
+        <article class="bahn" id={`bahn-${x.nr}`} aria-labelledby={`bahn-${x.nr}-titel`}>
+          <figure class="bahn__karte"><Bild name={`bahn-${String(x.nr).padStart(2, '0')}`} alt={`Bahnkarte von Bahn ${x.nr} aus dem Birdie Book: Spielbahn von oben mit Abschlägen, Bunkern, Wasser und Entfernungen zum Grün`} sizes="(max-width: 760px) 90vw, 22rem" /></figure>
+          <div>
+            <h3 id={`bahn-${x.nr}-titel`} style="font-size:2rem">Bahn {x.nr}</h3>
+            <ul class="bahn__daten">
+              <li><strong>Par {x.par}</strong></li>
+              <li>Handicap <strong>{x.hcp}</strong></li>
+              <li><span class="tee">Gelb <strong>{x.herren} m</strong></span></li>
+              <li><span class="tee tee--rot">Rot <strong>{x.damen} m</strong></span></li>
+            </ul>
+            {x.hinweis && <p>{x.hinweis}.</p>}
+            {x.hcp <= 3 && <p class="leise">Eine der drei schwersten Bahnen des Platzes (Handicap {x.hcp}).</p>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt--weiss" id="ueben" aria-labelledby="ueben-titel">
+    <div class="innen zwei-spalten zwei-spalten--mitte">
+      <div>
+        <h2 class="fahne" id="ueben-titel">Golf üben</h2>
+        <Text name="ueben" klasse="fliesstext" />
+        <p class="karte" style="margin-top:1rem"><strong>{zeiten.range.titel}:</strong> {zeiten.range.hinweis}</p>
+      </div>
+      <figure class="foto foto--breit"><Bild name="abschlag-landschaft" alt="Abschlag mit roter Markierung vor einer Hecke und Bäumen" sizes="(max-width: 900px) 100vw, 45vw" /></figure>
+    </div>
+  </section>
+
+  <section class="abschnitt" id="natur" aria-labelledby="natur-titel">
+    <div class="innen">
+      <div class="zwei-spalten">
+        <div>
+          <h2 class="fahne" id="natur-titel">Golf und Natur</h2>
+          <Text name="natur" />
+        </div>
+        <div class="raster raster--2">
+          <figure class="foto foto--hoch"><Bild name="hummel" alt="Hummel auf einer lila Blüte" sizes="(max-width: 900px) 50vw, 22vw" /></figure>
+          <figure class="foto foto--hoch"><Bild name="bienenstoecke" alt="Bienenstöcke zwischen hohen Gräsern" sizes="(max-width: 900px) 50vw, 22vw" position="40% 50%" /></figure>
+          <figure class="foto foto--breit" style="grid-column:1/-1"><Bild name="enten" alt="Eine Entenfamilie läuft über das Gras am Waldrand" sizes="(max-width: 900px) 100vw, 45vw" /></figure>
+        </div>
+      </div>
+      <div class="raster raster--3" style="margin-top:2rem">
+        <figure class="foto foto--breit"><Bild name="bruecke" alt="Weiße Holzbrücke über einen Graben auf dem Platz" sizes="(max-width: 900px) 100vw, 30vw" /></figure>
+        <figure class="foto foto--breit"><Bild name="weg-unter-baeumen" alt="Weg unter Bäumen entlang eines Fairways in der Morgensonne" sizes="(max-width: 900px) 100vw, 30vw" /></figure>
+        <figure class="foto foto--breit"><Bild name="rhododendron" alt="Pinke Rhododendronblüte" sizes="(max-width: 900px) 100vw, 30vw" /></figure>
+      </div>
+      <p style="margin-top:2rem"><a class="knopf knopf--dunkel" href={club.pccaddie.startzeit} rel="noopener">Startzeit buchen</a></p>
+    </div>
+  </section>
+</Basis>

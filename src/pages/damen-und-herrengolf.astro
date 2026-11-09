@@ -1,0 +1,44 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Termine from '../components/Termine.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import p from '../data/personen.json';
+const tel = (t: string) => t.replace(/[^\d+]/g, '');
+const gruppen = [
+  { titel: 'Damengolf (DiDaGo)', tag: 'Dienstag, vormittags und nachmittags', teams: [['Vormittag', p.damengolf.vormittag], ['Nachmittag', p.damengolf.nachmittag]] },
+  { titel: 'Herrengolf', tag: 'Mittwoch: MiHeGo vormittags, Amigo nachmittags', teams: [['MiHeGo', p.herrengolf.mihego], ['Amigo', p.herrengolf.amigo]] },
+] as const;
+---
+<Basis titel="Damengolf und Herrengolf" beschreibung="Damengolf am Dienstag und Herrengolf am Mittwoch im Golfclub Euregio: Spieltage und Spielleitung.">
+  <Seitenkopf titel="Damengolf und Herrengolf" text="Jede Woche feste Spieltage, sportlich und gesellig." bild="galerie-mihego-2026" bildAlt="" bereich={{ titel: 'Club' }} />
+  <section class="abschnitt">
+    <div class="innen zwei-spalten">
+      <Text name="damen-und-herrengolf" />
+      <div class="raster">
+        {gruppen.map((g) => (
+          <div class="karte">
+            <h2 class="fahne" style="font-size:1.35rem">{g.titel}</h2>
+            <p class="leise">{g.tag}</p>
+            {g.teams.map(([name, leute]) => (
+              <>
+                <h3 style="font-size:1.05rem;margin-top:1rem">Spielleitung {name}</h3>
+                <ul style="list-style:none;padding:0;margin:0">
+                  {(leute as any[]).map((l) => <li>{l.name}{l.telefon && <> · <a href={`tel:${tel(l.telefon)}`}>{l.telefon}</a></>}</li>)}
+                </ul>
+              </>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--dunkel">
+    <div class="innen">
+      <h2 class="fahne">Die nächsten Spieltage</h2>
+      <Termine kategorien={['damengolf', 'herrengolf']} filter id="termine-dh" />
+    </div>
+  </section>
+  <section class="abschnitt"><div class="innen innen--schmal"><Kontaktformular titel="Frage an die Spielleitung" themen={['Damengolf', 'Herrengolf', 'Allgemeine Frage']} /></div></section>
+</Basis>

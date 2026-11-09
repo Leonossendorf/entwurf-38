@@ -1,0 +1,36 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Bild from '../components/Bild.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import d from '../data/club-daten.json';
+const mitBild = d.mannschaften.filter((m) => m.bild);
+const ohneBild = d.mannschaften.filter((m) => !m.bild);
+---
+<Basis titel="Mannschaften" beschreibung="Die Mannschaften des Golfclub Euregio Bad Bentheim.">
+  <Seitenkopf titel="Mannschaften" text="Unsere Teams spielen in der Deutschen Golf Liga und in den Ligen des Golfverbands Niedersachsen-Bremen." bild="luftbild-bahnen" bildAlt="" bereich={{ titel: 'Club' }} />
+  <section class="abschnitt"><div class="innen"><Text name="mannschaften" /></div></section>
+  {mitBild.map((m, i) => (
+    <section class:list={['abschnitt', { 'abschnitt--weiss': i % 2 === 0 }]} aria-labelledby={`m-${i}`} style="padding-block:3rem">
+      <div class="innen zwei-spalten zwei-spalten--mitte">
+        <figure class="foto"><Bild name={m.bild} alt={`Mannschaftsfoto ${m.name}, ${m.liga}`} sizes="(max-width: 900px) 100vw, 55vw" /></figure>
+        <div>
+          <h2 class="fahne" id={`m-${i}`}>{m.name}</h2>
+          <p class="dachzeile">{m.liga}</p>
+          <p class="leise">{m.bildtext}</p>
+        </div>
+      </div>
+    </section>
+  ))}
+  <section class="abschnitt" aria-labelledby="weitere">
+    <div class="innen">
+      <h2 class="fahne" id="weitere">Weitere Mannschaften</h2>
+      <ul class="raster raster--3" style="list-style:none;padding:0">
+        {ohneBild.map((m) => <li class="karte"><strong>{m.name}</strong>{m.liga && <><br /><span class="leise">{m.liga}</span></>}</li>)}
+      </ul>
+      <p class="leise">Fotos dieser Teams folgen.</p>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular titel="Mitspielen in einer Mannschaft" themen={['Mannschaft', 'Allgemeine Frage']} /></div></section>
+</Basis>

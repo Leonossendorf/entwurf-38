@@ -1,0 +1,45 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Bild from '../components/Bild.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import p from '../data/personen.json';
+import d from '../data/club-daten.json';
+---
+<Basis titel="Vorstand und Geschichte" beschreibung="Vorstand, Chronik und die Golfplatz-KG des Golfclub Euregio Bad Bentheim.">
+  <Seitenkopf titel="Vorstand und Geschichte" text="Wer den Club führt, wie er entstanden ist und wem was gehört." bild="luftbild-clubhaus" bildAlt="" bereich={{ titel: 'Club' }} />
+  <section class="abschnitt" aria-labelledby="vorstand-titel">
+    <div class="innen">
+      <h2 class="fahne" id="vorstand-titel">Vorstand</h2>
+      <ul class="raster raster--4" style="list-style:none;padding:0">
+        {p.vorstand.map((v) => (
+          <li class="karte" style="text-align:center">
+            {v.bild
+              ? <div class="foto foto--quadrat" style="border-radius:50%;width:7rem;margin:0 auto 1rem"><Bild name={v.bild} alt={`Porträt von ${v.name}`} sizes="7rem" position="50% 30%" /></div>
+              : <div aria-hidden="true" style="width:7rem;height:7rem;margin:0 auto 1rem;border-radius:50%;background:var(--petrol);color:#fff;display:grid;place-items:center;font-family:var(--schrift-titel);font-weight:800;font-size:1.8rem">{v.name.split(' ').map((x) => x[0]).join('')}</div>}
+            <p class="dachzeile" style="margin-bottom:.2rem">{v.rolle}</p>
+            <h3 style="font-size:1.1rem;margin-bottom:.4rem">{v.name}</h3>
+            <a href={`mailto:${v.mail}`} style="font-size:.9rem;word-break:break-word">{v.mail}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss" aria-labelledby="chronik-titel">
+    <div class="innen zwei-spalten">
+      <div>
+        <h2 class="fahne" id="chronik-titel">Chronik</h2>
+        <ol style="list-style:none;padding:0;border-left:3px solid var(--gruen);margin-left:.4rem">
+          {d.chronik.map((c) => <li style="padding:0 0 1rem 1.2rem;position:relative"><span style="position:absolute;left:-.55rem;top:.45rem;width:.8rem;height:.8rem;border-radius:50%;background:var(--petrol)" aria-hidden="true"></span><strong style="font-family:var(--schrift-titel)">{c.jahr}</strong> · {c.text}</li>)}
+        </ol>
+      </div>
+      <div>
+        <h2 class="fahne">Die Golfplatz-KG</h2>
+        <Text name="club" />
+        <figure class="foto foto--breit" style="margin-top:1rem"><Bild name="luftbild-clubhaus" alt="Luftbild von Clubhaus, Service-Pavillon und den ersten Bahnen" sizes="(max-width: 900px) 100vw, 40vw" /></figure>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt"><div class="innen innen--schmal"><Kontaktformular titel="Nachricht an den Vorstand" themen={['Vorstand', 'Allgemeine Frage']} /></div></section>
+</Basis>

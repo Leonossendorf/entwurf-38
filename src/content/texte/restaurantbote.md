@@ -1,0 +1,11 @@
+---
+titel: "Aus dem Restaurantboten Oktober und November 2026"
+---
+- **Oktober- und November-Menü:** 3 Gänge ab 2 Personen, 39,50 € pro Person
+- **Wildgerichte aus heimischer Jagd**
+- **Gänse-Essen** ab 4 Personen, nur auf Vorbestellung
+- **Ente gut, alles gut:** Franks Honigente aus dem Ofen, ab 11. November
+- **Lesung und Dinner** mit Markus Bünseler am 13. November, 50 € pro Person
+- **Frühstücksbuffet** für die ganze Familie, sonntags von 9 bis 12 Uhr
+- **Silvester-Buffet** am 31. Dezember von 18 bis 22 Uhr, 40 € pro Person
+- **Geschenkgutscheine** für jeden Anlass

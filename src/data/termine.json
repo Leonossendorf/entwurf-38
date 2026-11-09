@@ -1,0 +1,12 @@
+{
+  "hinweis": "Eigene Termine, die nicht in PC CADDIE stehen. Turniere, Kurse und Events kommen automatisch aus PC CADDIE.",
+  "termine": [
+    { "titel": "Ente gut, alles gut: Franks Honigente aus dem Ofen", "kategorie": "restaurant", "datum": "2026-11-11", "bis": "2026-11-30", "uhrzeit": "", "text": "Ab 11. November im Restaurant Termühlen. Gänse-Essen ab 4 Personen nur auf Vorbestellung.", "link": "/restaurant/", "linktext": "Zum Restaurant" },
+    { "titel": "Lesung und Dinner mit Markus Bünseler", "kategorie": "restaurant", "datum": "2026-11-13", "uhrzeit": "", "text": "Eine kulinarische Reise zu den Literatur-Nobelpreisträgern. 50 € pro Person.", "link": "tel:+495922777613", "linktext": "Platz reservieren: 05922 777613" },
+    { "titel": "Großes Silvester-Buffet", "kategorie": "restaurant", "datum": "2026-12-31", "uhrzeit": "18:00", "ende": "22:00", "text": "40 € pro Person.", "link": "tel:+495922777613", "linktext": "Platz reservieren: 05922 777613" },
+    { "titel": "Frühstücksbuffet für die ganze Familie", "kategorie": "restaurant", "uhrzeit": "09:00", "ende": "12:00", "text": "Immer wieder sonntags im Restaurant Termühlen.", "link": "/restaurant/", "linktext": "Zum Restaurant", "wiederholung": { "wochentage": [0], "von": "2026-11-09", "bis": "2026-12-27" } },
+    { "titel": "Kindertraining", "kategorie": "jugend", "uhrzeit": "15:00", "ende": "16:00", "text": "Für Kinder von etwa 6 bis 10 Jahren. Einstieg jederzeit möglich.", "link": "/kinder-und-jugend/", "linktext": "Mehr zum Kindertraining", "wiederholung": { "wochentage": [2, 4], "von": "2026-11-09", "bis": "2026-12-17" } },
+    { "titel": "Jugendtraining", "kategorie": "jugend", "uhrzeit": "16:00", "ende": "17:30", "text": "Für Jugendliche, Ziel ist die DGV-Platzreife. Einstieg jederzeit möglich.", "link": "/kinder-und-jugend/", "linktext": "Mehr zum Jugendtraining", "wiederholung": { "wochentage": [2, 4], "von": "2026-11-09", "bis": "2026-12-17" } },
+    { "titel": "Driving Range geschlossen (bis Donnerstag 9 Uhr)", "kategorie": "anlage", "uhrzeit": "18:00", "text": "Die Driving Range ist jede Woche von Mittwoch 18 Uhr bis Donnerstag 9 Uhr geschlossen.", "link": "/platz/#ueben", "linktext": "Zu den Übungsanlagen", "wiederholung": { "wochentage": [3], "von": "2026-11-09", "bis": "2026-12-30" } }
+  ]
+}

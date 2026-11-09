@@ -1,0 +1,39 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Seitenkopf from '../components/Seitenkopf.astro';
+import Text from '../components/Text.astro';
+import Termine from '../components/Termine.astro';
+import Symbol from '../components/Symbol.astro';
+import Kontaktformular from '../components/Kontaktformular.astro';
+import z from '../data/oeffnungszeiten.json';
+import club from '../data/club.json';
+---
+<Basis titel="Restaurant Termühlen" beschreibung="Restaurant Termühlen im Clubhaus des Golfclub Euregio: Öffnungszeiten, Aktionen, Reservierung.">
+  <Seitenkopf titel="Restaurant Termühlen" text="Komplett im Grünen: Restaurant, Wintergarten mit Kamin und eine große Sonnenterrasse mit Blick auf den Platz." bild="terrasse-clubhaus" bildAlt="" bereich={{ titel: 'Spielen' }} />
+  <section class="abschnitt">
+    <div class="innen zwei-spalten">
+      <div>
+        <Text name="restaurant" />
+        <div class="knopfreihe">
+          <a class="knopf knopf--voll" href="tel:+495922777613"><Symbol name="telefon" />05922 777613</a>
+          <a class="knopf knopf--rand" href="mailto:restaurant@golfclub-euregio.de"><Symbol name="mail" />E-Mail</a>
+          <a class="knopf knopf--rand" href={club.instagramRestaurant} rel="noopener"><Symbol name="instagram" />Instagram</a>
+        </div>
+        <p class="leise" style="margin-top:1rem">Weitere Nummer laut Restaurantbote: <a href="tel:+491602421600">0160 2421600</a> · <a href="https://restaurant-termuehlen.de" rel="noopener">restaurant-termuehlen.de</a></p>
+      </div>
+      <div class="tabelle-huelle">
+        <table>
+          <caption>Öffnungszeiten</caption>
+          <tbody>{z.restaurant.tage.map((t) => <tr data-tag={t.tag}><th scope="row">{t.tag}</th><td>{t.zeit}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="abschnitt abschnitt--weiss">
+    <div class="innen zwei-spalten">
+      <Text name="restaurantbote" titel />
+      <div><h2 class="fahne">Termine im Restaurant</h2><Termine kategorien={['restaurant']} kompakt gruppieren={false} anzahl={6} id="termine-restaurant" /></div>
+    </div>
+  </section>
+  <section class="abschnitt"><div class="innen innen--schmal"><Kontaktformular titel="Anfrage an das Restaurant" themen={['Tisch reservieren', 'Geschenkgutschein', 'Allgemeine Frage']} /></div></section>
+</Basis>

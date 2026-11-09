@@ -1,0 +1,181 @@
+# Browser-Editor (Sveltia CMS) fuer die Website des Golfclub Euregio
+# Anmelden: unter /admin/ mit einem GitHub-Zugangsschluessel (Personal Access Token)
+backend:
+  name: github
+  repo: Leonossendorf/entwurf-38
+  branch: main
+  commit_messages:
+    create: 'Neu: {{collection}} „{{slug}}“'
+    update: 'Geändert: {{collection}} „{{slug}}“'
+    delete: 'Gelöscht: {{collection}} „{{slug}}“'
+    uploadMedia: 'Bild hochgeladen: {{path}}'
+    deleteMedia: 'Bild gelöscht: {{path}}'
+
+site_url: https://golfeuregio.leonossendorf.de
+locale: de
+media_folder: public/bilder/neu
+public_folder: /bilder/neu
+
+media_libraries:
+  default:
+    config:
+      max_file_size: 15000000
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 2400
+          height: 2400
+
+collections:
+  - name: termine
+    label: Termine
+    description: Eigene Termine, die nicht in PC CADDIE stehen (Restaurant, Jugendtraining, Hinweise zur Anlage). Turniere, Kurse und Events kommen automatisch aus PC CADDIE.
+    files:
+      - name: eigene
+        label: Eigene Termine
+        file: src/data/termine.json
+        fields:
+          - { name: hinweis, label: Hinweis, widget: hidden }
+          - name: termine
+            label: Termine
+            widget: list
+            summary: '{{fields.datum}} · {{fields.titel}}'
+            fields:
+              - { name: titel, label: Titel, widget: string }
+              - name: kategorie
+                label: Bereich
+                widget: select
+                options:
+                  - { label: Turniere, value: turniere }
+                  - { label: Damengolf, value: damengolf }
+                  - { label: Herrengolf, value: herrengolf }
+                  - { label: Einsteiger, value: einsteiger }
+                  - { label: Kurse der Golfschule, value: kurse }
+                  - { label: Kinder und Jugend, value: jugend }
+                  - { label: Clubleben, value: clubleben }
+                  - { label: Restaurant, value: restaurant }
+                  - { label: Platz und Anlage, value: anlage }
+              - { name: datum, label: Datum, widget: datetime, time_format: false, format: 'YYYY-MM-DD', required: false, hint: 'Bei wöchentlichen Terminen leer lassen und unten die Wiederholung ausfüllen.' }
+              - { name: bis, label: 'Bis (bei mehrtägigen Angeboten)', widget: datetime, time_format: false, format: 'YYYY-MM-DD', required: false }
+              - { name: uhrzeit, label: 'Beginn (z. B. 18:00, leer = ganztägig)', widget: string, required: false }
+              - { name: ende, label: 'Ende (z. B. 22:00)', widget: string, required: false }
+              - { name: text, label: Kurzer Text, widget: text, required: false }
+              - { name: link, label: 'Link (Seite, Telefon tel:+49…, PC CADDIE)', widget: string, required: false }
+              - { name: linktext, label: Text des Links, widget: string, required: false }
+              - name: wiederholung
+                label: Wöchentliche Wiederholung
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - name: wochentage
+                    label: Wochentage
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - { label: Sonntag, value: 0 }
+                      - { label: Montag, value: 1 }
+                      - { label: Dienstag, value: 2 }
+                      - { label: Mittwoch, value: 3 }
+                      - { label: Donnerstag, value: 4 }
+                      - { label: Freitag, value: 5 }
+                      - { label: Samstag, value: 6 }
+                  - { name: von, label: Ab, widget: datetime, time_format: false, format: 'YYYY-MM-DD', required: false }
+                  - { name: bis, label: Bis, widget: datetime, time_format: false, format: 'YYYY-MM-DD', required: false }
+
+  - name: aktuelles
+    label: Aktuelles
+    label_singular: Neuigkeit
+    folder: src/content/aktuelles
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    sortable_fields: [datum, titel]
+    fields:
+      - { name: titel, label: Überschrift, widget: string }
+      - { name: datum, label: Datum, widget: datetime, time_format: false, format: 'YYYY-MM-DD' }
+      - { name: kurz, label: 'Kurzfassung (1–2 Sätze)', widget: text }
+      - { name: bild, label: 'Bild (Name aus /bilder, optional)', widget: string, required: false }
+      - { name: bildtext, label: Bildbeschreibung für Vorleseprogramme, widget: string, required: false }
+      - { name: body, label: Text, widget: markdown }
+
+  - name: texte
+    label: Seitentexte
+    label_singular: Seitentext
+    folder: src/content/texte
+    create: false
+    delete: false
+    identifier_field: titel
+    fields:
+      - { name: titel, label: Überschrift, widget: string }
+      - { name: einleitung, label: Einleitung, widget: text, required: false }
+      - { name: body, label: Text, widget: markdown }
+
+  - name: daten
+    label: Preise, Zeiten und Platzstatus
+    files:
+      - name: platzstatus
+        label: 'Platzstatus (Demo)'
+        file: src/data/platzstatus.json
+        fields:
+          - { name: hinweis, label: Hinweis, widget: hidden }
+          - name: greenState
+            label: Zustand
+            widget: select
+            options:
+              - { label: '01 · Platz offen, alles erlaubt, Range offen', value: '01' }
+              - { label: '02 · Platz offen, keine Carts, Range offen', value: '02' }
+              - { label: '03 · Platz offen, keine Carts und Trolleys, Range offen', value: '03' }
+              - { label: '04 · Platz gesperrt, Range offen', value: '04' }
+              - { label: '05 · Platz offen, alles erlaubt, Range gesperrt', value: '05' }
+              - { label: '06 · Platz offen, keine Carts, Range gesperrt', value: '06' }
+              - { label: '07 · Platz offen, keine Carts und Trolleys, Range gesperrt', value: '07' }
+              - { label: '08 · Platz und Range gesperrt', value: '08' }
+          - { name: stand, label: 'Stand (z. B. 06.11.2026 10:19)', widget: string }
+      - name: greenfee
+        label: Greenfee
+        file: src/data/greenfee.json
+        fields:
+          - { name: hinweis, label: Hinweis über der Tabelle, widget: text }
+          - { name: spalten, label: Spalten, widget: list, field: { name: s, label: Spalte, widget: string } }
+          - name: preise
+            label: Preise
+            widget: list
+            summary: '{{fields.leistung}}'
+            fields:
+              - { name: leistung, label: Leistung, widget: string }
+              - { name: woche, label: Montag bis Freitag, widget: string }
+              - { name: wochenende, label: Wochenende und Feiertage, widget: string }
+          - name: carts
+            label: Golf Carts
+            widget: list
+            fields:
+              - { name: leistung, label: Leistung, widget: string }
+              - { name: preis, label: Preis, widget: string }
+          - { name: verbund, label: Greenfeeverbund Münsterland, widget: object, collapsed: true, fields: [{ name: titel, label: Titel, widget: string }, { name: text, label: Text, widget: text }, { name: clubs, label: Clubs, widget: list, fields: [{ name: name, label: Name, widget: string }, { name: telefon, label: Telefon, widget: string }, { name: web, label: Website, widget: string }] }] }
+          - { name: hospitality, label: Hospitality Chain, widget: object, collapsed: true, fields: [{ name: titel, label: Titel, widget: string }, { name: text, label: Text, widget: text }, { name: clubs, label: Clubs, widget: list, fields: [{ name: name, label: Name, widget: string }, { name: telefon, label: Telefon, widget: string }, { name: web, label: Website, widget: string }] }] }
+      - name: oeffnungszeiten
+        label: Öffnungszeiten
+        file: src/data/oeffnungszeiten.json
+        fields:
+          - name: servicePavillon
+            label: Service-Pavillon
+            widget: object
+            fields:
+              - { name: titel, label: Titel, widget: string }
+              - { name: hinweis, label: Hinweis, widget: string }
+              - { name: tage, label: Tage, widget: list, fields: [{ name: tag, label: Tag, widget: string }, { name: zeit, label: Zeit, widget: string }] }
+          - name: restaurant
+            label: Restaurant
+            widget: object
+            fields:
+              - { name: titel, label: Titel, widget: string }
+              - { name: hinweis, label: Hinweis, widget: string }
+              - { name: tage, label: Tage, widget: list, fields: [{ name: tag, label: Tag, widget: string }, { name: zeit, label: Zeit, widget: string }] }
+          - name: range
+            label: Driving Range
+            widget: object
+            fields:
+              - { name: titel, label: Titel, widget: string }
+              - { name: hinweis, label: Hinweis, widget: text }

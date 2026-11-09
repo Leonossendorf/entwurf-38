@@ -1,0 +1,14 @@
+---
+// Gibt einen Seitentext aus src/content/texte aus
+import { getEntry, render } from 'astro:content';
+interface Props { name: string; titel?: boolean; klasse?: string; ebene?: 'h2' | 'h3' }
+const { name, titel = false, klasse = 'fliesstext', ebene = 'h2' } = Astro.props;
+const eintrag = await getEntry('texte', name);
+if (!eintrag) throw new Error(`Text fehlt: ${name}`);
+const { Content } = await render(eintrag);
+const Ebene = ebene;
+---
+<div class={klasse}>
+  {titel && <Ebene class="fahne">{eintrag.data.titel}</Ebene>}
+  <Content />
+</div>

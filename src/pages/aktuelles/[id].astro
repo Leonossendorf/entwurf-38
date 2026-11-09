@@ -1,0 +1,27 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import Seitenkopf from '../../components/Seitenkopf.astro';
+import Bild from '../../components/Bild.astro';
+import Kontaktformular from '../../components/Kontaktformular.astro';
+import { getCollection, render } from 'astro:content';
+export async function getStaticPaths() {
+  const alle = await getCollection('aktuelles');
+  return alle.map((e) => ({ params: { id: e.id }, props: { e } }));
+}
+const { e } = Astro.props;
+const { Content } = await render(e);
+---
+<Basis titel={e.data.titel} beschreibung={e.data.kurz}>
+  <Seitenkopf titel={e.data.titel} text={e.data.datum.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })} bereich={{ titel: 'Aktuelles', href: '/aktuelles/' }} />
+  <article class="abschnitt">
+    <div class="innen zwei-spalten">
+      <div class="fliesstext">
+        <p class="einleitung"><strong>{e.data.kurz}</strong></p>
+        <Content />
+        <p><a class="pfeil-link" href="/aktuelles/">Alle Neuigkeiten</a></p>
+      </div>
+      {e.data.bild && <figure class="foto"><Bild name={e.data.bild} alt={e.data.bildtext ?? ''} sizes="(max-width: 900px) 100vw, 45vw" /></figure>}
+    </div>
+  </article>
+  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular /></div></section>
+</Basis>

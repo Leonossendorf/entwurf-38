@@ -1,0 +1,44 @@
+---
+import Symbol from './Symbol.astro';
+import club from '../data/club.json';
+import zeiten from '../data/oeffnungszeiten.json';
+const jahr = 2026;
+---
+<footer class="fuss">
+  <div class="innen fuss__oben">
+    <div>
+      <img src="/bilder/logo-weiss.webp" width="501" height="229" alt="Golfclub Euregio Bad Bentheim" style="width:170px;margin-bottom:1rem" loading="lazy" />
+      <p>{club.name}<br />{club.strasse}<br />{club.ort}</p>
+      <p><a href={club.routeLink} rel="noopener">Route planen</a></p>
+    </div>
+    <div>
+      <h2>Kontakt</h2>
+      <ul>
+        <li><a href={`tel:${club.telefonLink}`}>{club.telefon}</a></li>
+        <li><a href={`mailto:${club.mail}`}>{club.mail}</a></li>
+        <li><a href={`https://wa.me/${club.whatsappService.replace('+', '')}`} rel="noopener">WhatsApp Service-Pavillon</a></li>
+        <li><a href={club.instagram} rel="noopener">Instagram @gc_bad_bentheim</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Service-Pavillon heute</h2>
+      <p data-heute-zeiten={JSON.stringify(zeiten.servicePavillon.tage)}>Montag bis Freitag ab 9 Uhr</p>
+      <h2 style="margin-top:1.2rem">Restaurant heute</h2>
+      <p data-heute-zeiten={JSON.stringify(zeiten.restaurant.tage)}>Dienstag bis Sonntag</p>
+    </div>
+    <div>
+      <h2>Schnell gefunden</h2>
+      <ul>
+        <li><a href="/termine/">Alle Termine</a></li>
+        <li><a href={club.pccaddie.startzeit} rel="noopener">Startzeit buchen</a></li>
+        <li><a href="/gaeste/">Greenfee</a></li>
+        <li><a href="/golf-entdecken/">Golf ausprobieren</a></li>
+        <li><a href="/downloads/">Downloads</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="innen fuss__unten">
+    <p style="margin:0">© {jahr} {club.name} · <a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a> · <a href="/barrierefreiheit/">Barrierefreiheit</a></p>
+    <p class="fuss__entwurf" style="margin:0">Entwurf von Leon Oßendorf, noch nicht der offizielle Auftritt des Golfclub Euregio.</p>
+  </div>
+</footer>
