@@ -453,3 +453,9 @@ html[data-bewegung='aus'] *, html[data-bewegung='aus'] *::before, html[data-bewe
 .abschnitt--dunkel .knopf--voll, .abschnitt--dunkel .knopf--voll:hover { color: #fff; }
 .zwei-spalten--termine { grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); }
 @media (max-width: 900px) { .zwei-spalten--termine { grid-template-columns: 1fr; } .zwei-spalten--termine aside .karte { position: static !important; } }
+@media (max-width: 640px) {
+  .held__schleier { background: linear-gradient(to top, rgba(10, 24, 30, 0.92) 0%, rgba(10, 24, 30, 0.62) 55%, rgba(10, 24, 30, 0.4) 100%); }
+  .held__platzhalter { top: auto; bottom: 0.5rem; right: 50%; transform: translateX(50%); white-space: nowrap; }
+  .held__inhalt { padding-top: 6.5rem; padding-bottom: 2.6rem; }
+  .held .knopfreihe .knopf { width: 100%; justify-content: center; }
+}
