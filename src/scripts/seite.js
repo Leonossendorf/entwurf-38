@@ -173,6 +173,34 @@ if (kopf && kopf.dataset.startseite && held) {
   kopf.addEventListener('focusin', pruefen);
   kopf.addEventListener('focusout', () => setTimeout(pruefen, 0));
   kopfZeigen = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+  // Einrasten: Zwischen Leiste und Film bleibt man nie halb stehen.
+  // Hochscrollen kurz unterhalb des Films führt genau zurück aufs Vollbild,
+  // zwischen Leiste und Film geht es je nach Richtung ganz nach oben oder genau aufs Vollbild.
+  const sanft = () => (window.matchMedia('(prefers-reduced-motion: reduce)').matches || html.getAttribute('data-bewegung') === 'aus' ? 'instant' : 'smooth');
+  let vorigesY = window.scrollY;
+  let richtung = 0;
+  let ziel = null;
+  let finger = false;
+  let ruheTimer = 0;
+  const einrasten = () => {
+    if (finger) return;
+    const y = window.scrollY;
+    if (ziel !== null) { if (Math.abs(y - ziel) < 2) ziel = null; return; }
+    let neuY = null;
+    if (y > 0.5 && y < h - 0.5) neuY = richtung < 0 ? 0 : h;
+    else if (y > h + 0.5 && y < h + window.innerHeight * 0.35 && richtung < 0) neuY = h;
+    if (neuY !== null) { ziel = neuY; window.scrollTo({ top: neuY, behavior: sanft() }); setTimeout(() => { ziel = null; }, 900); }
+  };
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (ziel === null && Math.abs(y - vorigesY) > 0.5) richtung = y < vorigesY ? -1 : 1;
+    vorigesY = y;
+    clearTimeout(ruheTimer);
+    ruheTimer = setTimeout(einrasten, 140);
+  }, { passive: true });
+  window.addEventListener('touchstart', () => { finger = true; }, { passive: true });
+  window.addEventListener('touchend', () => { finger = false; clearTimeout(ruheTimer); ruheTimer = setTimeout(einrasten, 140); }, { passive: true });
 }
 
 // --- Bedienhilfen: klappen unter dem Knopf auf, kein eigenes Fenster
