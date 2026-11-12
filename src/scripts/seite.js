@@ -95,7 +95,7 @@ if (film) {
   film.addEventListener('webkitendfullscreen', () => setTimeout(vollbildEnde, 0));
   $('[data-film-vollbild]')?.addEventListener('click', () => {
     film.removeAttribute('aria-hidden');
-    film.controls = true; film.muted = false; film.currentTime = 0;
+    film.controls = true; film.muted = false;
     filmVonHand = false;
     film.play().catch(() => {});
     if (film.requestFullscreen) film.requestFullscreen().catch(() => {});
@@ -123,43 +123,56 @@ $$('[data-schalter]').forEach((b) => b.addEventListener('click', () => {
 }));
 anzeigen();
 
-// --- Startseite: Der Film füllt den Bildschirm. Die Kopfleiste kommt beim Hochscrollen
-// oder sobald etwa die Hälfte des Films aus dem Bild gescrollt ist.
+// --- Startseite: Die Kopfleiste liegt über dem Film wie ein Teil der Seite.
+// Beim Laden ist so weit gescrollt, dass der Film den Bildschirm füllt; wer hochscrollt,
+// sieht die Leiste, wer wieder runterscrollt, ist zurück im Vollbild.
+// Ab etwa der Hälfte des Films bleibt die Leiste oben angeheftet.
 const kopf = $('#kopf');
 const held = $('.held');
 let kopfZeigen = () => {};
 if (kopf && kopf.dataset.startseite && held) {
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  window.scrollTo(0, 0);
-  let letztesY = window.scrollY;
-  let hochGewollt = false;
-  const setzenKopf = (zeigen) => {
-    kopf.classList.toggle('kopf--versteckt', !zeigen);
-    kopf.classList.toggle('kopf--schatten', zeigen);
-  };
+  let h = kopf.offsetHeight;
+  const platz = () => { h = kopf.offsetHeight; held.style.marginTop = `${h}px`; };
   const pruefen = () => {
-    const halbWeg = held.getBoundingClientRect().bottom < window.innerHeight * 0.5;
     const y = window.scrollY;
-    if (y > letztesY + 2) hochGewollt = false;
-    if (y < letztesY - 2) hochGewollt = true;
-    letztesY = y;
+    const halbWeg = held.getBoundingClientRect().bottom < window.innerHeight * 0.5;
     const feld = $('#bedienhilfen');
     const offen = kopf.contains(document.activeElement) || (feld && !feld.hidden);
-    setzenKopf(halbWeg || hochGewollt || offen);
+    if (halbWeg || offen) {
+      // angeheftet
+      kopf.classList.remove('kopf--folgt', 'kopf--versteckt');
+      kopf.classList.add('kopf--schatten');
+      kopf.style.transform = '';
+    } else if (y < h) {
+      // läuft mit der Seite mit, als stünde sie über dem Film
+      kopf.classList.add('kopf--folgt');
+      kopf.classList.remove('kopf--versteckt', 'kopf--schatten');
+      kopf.style.transform = `translateY(${-y}px)`;
+    } else {
+      // im Film: weg
+      kopf.style.transform = '';
+      kopf.classList.remove('kopf--schatten');
+      kopf.classList.add('kopf--versteckt');
+      requestAnimationFrame(() => kopf.classList.remove('kopf--folgt'));
+    }
   };
-  kopfZeigen = () => { hochGewollt = true; setzenKopf(true); };
+  platz();
+  window.scrollTo({ top: h, behavior: 'instant' });
+  pruefen();
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(() => {
+      const imFilm = window.scrollY >= h - 1 && held.getBoundingClientRect().top <= 1;
+      const alt = h; platz();
+      if (imFilm && h !== alt) window.scrollTo({ top: window.scrollY + (h - alt), behavior: 'instant' });
+      pruefen();
+    }).observe(kopf);
+  }
   window.addEventListener('scroll', pruefen, { passive: true });
-  // Ganz oben kann man nicht weiter hochscrollen: dann reicht die Geste nach oben
-  window.addEventListener('wheel', (e) => {
-    if (e.deltaY < 0) kopfZeigen();
-    else if (window.scrollY < 5) { hochGewollt = false; pruefen(); }
-  }, { passive: true });
-  let startY = 0;
-  window.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; }, { passive: true });
-  window.addEventListener('touchmove', (e) => { if (e.touches[0].clientY - startY > 30 && window.scrollY < 5) kopfZeigen(); }, { passive: true });
-  kopf.addEventListener('focusin', () => setzenKopf(true));
+  window.addEventListener('resize', pruefen, { passive: true });
+  kopf.addEventListener('focusin', pruefen);
   kopf.addEventListener('focusout', () => setTimeout(pruefen, 0));
-  setzenKopf(false);
+  kopfZeigen = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
 }
 
 // --- Bedienhilfen: klappen unter dem Knopf auf, kein eigenes Fenster

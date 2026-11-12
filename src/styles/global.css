@@ -689,3 +689,10 @@ html[data-schrift="gross"] .werkzeug__symbol { width: 42px; height: 42px; }
 .einstieg .knopf--rand { color: #fff; }
 .einstieg :focus-visible { outline-color: var(--fokus); }
 @media (max-width: 640px) { .einstieg .knopfreihe .knopf { width: 100%; justify-content: center; } }
+
+/* Startseite: Leiste läuft über dem Film mit, Menü klein im Film, Filmknöpfe links (Logo im Film sitzt rechts unten) */
+.kopf--folgt { transition: none !important; }
+.held__menue { min-height: 2.5rem; padding: 0.35rem 0.75rem; font-size: 0.9rem !important; gap: 0.4rem; }
+.held__menue svg { width: 1.1rem; height: 1.1rem; }
+.held__film-knoepfe { left: var(--rand) !important; right: auto !important; justify-content: flex-start !important; }
+@media (max-width: 440px) { .held__film-knoepfe { left: 0.6rem !important; right: 0.6rem !important; } }
