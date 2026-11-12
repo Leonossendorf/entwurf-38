@@ -45,7 +45,6 @@ function dialog(id, oeffnen, schliessen) {
   $$('a', d).forEach((a) => a.addEventListener('click', () => d.close()));
 }
 dialog('menue', '[data-menue-oeffnen]', '[data-menue-schliessen]');
-dialog('zugang', '[data-zugang-oeffnen]', '[data-zugang-schliessen]');
 
 // --- Barrierefreiheit: Einstellungen merken
 function lesen() { try { return JSON.parse(localStorage.getItem('gce-zugang') || '{}'); } catch { return {}; } }
@@ -68,26 +67,59 @@ $$('[data-schalter]').forEach((b) => b.addEventListener('click', () => {
 }));
 anzeigen();
 
-// --- Startseite: Kopf erst zeigen, wenn der Film nicht mehr den Bildschirm füllt
+// --- Startseite: Der Film füllt den Bildschirm. Die Kopfleiste kommt beim Hochscrollen
+// oder sobald etwa die Hälfte des Films aus dem Bild gescrollt ist.
 const kopf = $('#kopf');
 const held = $('.held');
+let kopfZeigen = () => {};
 if (kopf && kopf.dataset.startseite && held) {
-  let imHeld = true;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
   let letztesY = window.scrollY;
-  const pruefen = () => {
-    const unten = held.getBoundingClientRect().bottom;
-    imHeld = unten > window.innerHeight * 0.35;
-    const hoch = window.scrollY < letztesY;
-    const zeigen = !imHeld || kopf.contains(document.activeElement);
+  let hochGewollt = false;
+  const setzenKopf = (zeigen) => {
     kopf.classList.toggle('kopf--versteckt', !zeigen);
     kopf.classList.toggle('kopf--schatten', zeigen);
-    letztesY = window.scrollY;
-    return hoch;
   };
+  const pruefen = () => {
+    const halbWeg = held.getBoundingClientRect().bottom < window.innerHeight * 0.5;
+    const y = window.scrollY;
+    if (y > letztesY + 2) hochGewollt = false;
+    if (y < letztesY - 2) hochGewollt = true;
+    letztesY = y;
+    const feld = $('#bedienhilfen');
+    const offen = kopf.contains(document.activeElement) || (feld && !feld.hidden);
+    setzenKopf(halbWeg || hochGewollt || offen);
+  };
+  kopfZeigen = () => { hochGewollt = true; setzenKopf(true); };
   window.addEventListener('scroll', pruefen, { passive: true });
-  kopf.addEventListener('focusin', () => kopf.classList.remove('kopf--versteckt'));
+  // Ganz oben kann man nicht weiter hochscrollen: dann reicht die Geste nach oben
+  window.addEventListener('wheel', (e) => {
+    if (e.deltaY < 0) kopfZeigen();
+    else if (window.scrollY < 5) { hochGewollt = false; pruefen(); }
+  }, { passive: true });
+  let startY = 0;
+  window.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; }, { passive: true });
+  window.addEventListener('touchmove', (e) => { if (e.touches[0].clientY - startY > 30 && window.scrollY < 5) kopfZeigen(); }, { passive: true });
+  kopf.addEventListener('focusin', () => setzenKopf(true));
   kopf.addEventListener('focusout', () => setTimeout(pruefen, 0));
-  pruefen();
+  setzenKopf(false);
+}
+
+// --- Bedienhilfen: klappen unter dem Knopf auf, kein eigenes Fenster
+const bhKnopf = $('[data-bedienhilfen]');
+const bhFeld = $('#bedienhilfen');
+if (bhKnopf && bhFeld) {
+  const auf = (offen) => { bhFeld.hidden = !offen; bhKnopf.setAttribute('aria-expanded', String(offen)); };
+  bhKnopf.addEventListener('click', () => auf(bhFeld.hidden));
+  $('[data-bedienhilfen-zu]', bhFeld).addEventListener('click', () => { auf(false); bhKnopf.focus(); });
+  document.addEventListener('click', (e) => {
+    if (!bhFeld.hidden && !e.target.closest('.werkzeug--zugang') && !e.target.closest('[data-bedienhilfen-held]')) auf(false);
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !bhFeld.hidden) { auf(false); bhKnopf.focus(); } });
+  $$('[data-bedienhilfen-held]').forEach((b) => b.addEventListener('click', () => {
+    kopfZeigen(); auf(true); setTimeout(() => $('.schalter', bhFeld).focus(), 360);
+  }));
 }
 
 // --- Ruhiges Einblenden beim Scrollen

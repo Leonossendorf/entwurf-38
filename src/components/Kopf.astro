@@ -1,6 +1,7 @@
 ---
 // Kopfleiste: Logo, Hauptmenü und große Symbol-Knöpfe (Symbole wie auf der bisherigen Seite)
 import Symbol from './Symbol.astro';
+import Zugang from './Zugang.astro';
 import nav from '../data/navigation.json';
 import club from '../data/club.json';
 import status from '../data/platzstatus.json';
@@ -37,12 +38,21 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
     </nav>
     <ul class="werkzeuge" aria-label="Schnellzugriff">
       <li class="werkzeug werkzeug--platz">
-        <a href="/#platzstatus" aria-describedby="tipp-platz">
-          <span class="werkzeug__symbol"><Symbol name="flagge" /><span class:list={['werkzeug__punkt', { 'werkzeug__punkt--zu': !z.platz }]} aria-hidden="true"></span></span>
+        <a href="/platz/#platzstatus" aria-describedby="tipp-platz">
+          <span class="werkzeug__symbol"><Symbol name="flagge" /><span class:list={['werkzeug__marke', z.platz ? 'werkzeug__marke--ja' : 'werkzeug__marke--nein']} aria-hidden="true">{z.platz ? '✓' : '✕'}</span></span>
           <span class="werkzeug__text">Platz {z.platz ? 'offen' : 'zu'}</span>
         </a>
-        <span class="tipp" role="tooltip" id="tipp-platz">{kurztext(status.greenState)}. Stand {status.stand} Uhr</span>
+        <span class="tipp" role="tooltip" id="tipp-platz">{kurztext(status.greenState)}. Driving Range {z.range ? 'geöffnet' : 'gesperrt'}. Stand {status.stand} Uhr</span>
       </li>
+      {[['cart', 'Cart', 'Golf Cart'], ['trolley', 'Trolley', 'Golf Trolley'], ['bag', 'Bag', 'Golf Bag']].map(([id, kurz, lang]) => (
+        <li class="werkzeug werkzeug--erlaubt">
+          <a href="/platz/#platzstatus" aria-label={`${lang} heute ${z[id] ? 'erlaubt' : 'nicht erlaubt'}`}>
+            <span class="werkzeug__symbol"><span class={`altsymbol altsymbol--${id}`} aria-hidden="true"></span><span class:list={['werkzeug__marke', z[id] ? 'werkzeug__marke--ja' : 'werkzeug__marke--nein']} aria-hidden="true">{z[id] ? '✓' : '✕'}</span></span>
+            <span class="werkzeug__text">{kurz}</span>
+          </a>
+          <span class="tipp" role="tooltip">{lang} heute {z[id] ? 'erlaubt' : 'nicht erlaubt'}</span>
+        </li>
+      ))}
       <li class="werkzeug werkzeug--wetter">
         <a href={club.wetterLink} rel="noopener" aria-describedby="tipp-wetter" data-wetter-knopf>
           <span class="werkzeug__symbol" data-wetter-symbol set:html={ohneKommentar(faWolkeSonne)} />
@@ -73,11 +83,11 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
         <span class="tipp" role="tooltip" id="tipp-pcc">Startzeiten, Turniere und Kurse buchen</span>
       </li>
       <li class="werkzeug werkzeug--zugang">
-        <button type="button" data-zugang-oeffnen aria-describedby="tipp-zugang">
+        <button type="button" aria-expanded="false" aria-controls="bedienhilfen" data-bedienhilfen>
           <span class="werkzeug__symbol" set:html={ohneKommentar(faZugang)} />
-          <span class="werkzeug__text">Barriere&shy;frei</span>
+          <span class="werkzeug__text">Bedienhilfen</span>
         </button>
-        <span class="tipp" role="tooltip" id="tipp-zugang">Große Schrift, starker Kontrast und mehr</span>
+        <Zugang />
       </li>
       <li class="werkzeug werkzeug--menue">
         <button type="button" data-menue-oeffnen aria-haspopup="dialog" aria-controls="menue">
@@ -87,6 +97,12 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
       </li>
     </ul>
   </div>
+  <ul class="statuszeile" aria-label="Heute auf dem Platz">
+    <li><a href="/platz/#platzstatus"><Symbol name="flagge" /><span aria-hidden="true">Platz</span><span class="visuell-versteckt">{z.platz ? ' geöffnet' : ' gesperrt'}</span><b class:list={[z.platz ? 'ja' : 'nein']} aria-hidden="true">{z.platz ? '✓' : '✕'}</b></a></li>
+    {[['cart', 'Cart', 'Golf Cart'], ['trolley', 'Trolley', 'Golf Trolley'], ['bag', 'Bag', 'Golf Bag']].map(([id, kurz, lang]) => (
+      <li><a href="/platz/#platzstatus" aria-label={`${lang} heute ${z[id] ? 'erlaubt' : 'nicht erlaubt'}`}><span class={`altsymbol altsymbol--${id}`} aria-hidden="true"></span><span aria-hidden="true">{kurz}</span><b class:list={[z[id] ? 'ja' : 'nein']} aria-hidden="true">{z[id] ? '✓' : '✕'}</b></a></li>
+    ))}
+  </ul>
 </header>
 
 <dialog class="menue" id="menue" aria-label="Menü">
@@ -98,7 +114,7 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
     <ul class="menue__schnell">
       <li><a href="/termine/"><Symbol name="kalender" />Alle Termine</a></li>
       <li><a href={club.pccaddie.startzeit} rel="noopener"><Symbol name="start" />Startzeit buchen</a></li>
-      <li><a href="/#platzstatus"><Symbol name="flagge" />Platz: {z.platz ? 'offen' : 'gesperrt'}</a></li>
+      <li><a href="/platz/#platzstatus"><Symbol name="flagge" />Platz: {z.platz ? 'offen' : 'gesperrt'}</a></li>
       <li><a href={`tel:${club.telefonLink}`}><Symbol name="telefon" />Anrufen</a></li>
     </ul>
     {nav.gruppen.map((g) => (

@@ -524,3 +524,65 @@ html[data-schrift='gross'] { font-size: 131.25%; }
 }
 .werkzeug__text { font-size: 0.8rem; }
 .werkzeug__symbol { width: 1.8rem; height: 1.8rem; }
+
+/* --- Runde 12.11.: größere Kopfleiste, alte Symbole für Cart, Trolley, Bag, Bedienhilfen zum Aufklappen --- */
+.werkzeug > a, .werkzeug > button { min-width: 4.7rem; min-height: 4.5rem; gap: 0.3rem; }
+.werkzeug__symbol { width: 2.15rem; height: 2.15rem; }
+.werkzeug__text { font-size: 0.86rem; }
+.logo img { width: 170px; }
+.altsymbol { display: block; width: 100%; height: 100%; background: currentColor; -webkit-mask: var(--bild) center / contain no-repeat; mask: var(--bild) center / contain no-repeat; }
+.altsymbol--cart { --bild: url('/bilder/symbol-cart.png'); }
+.altsymbol--trolley { --bild: url('/bilder/symbol-trolley.png'); }
+.altsymbol--bag { --bild: url('/bilder/symbol-bag.png'); }
+.werkzeug__marke { position: absolute; right: -0.55rem; bottom: -0.3rem; width: 1.15rem; height: 1.15rem; border-radius: 50%; display: grid; place-items: center; font-size: 0.75rem; font-weight: 800; line-height: 1; border: 2px solid var(--petrol); }
+.werkzeug__marke--ja { background: var(--gruen-hell); color: var(--tief); }
+.werkzeug__marke--nein { background: #e5455d; color: #fff; }
+.werkzeug--platz { margin-left: 0.2rem; }
+.werkzeug--erlaubt + .werkzeug--wetter { margin-left: 0.8rem; border-left: 1px solid rgba(255, 255, 255, 0.18); padding-left: 0.6rem; }
+.werkzeug--zugang > button { width: 92px; min-width: 92px; height: 74px; min-height: 74px; }
+.werkzeug--zugang .werkzeug__symbol { width: 32px; height: 32px; }
+.werkzeug--zugang .werkzeug__text { font-size: 13px; }
+.werkzeug--zugang > button[aria-expanded='true'] { background: rgba(255, 255, 255, 0.16); }
+.zugang { position: absolute; right: 0; top: calc(100% + 0.4rem); z-index: 20; width: min(23rem, calc(100vw - 1rem)); background: #fff; color: var(--text); border-radius: 10px; box-shadow: 0 24px 50px rgba(10, 25, 30, 0.35); overflow: hidden; }
+.zugang[hidden] { display: none; }
+.zugang__kopf { padding: 0.8rem 1rem; }
+.zugang__inhalt { padding: 1rem; gap: 0.7rem; }
+.statuszeile { display: none; }
+@media (max-width: 1240px) { .werkzeug--erlaubt + .werkzeug--wetter { margin-left: 0.3rem; padding-left: 0.3rem; } }
+@media (max-width: 1060px) { .werkzeug--pcc, .werkzeug--telefon { display: none; } }
+@media (max-width: 760px) {
+  .werkzeug--platz, .werkzeug--erlaubt { display: none; }
+  .werkzeug--erlaubt + .werkzeug--wetter { border: 0; margin: 0; padding: 0; }
+  .werkzeug > a, .werkzeug > button { min-width: 3.6rem; min-height: 4rem; }
+  .werkzeug__symbol { width: 1.9rem; height: 1.9rem; }
+  .werkzeug--zugang > button { width: 78px; min-width: 78px; height: 64px; min-height: 64px; }
+  .logo img { width: 104px; }
+  .statuszeile { display: grid; grid-template-columns: repeat(4, 1fr); list-style: none; margin: 0; padding: 0.35rem 0.5rem 0.45rem; gap: 0.3rem; border-top: 1px solid rgba(255, 255, 255, 0.14); background: var(--tief); }
+  .statuszeile a { position: relative; display: flex; align-items: center; justify-content: center; gap: 0.35rem; color: #fff; text-decoration: none; font-weight: 700; font-size: 0.82rem; padding: 0.3rem 0.2rem; border-radius: 6px; }
+  .statuszeile svg, .statuszeile .altsymbol { width: 1.35rem; height: 1.35rem; flex: none; }
+  .statuszeile b { width: 1rem; height: 1rem; border-radius: 50%; display: grid; place-items: center; font-size: 0.68rem; }
+  .statuszeile b.ja { background: var(--gruen-hell); color: var(--tief); }
+  .statuszeile b.nein { background: #e5455d; color: #fff; }
+}
+@media (max-width: 380px) { .werkzeug--zugang .werkzeug__text { font-size: 11px; } .werkzeug--zugang > button { width: 70px; min-width: 70px; } }
+.kachel__symbol.altsymbol { width: 2.6rem; height: 2.6rem; }
+@media (max-width: 640px) { .kachel__symbol.altsymbol { width: 2.1rem; height: 2.1rem; } }
+.held__menue { font-size: 1rem; }
+
+/* Unsichtbare Vorlesetexte bleiben in ihrer Karte (sonst ragten sie über den Seitenrand) */
+.lochkarte, .bahnen-band, .werkzeug, .statuszeile a { position: relative; }
+@media (max-width: 760px) {
+  .kopf__zeile { gap: 0.2rem; }
+  .werkzeuge { gap: 0; margin-left: auto; }
+  .statuszeile { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .statuszeile a { min-width: 0; gap: 0.25rem; font-size: 0.8rem; padding-inline: 0; }
+}
+@media (max-width: 440px) {
+  .logo img { width: 92px; }
+  .werkzeug > a, .werkzeug > button { min-width: 3.15rem; padding-inline: 0.1rem; }
+  .werkzeug__text { font-size: 0.78rem; }
+  .werkzeug--zugang > button { width: 72px; min-width: 72px; }
+  .werkzeug--zugang .werkzeug__text { font-size: 11px; }
+  .statuszeile svg, .statuszeile .altsymbol { width: 1.15rem; height: 1.15rem; }
+  .statuszeile b { width: 0.9rem; height: 0.9rem; font-size: 0.6rem; }
+}

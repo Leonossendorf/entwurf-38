@@ -2,7 +2,6 @@
 import Basis from '../layouts/Basis.astro';
 import Bild from '../components/Bild.astro';
 import Symbol from '../components/Symbol.astro';
-import Platzstatus from '../components/Platzstatus.astro';
 import Termine from '../components/Termine.astro';
 import Text from '../components/Text.astro';
 import Kontaktformular from '../components/Kontaktformular.astro';
@@ -31,7 +30,7 @@ const neues = (await getCollection('aktuelles')).sort((a, b) => b.data.datum.get
     <div class="held__oben">
       <a class="logo" href="/" aria-label="Golfclub Euregio Bad Bentheim"><img src="/bilder/logo-weiss.webp" width="501" height="229" alt="" /></a>
       <div class="held__oben-rechts">
-        <button type="button" class="held__menue" data-zugang-oeffnen><Symbol name="zugang" /><span class="visuell-versteckt">Barrierefreiheit einstellen</span></button>
+        <button type="button" class="held__menue" data-bedienhilfen-held><Symbol name="zugang" />Bedienhilfen</button>
         <button type="button" class="held__menue" data-menue-oeffnen aria-haspopup="dialog"><Symbol name="menue" />Menü</button>
       </div>
     </div>
@@ -46,7 +45,6 @@ const neues = (await getCollection('aktuelles')).sort((a, b) => b.data.datum.get
           <a class="knopf knopf--rand" style="color:#fff" href={club.pccaddie.startzeit} rel="noopener">Startzeit buchen</a>
         </div>
       </div>
-      <Platzstatus id="platzstatus" />
     </div>
   </section>
 

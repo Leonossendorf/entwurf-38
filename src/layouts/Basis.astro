@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import Kopf from '../components/Kopf.astro';
 import Fuss from '../components/Fuss.astro';
-import Zugang from '../components/Zugang.astro';
 interface Props { titel: string; beschreibung?: string; startseite?: boolean }
 const { titel, beschreibung = 'Golfclub Euregio Bad Bentheim: 18-Loch-Platz an der deutsch-niederländischen Grenze, Golfschule, Restaurant und alle Termine an einem Ort.', startseite = false } = Astro.props;
 const pfad = Astro.url.pathname;
@@ -35,7 +34,6 @@ const seitentitel = startseite ? 'Golfclub Euregio Bad Bentheim' : `${titel} · 
       <slot />
     </main>
     <Fuss />
-    <Zugang />
     <script src="../scripts/seite.js"></script>
   </body>
 </html>

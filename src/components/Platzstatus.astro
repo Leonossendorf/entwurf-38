@@ -17,7 +17,7 @@ const Titel = ueberschrift;
       const ok = z[k.id as keyof typeof z];
       return (
         <li class:list={['kachel', ok ? 'kachel--ja' : 'kachel--nein']}>
-          <Symbol name={k.symbol} klasse="kachel__symbol" />
+          {['cart', 'trolley', 'bag'].includes(k.id) ? <span class={`kachel__symbol altsymbol altsymbol--${k.id}`} aria-hidden="true"></span> : <Symbol name={k.symbol} klasse="kachel__symbol" />}
           <span class="kachel__name">{k.name}</span>
           <span class="kachel__wert"><Symbol name={ok ? 'haken' : 'kreuz'} />{ok ? k.ja : k.nein}</span>
         </li>
