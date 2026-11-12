@@ -12,6 +12,7 @@ import pcc from '../data/termine-pccaddie.json';
 import eigene from '../data/termine.json';
 import { zusammenfuehren, datumTeile } from '../lib/termine.js';
 import { getCollection } from 'astro:content';
+import { faPlay, faPause, faTon, faStumm, faVollbild } from '../icons/symbole.js';
 
 const alle = zusammenfuehren(pcc.termine as any[], eigene.termine as any[]);
 const entdecken = alle.find((t) => /golfentdeck/i.test(t.titel));
@@ -23,8 +24,11 @@ const neues = (await getCollection('aktuelles')).sort((a, b) => b.data.datum.get
 <Basis titel="Start" startseite>
   <section class="held" aria-labelledby="held-titel">
     <div class="held__medien">
-      <!-- Platzhalter: Hier läuft später der Imagefilm des Clubs (Original kommt von Leon) -->
-      <Bild name="luftbild-bahnen" alt="Luftbild über die Spielbahnen des Golfclub Euregio, zwischen Wald, Wasser und Wiesen" laden="eager" wichtig position="50% 45%" />
+      <!-- Imagefilm des Clubs (Original 4K, fürs Web auf 1080p und 720p verkleinert, schwarze Abspanntafel am Ende weggelassen) -->
+      <video class="held__film" autoplay muted loop playsinline preload="auto" poster="/film/standbild.webp" aria-hidden="true" tabindex="-1" data-film>
+        <source src="/film/imagefilm-720.mp4" type="video/mp4" media="(max-width: 900px)" />
+        <source src="/film/imagefilm-1080.mp4" type="video/mp4" />
+      </video>
     </div>
     <div class="held__schleier"></div>
     <div class="held__oben">
@@ -34,7 +38,11 @@ const neues = (await getCollection('aktuelles')).sort((a, b) => b.data.datum.get
         <button type="button" class="held__menue" data-menue-oeffnen aria-haspopup="dialog"><Symbol name="menue" />Menü</button>
       </div>
     </div>
-    <p class="held__platzhalter">Platzhalter: Hier läuft später der Imagefilm</p>
+    <div class="held__film-knoepfe" role="group" aria-label="Imagefilm">
+      <button type="button" class="filmknopf" data-film-pause><span class="filmknopf__symbol" data-zeige="laeuft" set:html={faPause} /><span class="filmknopf__symbol" data-zeige="steht" set:html={faPlay} /><span data-film-pause-text>Anhalten</span></button>
+      <button type="button" class="filmknopf" data-film-ton><span class="filmknopf__symbol" data-zeige="stumm" set:html={faStumm} /><span class="filmknopf__symbol" data-zeige="ton" set:html={faTon} /><span data-film-ton-text>Ton an</span></button>
+      <button type="button" class="filmknopf" data-film-vollbild><span class="filmknopf__symbol" set:html={faVollbild} /><span>Film<span class="nur-breit"> mit Ton</span> ansehen</span></button>
+    </div>
     <div class="held__inhalt">
       <div>
         <p class="held__ort">Bad Bentheim · Euregio</p>

@@ -46,6 +46,63 @@ function dialog(id, oeffnen, schliessen) {
 }
 dialog('menue', '[data-menue-oeffnen]', '[data-menue-schliessen]');
 
+// --- Imagefilm auf der Startseite: läuft stumm im Hintergrund.
+// Anhalten, Ton an und „Film mit Ton ansehen“ (Vollbild von vorn, mit Bedienleiste).
+const film = $('[data-film]');
+let filmVonHand = false; // jemand hat den Film selbst angehalten
+function filmKnoepfe() {
+  if (!film) return;
+  const steht = film.paused;
+  const pk = $('[data-film-pause]');
+  if (pk) {
+    pk.dataset.zustand = steht ? 'steht' : 'laeuft';
+    $('[data-film-pause-text]').textContent = steht ? 'Abspielen' : 'Anhalten';
+  }
+  const tk = $('[data-film-ton]');
+  if (tk) {
+    tk.dataset.zustand = film.muted ? 'stumm' : 'ton';
+    $('[data-film-ton-text]').textContent = film.muted ? 'Ton an' : 'Ton aus';
+  }
+}
+function filmPruefen() {
+  if (!film) return;
+  const ruhe = html.getAttribute('data-bewegung') === 'aus';
+  const sparen = navigator.connection && navigator.connection.saveData;
+  if (ruhe || filmVonHand || sparen) film.pause();
+  else film.play().catch(() => {});
+  filmKnoepfe();
+}
+if (film) {
+  ['play', 'pause', 'volumechange'].forEach((e) => film.addEventListener(e, filmKnoepfe));
+  $('[data-film-pause]')?.addEventListener('click', () => {
+    if (film.paused) {
+      filmVonHand = false;
+      if (html.getAttribute('data-bewegung') === 'aus') setzen('bewegung', '');
+      film.play().catch(() => {});
+    } else { filmVonHand = true; film.pause(); }
+  });
+  $('[data-film-ton]')?.addEventListener('click', () => {
+    film.muted = !film.muted;
+    if (!film.muted && film.paused) { filmVonHand = false; film.play().catch(() => {}); }
+  });
+  const vollbildEnde = () => {
+    if (document.fullscreenElement || document.webkitFullscreenElement) return;
+    film.controls = false; film.muted = true; film.setAttribute('aria-hidden', 'true');
+    filmPruefen();
+  };
+  document.addEventListener('fullscreenchange', vollbildEnde);
+  document.addEventListener('webkitfullscreenchange', vollbildEnde);
+  film.addEventListener('webkitendfullscreen', () => setTimeout(vollbildEnde, 0));
+  $('[data-film-vollbild]')?.addEventListener('click', () => {
+    film.removeAttribute('aria-hidden');
+    film.controls = true; film.muted = false; film.currentTime = 0;
+    filmVonHand = false;
+    film.play().catch(() => {});
+    if (film.requestFullscreen) film.requestFullscreen().catch(() => {});
+    else if (film.webkitEnterFullscreen) film.webkitEnterFullscreen();
+  });
+}
+
 // --- Barrierefreiheit: Einstellungen merken
 function lesen() { try { return JSON.parse(localStorage.getItem('gce-zugang') || '{}'); } catch { return {}; } }
 function schreiben(e) { try { localStorage.setItem('gce-zugang', JSON.stringify(e)); } catch {} }
@@ -58,8 +115,7 @@ function setzen(schluessel, wert) {
 }
 function anzeigen() {
   $$('[data-schalter]').forEach((b) => b.setAttribute('aria-pressed', String(html.getAttribute(`data-${b.dataset.schalter}`) === b.dataset.an)));
-  const film = $('.held video');
-  if (film) html.getAttribute('data-bewegung') === 'aus' ? film.pause() : film.play().catch(() => {});
+  filmPruefen();
 }
 $$('[data-schalter]').forEach((b) => b.addEventListener('click', () => {
   const an = html.getAttribute(`data-${b.dataset.schalter}`) === b.dataset.an;

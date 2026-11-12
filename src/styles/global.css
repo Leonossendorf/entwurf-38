@@ -633,3 +633,47 @@ html[data-schrift="gross"] .werkzeug__symbol { width: 42px; height: 42px; }
 .tipp__zeile b { color: var(--petrol); }
 .tipp__zeile small, .tipp__stand { color: var(--text-leise); font-size: 0.8rem; }
 .tipp__stand { margin-top: 0.3rem; }
+
+/* Imagefilm im Held */
+.held__film { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--tief); }
+.held__film:fullscreen { object-fit: contain; background: #000; }
+.held__film-knoepfe { position: absolute; right: var(--rand); bottom: 1.4rem; z-index: 3; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+.filmknopf { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0.45rem 0.95rem; color: #fff; background: rgba(17, 37, 45, 0.6); border: 2px solid rgba(255, 255, 255, 0.6); border-radius: 999px; font-family: var(--schrift-titel); font-weight: 700; font-size: 0.95rem; cursor: pointer; backdrop-filter: blur(4px); }
+.filmknopf:hover { background: rgba(17, 37, 45, 0.85); border-color: #fff; }
+.filmknopf__symbol { display: inline-flex; width: 1.05rem; height: 1.05rem; }
+.filmknopf__symbol svg { width: 100%; height: 100%; fill: currentColor; }
+.filmknopf[data-zustand] .filmknopf__symbol[data-zeige] { display: none; }
+.filmknopf[data-zustand='laeuft'] [data-zeige='laeuft'], .filmknopf[data-zustand='steht'] [data-zeige='steht'],
+.filmknopf[data-zustand='stumm'] [data-zeige='stumm'], .filmknopf[data-zustand='ton'] [data-zeige='ton'] { display: inline-flex; }
+.filmknopf:not([data-zustand]) [data-zeige='steht'], .filmknopf:not([data-zustand]) [data-zeige='ton'] { display: none; }
+@media (max-width: 760px) {
+  .held__film-knoepfe { left: var(--rand); right: var(--rand); top: 5.4rem; bottom: auto; justify-content: flex-start; }
+  .filmknopf { min-height: 2.75rem; padding: 0.35rem 0.75rem; font-size: 0.85rem; }
+}
+@media (max-width: 1100px) {
+  .held__film-knoepfe { top: 5.4rem; bottom: auto; }
+}
+@media (max-width: 760px) {
+  .held__film-knoepfe { left: var(--rand); right: var(--rand); justify-content: flex-start; }
+}
+@media (max-width: 760px) {
+  .nur-breit { display: none; }
+  .held__film-knoepfe { gap: 0.4rem; flex-wrap: nowrap; }
+}
+@media (max-width: 440px) {
+  .held__oben { padding-inline: 0.75rem; gap: 0.4rem; }
+  .held__oben .logo img { width: 92px; }
+  .held__oben-rechts { gap: 0.35rem; }
+  .held__menue { padding: 0.4rem 0.6rem; font-size: 0.9rem; gap: 0.35rem; }
+  .held__menue svg { width: 1.1rem; height: 1.1rem; }
+  .held__film-knoepfe { left: 0.75rem; right: 0.75rem; }
+  .filmknopf { padding: 0.35rem 0.65rem; gap: 0.35rem; }
+}
+.filmknopf, .held__menue { white-space: nowrap; }
+@media (max-width: 440px) {
+  .held__oben { padding-inline: 0.6rem; }
+  .held__oben .logo img { width: 84px; }
+  .held__menue { padding: 0.4rem 0.5rem; font-size: 0.88rem; }
+  .held__film-knoepfe { left: 0.6rem; right: 0.6rem; gap: 0.3rem; }
+  .filmknopf { padding: 0.35rem 0.55rem; font-size: 0.82rem; }
+}

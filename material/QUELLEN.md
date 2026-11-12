@@ -78,3 +78,10 @@ Alle Bilder stammen von der Website des Golfclub Euregio Bad Bentheim e. V. (gol
 | plan-captains-becher-2026 | https://www.golfclub-euregio.de/wp-content/uploads/2026/10/Turnierplan_Captains_Becher_2026_6.jpeg | Grafik/Plan | 905x1280 | hochgerechnet x2 (Lanczos und Nachschaerfen), Original 905x1280 |
 | plan-team-cup-2026 | https://www.golfclub-euregio.de/wp-content/uploads/2026/10/Turnierplan_Team_Cup_2026_6.jpeg | Grafik/Plan | 905x1280 | hochgerechnet x2 (Lanczos und Nachschaerfen), Original 905x1280 |
 | plan-rosen-pokal-2026 | https://www.golfclub-euregio.de/wp-content/uploads/2026/08/Turnierplan_Rosen_Pokal_2026_5.jpeg | Grafik/Plan | 1015x961 | hochgerechnet x2 (Lanczos und Nachschaerfen), Original 1015x961 |
+
+## Imagefilm
+
+- Original: `euregiogolf_-_final_-_v2 (2160p).mp4` von Leon (12.11.2026), 3840x2160, 25 fps, 62 s, mit Ton, 182 MB. Liegt nicht im Repo.
+- Webfassung: `public/film/imagefilm-1080.mp4` (1920x1080, ca. 20 MB) und `public/film/imagefilm-720.mp4` (1280x720, ca. 10 MB, für Handys), H.264 und AAC.
+- Einzige Änderung am Inhalt: endet bei 59,3 s, also nach dem Logo und vor der schwarzen Tafel „Mehr Informationen / www.golfclub-euregio.de“. Der Ton blendet in den letzten 1,5 s aus. Sonst nicht geschnitten.
+- Standbild `public/film/standbild.webp`: Bild bei 0,65 s (Sonnenaufgang, noch ohne Logo).
