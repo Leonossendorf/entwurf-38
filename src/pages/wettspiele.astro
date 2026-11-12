@@ -3,36 +3,31 @@ import Basis from '../layouts/Basis.astro';
 import Seitenkopf from '../components/Seitenkopf.astro';
 import Text from '../components/Text.astro';
 import Bild from '../components/Bild.astro';
-import Symbol from '../components/Symbol.astro';
+import bilder from '../data/bilder.json';
 import Kontaktformular from '../components/Kontaktformular.astro';
 const plaene = [
   { name: 'plan-captains-becher-2026', titel: 'Captains-Becher 2026' },
   { name: 'plan-rosen-pokal-2026', titel: 'Rosen Pokal 2026' },
   { name: 'plan-team-cup-2026', titel: 'Team-Cup 2026' },
 ];
+const gross = (n: string) => { const b = (bilder as any)[n]; return `/bilder/${n}-${b.breiten[b.breiten.length - 1]}.webp`; };
 ---
 <Basis titel="Wettspiele" beschreibung="Lochspielserien im Golfclub Euregio: Captains-Becher, Rosen Pokal und Team-Cup.">
-  <Seitenkopf titel="Wettspiele" text="Lochspielserien über die ganze Saison: Captains-Becher, Rosen Pokal und Team-Cup." bild="abendrot-gruen" bildAlt="" bereich={{ titel: 'Club' }} />
+  <Seitenkopf titel="Wettspiele" text="Lochspielserien über die ganze Saison: Captains-Becher, Rosen Pokal und Team-Cup." bild="winterpokal" bildAlt="" bereich={{ titel: 'Club' }} />
   <section class="abschnitt">
     <div class="innen">
       <Text name="wettspiele" />
-      <ul class="galerie" style="margin-top:1.5rem">
+      <ul class="plaene">
         {plaene.map((p) => (
           <li>
-            <button type="button" data-gross={`/bilder/${p.name}-1100.webp`} data-alt={`Turnierplan ${p.titel}`} data-text={p.titel}>
-              <span class="foto" style="display:block;aspect-ratio:1"><Bild name={p.name} alt={`Turnierplan ${p.titel}, zum Vergrößern antippen`} sizes="(max-width: 900px) 100vw, 30vw" position="50% 0%" /></span>
-              <span class="galerie__text">{p.titel}<small>Turnierplan als Bild, zum Vergrößern antippen</small></span>
+            <button type="button" class="plan-knopf" data-gross={gross(p.name)} data-alt={`Turnierplan ${p.titel}`} data-text={p.titel}>
+              <span class="foto" style="display:block"><Bild name={p.name} alt={`Turnierplan ${p.titel}`} sizes="(max-width: 900px) 100vw, 30vw" /></span>
+              <span class="plan-knopf__titel">{p.titel}<span>Groß ansehen</span></span>
             </button>
           </li>
         ))}
       </ul>
-      <p class="leise" style="margin-top:1.2rem">Hinweis im Entwurf: Die Pläne liegen bisher nur als Bild vor. Auf der fertigen Seite stehen die Paarungen und Ergebnisse als lesbarer Text, damit sie auch vergrößert und vorgelesen werden können.</p>
     </div>
   </section>
-  <dialog class="leuchtkasten" id="leuchtkasten" aria-label="Großansicht">
-    <button type="button" class="schliessen"><Symbol name="x" />Schließen</button>
-    <img src="" alt="" />
-    <p></p>
-  </dialog>
   <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular titel="Frage zu den Wettspielen" themen={['Wettspiele', 'Allgemeine Frage']} /></div></section>
 </Basis>

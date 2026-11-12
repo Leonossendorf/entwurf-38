@@ -21,9 +21,6 @@ Alle Bilder stammen von der Website des Golfclub Euregio Bad Bentheim e. V. (gol
 | rhododendron | https://www.golfclub-euregio.de/wp-content/uploads/2022/01/Bluete-1-scaled.jpg | ohne Personen | 2560x1700 | nur verkleinert und komprimiert |
 | terrasse-clubhaus | https://www.golfclub-euregio.de/wp-content/uploads/2021/09/Terrasse-neu-scaled.jpg | ohne Personen | 2560x1920 | nur verkleinert und komprimiert |
 | logo-weiss | https://www.golfclub-euregio.de/wp-content/uploads/2021/07/golfclub_euregio_logo_final.png | Logo | 501x229 | nur verkleinert und komprimiert |
-| plan-captains-becher-2026 | https://www.golfclub-euregio.de/wp-content/uploads/2026/10/Turnierplan_Captains_Becher_2026_6-e1791023874101.jpeg | Grafik/Plan | 905x988 | nur verkleinert und komprimiert |
-| plan-team-cup-2026 | https://www.golfclub-euregio.de/wp-content/uploads/2026/10/Turnierplan_Team_Cup_2026_6-e1791023853855.jpeg | Grafik/Plan | 905x1000 | nur verkleinert und komprimiert |
-| plan-rosen-pokal-2026 | https://www.golfclub-euregio.de/wp-content/uploads/2026/08/Turnierplan_Rosen_Pokal_2026_5.jpeg | Grafik/Plan | 1015x961 | nur verkleinert und komprimiert |
 | person-koetterheinrich | https://www.golfclub-euregio.de/wp-content/uploads/2021/09/csm_Christian1_bd3cfb1701.jpeg | mit Personen | 190x150 | nur verkleinert und komprimiert |
 | person-thiemann | https://www.golfclub-euregio.de/wp-content/uploads/2023/02/220513_After-Work-48-scaled-e1690532919100.jpg | mit Personen | 1478x1440 | nur verkleinert und komprimiert |
 | person-niehoff | https://www.golfclub-euregio.de/wp-content/uploads/2021/09/csm_Jens_1_d0c16d9307.jpeg | mit Personen | 190x150 | nur verkleinert und komprimiert |
@@ -64,3 +61,20 @@ Alle Bilder stammen von der Website des Golfclub Euregio Bad Bentheim e. V. (gol
 | bahn-16 | https://www.golfclub-euregio.de/wp-content/uploads/2022/01/Bahn16-Kopie.jpg | Grafik/Plan | 1730x2423 | nur verkleinert und komprimiert |
 | bahn-17 | https://www.golfclub-euregio.de/wp-content/uploads/2022/01/Bahn17-Kopie.jpg | Grafik/Plan | 1730x2423 | nur verkleinert und komprimiert |
 | bahn-18 | https://www.golfclub-euregio.de/wp-content/uploads/2022/01/Bahn18-Kopie.jpg | Grafik/Plan | 1730x2423 | nur verkleinert und komprimiert |
+| range-halle | https://www.golfclub-euregio.de/wp-content/uploads/2022/01/210403_Driving-Range-und-Platz-1-scaled.jpg | ohne Personen | 2560x1439 | nur verkleinert und komprimiert |
+| range-gebaeude | https://www.golfclub-euregio.de/wp-content/uploads/2022/01/210403_Driving-Range-und-Platz-10-scaled.jpg | ohne Personen | 2560x1439 | nur verkleinert und komprimiert |
+| kinder-training | https://www.golfclub-euregio.de/wp-content/uploads/2022/01/210701_Kinder-und-Jugendtraining-15-scaled.jpg | mit Personen | 2560x1439 | nur verkleinert und komprimiert |
+| shop-bekleidung | https://www.golfclub-euregio.de/wp-content/uploads/2021/09/Verkauf-Service-pavillon.jpg | ohne Personen | 1545x2321 | hochgerechnet x1.55 (Lanczos und Nachschaerfen), Original 1545x2321 |
+| training-range | https://www.golfclub-euregio.de/wp-content/uploads/2021/09/Damenmannschaftstraining-scaled.jpg | mit Personen | 2560x1439 | nur verkleinert und komprimiert |
+| putten | https://www.golfclub-euregio.de/wp-content/uploads/2023/04/230415_Rabbit-Turnier-23-scaled.jpg | mit Personen | 2560x1700 | nur verkleinert und komprimiert |
+| winterpokal | https://www.golfclub-euregio.de/wp-content/uploads/2023/03/230319_3.-Winterpokal-1-scaled.jpg | mit Personen | 2560x1439 | nur verkleinert und komprimiert |
+| morgennebel | https://www.golfclub-euregio.de/wp-content/uploads/2023/07/230625_Sommersonnenwende-1-scaled.jpg | ohne Personen | 2560x1920 | nur verkleinert und komprimiert |
+| preis-des-praesidenten | https://www.golfclub-euregio.de/wp-content/uploads/2024/08/240707_Preis-des-Praesidenten-8-scaled.jpg | mit Personen | 2560x1439 | nur verkleinert und komprimiert |
+| damen-gruppe | https://www.golfclub-euregio.de/wp-content/uploads/2024/09/240831_0901_Clubmeisterschaften-252-scaled.jpg | mit Personen | 2560x1439 | nur verkleinert und komprimiert |
+| junger-golfer | https://www.golfclub-euregio.de/wp-content/uploads/2024/09/240831_0901_Clubmeisterschaften-40-scaled.jpg | mit Personen | 2560x1439 | nur verkleinert und komprimiert |
+| clubmeisterschaft-flight | https://www.golfclub-euregio.de/wp-content/uploads/2024/09/240831_0901_Clubmeisterschaften-104-scaled.jpg | mit Personen | 2560x1920 | nur verkleinert und komprimiert |
+| terrasse-voll | https://www.golfclub-euregio.de/wp-content/uploads/2023/05/230430_Kinderkrebshilfe-Turnier-1-scaled.jpg | mit Personen | 2560x1439 | nur verkleinert und komprimiert |
+| team-gruen | https://www.golfclub-euregio.de/wp-content/uploads/2024/05/240511_Rabbit-Turnier-9-scaled.jpg | mit Personen | 2560x1710 | nur verkleinert und komprimiert |
+| plan-captains-becher-2026 | https://www.golfclub-euregio.de/wp-content/uploads/2026/10/Turnierplan_Captains_Becher_2026_6.jpeg | Grafik/Plan | 905x1280 | hochgerechnet x2 (Lanczos und Nachschaerfen), Original 905x1280 |
+| plan-team-cup-2026 | https://www.golfclub-euregio.de/wp-content/uploads/2026/10/Turnierplan_Team_Cup_2026_6.jpeg | Grafik/Plan | 905x1280 | hochgerechnet x2 (Lanczos und Nachschaerfen), Original 905x1280 |
+| plan-rosen-pokal-2026 | https://www.golfclub-euregio.de/wp-content/uploads/2026/08/Turnierplan_Rosen_Pokal_2026_5.jpeg | Grafik/Plan | 1015x961 | hochgerechnet x2 (Lanczos und Nachschaerfen), Original 1015x961 |

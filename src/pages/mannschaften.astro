@@ -9,7 +9,7 @@ const mitBild = d.mannschaften.filter((m) => m.bild);
 const ohneBild = d.mannschaften.filter((m) => !m.bild);
 ---
 <Basis titel="Mannschaften" beschreibung="Die Mannschaften des Golfclub Euregio Bad Bentheim.">
-  <Seitenkopf titel="Mannschaften" text="Unsere Teams spielen in der Deutschen Golf Liga und in den Ligen des Golfverbands Niedersachsen-Bremen." bild="luftbild-bahnen" bildAlt="" bereich={{ titel: 'Club' }} />
+  <Seitenkopf titel="Mannschaften" text="Unsere Teams spielen in der Deutschen Golf Liga und in den Ligen des Golfverbands Niedersachsen-Bremen." bild="team-gruen" bildAlt="" bereich={{ titel: 'Club' }} />
   <section class="abschnitt"><div class="innen"><Text name="mannschaften" /></div></section>
   {mitBild.map((m, i) => (
     <section class:list={['abschnitt', { 'abschnitt--weiss': i % 2 === 0 }]} aria-labelledby={`m-${i}`} style="padding-block:3rem">

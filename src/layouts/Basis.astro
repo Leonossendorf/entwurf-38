@@ -22,6 +22,7 @@ const seitentitel = startseite ? 'Golfclub Euregio Bad Bentheim' : `${titel} · 
       // Einstellungen zur Barrierefreiheit sofort anwenden (kein Flackern)
       try {
         var e = JSON.parse(localStorage.getItem('gce-zugang') || '{}');
+        if (e.schrift && e.schrift !== 'gross') e.schrift = 'gross';
         for (var k in e) document.documentElement.setAttribute('data-' + k, e[k]);
       } catch (x) {}
       if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches && !document.documentElement.getAttribute('data-bewegung')) document.documentElement.setAttribute('data-bewegung', 'aus');

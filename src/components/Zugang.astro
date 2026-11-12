@@ -7,14 +7,7 @@ import Symbol from './Symbol.astro';
     <button type="button" class="schliessen" data-zugang-schliessen><Symbol name="x" />Schließen</button>
   </div>
   <div class="zugang__inhalt">
-    <div class="zugang__gruppe" role="group" aria-labelledby="schrift-label">
-      <span id="schrift-label">Schriftgröße</span>
-      <div class="stufen">
-        <button type="button" data-einstellung="schrift" data-wert="1" aria-pressed="true">Normal</button>
-        <button type="button" data-einstellung="schrift" data-wert="2" aria-pressed="false" style="font-size:1.1em">Größer</button>
-        <button type="button" data-einstellung="schrift" data-wert="3" aria-pressed="false" style="font-size:1.25em">Sehr groß</button>
-      </div>
-    </div>
+    <button type="button" class="schalter" data-schalter="schrift" data-an="gross" aria-pressed="false">Große Schrift<span class="schalter__spur" aria-hidden="true"></span></button>
     <button type="button" class="schalter" data-schalter="kontrast" data-an="hoch" aria-pressed="false">Starker Kontrast<span class="schalter__spur" aria-hidden="true"></span></button>
     <button type="button" class="schalter" data-schalter="zeilen" data-an="weit" aria-pressed="false">Mehr Abstand zwischen den Zeilen<span class="schalter__spur" aria-hidden="true"></span></button>
     <button type="button" class="schalter" data-schalter="links" data-an="unterstrichen" aria-pressed="false">Links immer unterstreichen<span class="schalter__spur" aria-hidden="true"></span></button>

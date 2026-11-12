@@ -149,24 +149,27 @@
   "breiten": []
  },
  "plan-captains-becher-2026": {
-  "w": 905,
-  "h": 988,
+  "w": 1810,
+  "h": 2560,
   "breiten": [
-   600
+   800,
+   1810
   ]
  },
  "plan-team-cup-2026": {
-  "w": 905,
-  "h": 1000,
+  "w": 1810,
+  "h": 2560,
   "breiten": [
-   600
+   800,
+   1810
   ]
  },
  "plan-rosen-pokal-2026": {
-  "w": 1015,
-  "h": 961,
+  "w": 2030,
+  "h": 1922,
   "breiten": [
-   600
+   800,
+   2030
   ]
  },
  "person-koetterheinrich": {
@@ -482,6 +485,132 @@
   "breiten": [
    600,
    1100
+  ]
+ },
+ "range-halle": {
+  "w": 2560,
+  "h": 1439,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "range-gebaeude": {
+  "w": 2560,
+  "h": 1439,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "kinder-training": {
+  "w": 2560,
+  "h": 1439,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "shop-bekleidung": {
+  "w": 2400,
+  "h": 3605,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "training-range": {
+  "w": 2560,
+  "h": 1439,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "putten": {
+  "w": 2560,
+  "h": 1700,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "winterpokal": {
+  "w": 2560,
+  "h": 1439,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "morgennebel": {
+  "w": 2560,
+  "h": 1920,
+  "breiten": [
+   640,
+   1280,
+   2400
+  ]
+ },
+ "preis-des-praesidenten": {
+  "w": 2560,
+  "h": 1439,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "damen-gruppe": {
+  "w": 2560,
+  "h": 1439,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "junger-golfer": {
+  "w": 2560,
+  "h": 1439,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "clubmeisterschaft-flight": {
+  "w": 2560,
+  "h": 1920,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "terrasse-voll": {
+  "w": 2560,
+  "h": 1439,
+  "breiten": [
+   480,
+   960,
+   1600
+  ]
+ },
+ "team-gruen": {
+  "w": 2560,
+  "h": 1710,
+  "breiten": [
+   480,
+   960,
+   1600
   ]
  }
 }

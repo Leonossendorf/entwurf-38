@@ -8,7 +8,7 @@ const { anzahl = 0, kategorien = [], filter = false, kompakt = false, gruppieren
 let liste = zusammenfuehren(pcc.termine as any[], eigene.termine as any[]);
 if (kategorien.length) liste = liste.filter((t) => kategorien.includes(t.kategorie));
 if (anzahl) liste = liste.slice(0, anzahl);
-const vorhanden = KATEGORIEN.filter((k) => !kategorien.length || kategorien.includes(k.id));
+const vorhanden = KATEGORIEN.filter((k) => liste.some((t) => t.kategorie === k.id));
 ---
 <div class:list={['termine', { 'termine-kompakt': kompakt }]} id={id} data-termine data-anzahl={anzahl} data-kategorien={kategorien.join(',')} data-gruppieren={gruppieren ? 'ja' : 'nein'} data-eigene={JSON.stringify(eigene.termine)}>
   {filter && (

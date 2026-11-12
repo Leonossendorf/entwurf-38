@@ -2,7 +2,6 @@
 import Basis from '../../layouts/Basis.astro';
 import Seitenkopf from '../../components/Seitenkopf.astro';
 import Bild from '../../components/Bild.astro';
-import Symbol from '../../components/Symbol.astro';
 import Kontaktformular from '../../components/Kontaktformular.astro';
 import d from '../../data/club-daten.json';
 import bilder from '../../data/bilder.json';
@@ -44,10 +43,5 @@ const gross = (n: string) => { const b = (bilder as any)[n]; return `/bilder/${n
       </ul>
     </div>
   </section>
-  <dialog class="leuchtkasten" id="leuchtkasten" aria-label="Großansicht">
-    <button type="button" class="schliessen"><Symbol name="x" />Schließen</button>
-    <img src="" alt="" />
-    <p></p>
-  </dialog>
   <section class="abschnitt"><div class="innen innen--schmal"><Kontaktformular titel="Foto oder Bericht schicken" themen={['Foto oder Bericht', 'Allgemeine Frage']} /></div></section>
 </Basis>

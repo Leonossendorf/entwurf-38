@@ -1,85 +1,114 @@
 ---
+// Kopfleiste: Logo, Hauptmenü und große Symbol-Knöpfe (Symbole wie auf der bisherigen Seite)
 import Symbol from './Symbol.astro';
 import nav from '../data/navigation.json';
 import club from '../data/club.json';
 import status from '../data/platzstatus.json';
 import { kurztext, ZUSTAENDE } from '../lib/platzstatus.js';
+import { faPhone as faTelefon, faGolfBall as faBall, faSun as faSonne, faCloudSun as faWolkeSonne, faCloud as faWolke, faCloudRain as faRegen, faSnowflake as faSchnee, faSmog as faNebel, faBolt as faGewitter, faUniversalAccess as faZugang, googleMaps as mapsLogo } from '../icons/symbole.js';
 interface Props { startseite?: boolean; pfad: string }
 const { startseite = false, pfad } = Astro.props;
 const aktiv = (href: string) => (href === pfad ? 'page' : undefined);
 const gruppeAktiv = (g: { links: { href: string }[] }) => g.links.some((l) => l.href === pfad);
-const offen = (ZUSTAENDE as any)[status.greenState]?.platz !== false;
+const z = (ZUSTAENDE as any)[status.greenState] ?? ZUSTAENDE['01'];
+const ohneKommentar = (s: string) => s.replace(/<!--[\s\S]*?-->/g, '');
+const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke, regen: faRegen, schnee: faSchnee, nebel: faNebel, gewitter: faGewitter };
 ---
 <header class:list={['kopf', { 'kopf--startseite kopf--versteckt': startseite }]} id="kopf" data-startseite={startseite ? 'ja' : undefined}>
-  <div class="kopf__dienst">
-    <div class="innen">
-      <ul class="dienst__liste" aria-label="Schnellzugriff">
-        <li><a href="/#platzstatus" class="status-kurz"><span class:list={['status-kurz__punkt', { 'status-kurz__punkt--zu': !offen }]} aria-hidden="true"></span>{kurztext(status.greenState)}</a></li>
-        <li><a href={club.wetterLink} rel="noopener"><Symbol name="wetter" /><span>Wetter in Bad Bentheim<span class="wetter-live" data-wetter></span></span></a></li>
-        <li><a href={club.routeLink} rel="noopener"><Symbol name="route" />Route planen</a></li>
+  <div class="innen kopf__zeile">
+    <a class="logo" href="/" aria-label="Golfclub Euregio Bad Bentheim, zur Startseite">
+      <img src="/bilder/logo-weiss.webp" width="501" height="229" alt="" />
+    </a>
+    <nav class="nav" aria-label="Hauptmenü">
+      <ul class="nav__liste">
+        <li class="nav__eintrag"><a class="nav__link" href="/termine/" aria-current={aktiv('/termine/')}>Termine</a></li>
+        {nav.gruppen.map((g, i) => (
+          <li class="nav__eintrag">
+            <button type="button" class:list={['nav__knopf', { 'ist-aktiv': gruppeAktiv(g) }]} aria-expanded="false" aria-controls={`panel-${g.id}`}>{g.titel}<Symbol name="runter" /></button>
+            <ul class:list={['nav__panel', { 'nav__panel--rechts': i === nav.gruppen.length - 1 }]} id={`panel-${g.id}`} hidden>
+              {g.links.map((l) => (
+                <li><a href={l.href} aria-current={aktiv(l.href)} rel={l.extern ? 'noopener' : undefined}>{l.titel}<small>{l.text}</small></a></li>
+              ))}
+            </ul>
+          </li>
+        ))}
+        <li class="nav__eintrag"><a class="nav__link" href="/kontakt/" aria-current={aktiv('/kontakt/')}>Kontakt</a></li>
       </ul>
-      <ul class="dienst__liste">
-        <li><a href={club.pccaddie.start} rel="noopener"><Symbol name="extern" />PC CADDIE</a></li>
-        <li><a href={`tel:${club.telefonLink}`}><Symbol name="telefon" />{club.telefon}</a></li>
-        <li><button type="button" data-zugang-oeffnen><Symbol name="zugang" />Barrierefreiheit</button></li>
-      </ul>
-    </div>
-  </div>
-  <div class="kopf__haupt">
-    <div class="innen">
-      <a class="logo" href="/" aria-label="Golfclub Euregio Bad Bentheim, zur Startseite">
-        <img src="/bilder/logo-weiss.webp" width="501" height="229" alt="" />
-      </a>
-      <nav class="nav" aria-label="Hauptmenü">
-        <ul class="nav__liste">
-          <li class="nav__eintrag"><a class="nav__link" href="/termine/" aria-current={aktiv('/termine/')}>Termine</a></li>
-          {nav.gruppen.map((g) => (
-            <li class="nav__eintrag">
-              <button type="button" class:list={['nav__knopf', { 'ist-aktiv': gruppeAktiv(g) }]} aria-expanded="false" aria-controls={`panel-${g.id}`}>{g.titel}<Symbol name="runter" /></button>
-              <ul class="nav__panel" id={`panel-${g.id}`} hidden>
-                {g.links.map((l) => (
-                  <li><a href={l.href} aria-current={aktiv(l.href)} rel={l.extern ? 'noopener' : undefined}>{l.titel}<small>{l.text}</small></a></li>
-                ))}
-              </ul>
-            </li>
-          ))}
-          <li class="nav__eintrag"><a class="nav__link" href="/kontakt/" aria-current={aktiv('/kontakt/')}>Kontakt</a></li>
-        </ul>
-      </nav>
-      <a class="knopf knopf--voll kopf__aktion" href={club.pccaddie.startzeit} rel="noopener">Startzeit buchen</a>
-      <button type="button" class="menue-knopf" data-menue-oeffnen aria-haspopup="dialog"><Symbol name="menue" />Menü</button>
-    </div>
+    </nav>
+    <ul class="werkzeuge" aria-label="Schnellzugriff">
+      <li class="werkzeug werkzeug--platz">
+        <a href="/#platzstatus" aria-describedby="tipp-platz">
+          <span class="werkzeug__symbol"><Symbol name="flagge" /><span class:list={['werkzeug__punkt', { 'werkzeug__punkt--zu': !z.platz }]} aria-hidden="true"></span></span>
+          <span class="werkzeug__text">Platz {z.platz ? 'offen' : 'zu'}</span>
+        </a>
+        <span class="tipp" role="tooltip" id="tipp-platz">{kurztext(status.greenState)}. Stand {status.stand} Uhr</span>
+      </li>
+      <li class="werkzeug werkzeug--wetter">
+        <a href={club.wetterLink} rel="noopener" aria-describedby="tipp-wetter" data-wetter-knopf>
+          <span class="werkzeug__symbol" data-wetter-symbol set:html={ohneKommentar(faWolkeSonne)} />
+          <span class="werkzeug__text" data-wetter-kurz>Wetter</span>
+        </a>
+        <span class="tipp" role="tooltip" id="tipp-wetter" data-wetter-lang>Wetter am Platz in Bad Bentheim. Antippen für die Vorhersage.</span>
+        <span hidden>{Object.entries(wetterSymbole).map(([k, v]) => <span data-wetter-vorlage={k} set:html={ohneKommentar(v)} />)}</span>
+      </li>
+      <li class="werkzeug werkzeug--route">
+        <a href={club.routeLink} rel="noopener" aria-describedby="tipp-route">
+          <span class="werkzeug__symbol werkzeug__symbol--bunt" set:html={mapsLogo} />
+          <span class="werkzeug__text">Route</span>
+        </a>
+        <span class="tipp" role="tooltip" id="tipp-route">Route zum Golfclub in Google Maps öffnen: {club.strasse}, {club.ort}</span>
+      </li>
+      <li class="werkzeug werkzeug--telefon">
+        <a href={`tel:${club.telefonLink}`} aria-describedby="tipp-telefon">
+          <span class="werkzeug__symbol" set:html={ohneKommentar(faTelefon)} />
+          <span class="werkzeug__text">Anrufen</span>
+        </a>
+        <span class="tipp" role="tooltip" id="tipp-telefon">Service-Pavillon: {club.telefon}</span>
+      </li>
+      <li class="werkzeug werkzeug--pcc">
+        <a href={club.pccaddie.start} rel="noopener" aria-describedby="tipp-pcc">
+          <span class="werkzeug__symbol" set:html={ohneKommentar(faBall)} />
+          <span class="werkzeug__text">PC CADDIE</span>
+        </a>
+        <span class="tipp" role="tooltip" id="tipp-pcc">Startzeiten, Turniere und Kurse buchen</span>
+      </li>
+      <li class="werkzeug werkzeug--zugang">
+        <button type="button" data-zugang-oeffnen aria-describedby="tipp-zugang">
+          <span class="werkzeug__symbol" set:html={ohneKommentar(faZugang)} />
+          <span class="werkzeug__text">Barriere&shy;frei</span>
+        </button>
+        <span class="tipp" role="tooltip" id="tipp-zugang">Große Schrift, starker Kontrast und mehr</span>
+      </li>
+      <li class="werkzeug werkzeug--menue">
+        <button type="button" data-menue-oeffnen aria-haspopup="dialog" aria-controls="menue">
+          <span class="werkzeug__symbol"><Symbol name="menue" /></span>
+          <span class="werkzeug__text">Menü</span>
+        </button>
+      </li>
+    </ul>
   </div>
 </header>
 
 <dialog class="menue" id="menue" aria-label="Menü">
   <div class="menue__kopf">
-    <a class="logo" href="/" aria-label="Zur Startseite"><img src="/bilder/logo-weiss.webp" width="501" height="229" alt="" style="width:120px" /></a>
+    <strong>Menü</strong>
     <button type="button" class="schliessen" data-menue-schliessen><Symbol name="x" />Schließen</button>
   </div>
   <div class="menue__inhalt">
-    <div class="menue__schnell">
-      <a href="/termine/"><Symbol name="kalender" />Alle Termine</a>
-      <a href={club.pccaddie.startzeit} rel="noopener"><Symbol name="start" />Startzeit buchen</a>
-      <a href="/#platzstatus"><Symbol name="flagge" />{kurztext(status.greenState)}</a>
-      <a href={club.routeLink} rel="noopener"><Symbol name="route" />Route planen</a>
-      <a href={club.wetterLink} rel="noopener"><Symbol name="wetter" />Wetter<span data-wetter></span></a>
-      <a href={`tel:${club.telefonLink}`}><Symbol name="telefon" />Anrufen</a>
-    </div>
+    <ul class="menue__schnell">
+      <li><a href="/termine/"><Symbol name="kalender" />Alle Termine</a></li>
+      <li><a href={club.pccaddie.startzeit} rel="noopener"><Symbol name="start" />Startzeit buchen</a></li>
+      <li><a href="/#platzstatus"><Symbol name="flagge" />Platz: {z.platz ? 'offen' : 'gesperrt'}</a></li>
+      <li><a href={`tel:${club.telefonLink}`}><Symbol name="telefon" />Anrufen</a></li>
+    </ul>
     {nav.gruppen.map((g) => (
-      <div class="menue__gruppe">
-        <h2>{g.titel}</h2>
+      <details class="menue__gruppe" open={gruppeAktiv(g)}>
+        <summary>{g.titel}<Symbol name="runter" /></summary>
         <ul>
           {g.links.map((l) => <li><a href={l.href} aria-current={aktiv(l.href)} rel={l.extern ? 'noopener' : undefined}>{l.titel}</a></li>)}
         </ul>
-      </div>
+      </details>
     ))}
-    <div class="menue__gruppe">
-      <h2>Mehr</h2>
-      <ul>
-        <li><a href="/kontakt/">Kontakt und Anfahrt</a></li>
-        <li><button type="button" class="schliessen" data-zugang-oeffnen style="margin-top:.5rem"><Symbol name="zugang" />Barrierefreiheit einstellen</button></li>
-      </ul>
-    </div>
+    <p class="menue__fuss"><a href="/kontakt/">Kontakt und Anfahrt</a></p>
   </div>
 </dialog>

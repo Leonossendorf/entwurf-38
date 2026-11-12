@@ -1,12 +1,11 @@
 ---
+// Seitenkopf: Titel links, großes Foto rechts (kein abgedunkelter Bildstreifen)
 import Bild from './Bild.astro';
 interface Props { titel: string; text?: string; bild?: string; bildAlt?: string; position?: string; bereich?: { titel: string; href?: string } }
 const { titel, text, bild, bildAlt = '', position, bereich } = Astro.props;
 ---
 <header class:list={['seitenkopf', { 'seitenkopf--schlicht': !bild }]}>
-  {bild && <Bild name={bild} alt={bildAlt} laden="eager" wichtig position={position} />}
-  {bild && <div class="bild-schleier"></div>}
-  <div class="innen seitenkopf__inhalt">
+  <div class="seitenkopf__text">
     <nav aria-label="Sie sind hier">
       <ol class="pfad">
         <li><a href="/">Start</a></li>
@@ -14,7 +13,8 @@ const { titel, text, bild, bildAlt = '', position, bereich } = Astro.props;
         <li aria-current="page">{titel}</li>
       </ol>
     </nav>
-    <h1>{titel}</h1>
+    <h1 class="fahne">{titel}</h1>
     {text && <p>{text}</p>}
   </div>
+  {bild && <figure class="seitenkopf__bild"><Bild name={bild} alt={bildAlt} laden="eager" wichtig position={position} sizes="(max-width: 900px) 100vw, 55vw" /></figure>}
 </header>
