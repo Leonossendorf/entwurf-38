@@ -5,6 +5,7 @@ import Zugang from './Zugang.astro';
 import nav from '../data/navigation.json';
 import club from '../data/club.json';
 import status from '../data/platzstatus.json';
+import zeiten from '../data/oeffnungszeiten.json';
 import { kurztext, ZUSTAENDE } from '../lib/platzstatus.js';
 import { faPhone as faTelefon, faGolfBall as faBall, faSun as faSonne, faCloudSun as faWolkeSonne, faCloud as faWolke, faCloudRain as faRegen, faSnowflake as faSchnee, faSmog as faNebel, faBolt as faGewitter, faUniversalAccess as faZugang, googleMaps as mapsLogo } from '../icons/symbole.js';
 interface Props { startseite?: boolean; pfad: string }
@@ -42,7 +43,16 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
           <span class="werkzeug__symbol"><Symbol name="flagge" /><span class:list={['werkzeug__marke', z.platz ? 'werkzeug__marke--ja' : 'werkzeug__marke--nein']} aria-hidden="true">{z.platz ? '✓' : '✕'}</span></span>
           <span class="werkzeug__text">Platz {z.platz ? 'offen' : 'zu'}</span>
         </a>
-        <span class="tipp" role="tooltip" id="tipp-platz">{kurztext(status.greenState)}. Driving Range {z.range ? 'geöffnet' : 'gesperrt'}. Stand {status.stand} Uhr</span>
+        <span class="tipp tipp--platz" role="tooltip" id="tipp-platz">
+          <strong class="tipp__titel">Heute auf dem Platz</strong>
+          <span class="tipp__zeile"><b>Golfplatz:</b> {z.platz ? 'geöffnet' : 'gesperrt'}</span>
+          <span class="tipp__zeile"><b>Driving Range:</b> {z.range ? 'geöffnet' : 'gesperrt'} <small>(jede Woche Mi 18 Uhr bis Do 9 Uhr geschlossen)</small></span>
+          <span class="tipp__zeile"><b>Golf Cart:</b> {z.cart ? 'erlaubt' : 'nicht erlaubt'} · <b>Trolley:</b> {z.trolley ? 'erlaubt' : 'nicht erlaubt'} · <b>Bag:</b> {z.bag ? 'erlaubt' : 'nicht erlaubt'}</span>
+          <strong class="tipp__titel">Heute geöffnet</strong>
+          <span class="tipp__zeile"><b>Service-Pavillon</b> <span data-heute-zeiten={JSON.stringify(zeiten.servicePavillon.tage)}>Mo–Fr ab 9 Uhr</span></span>
+          <span class="tipp__zeile"><b>Restaurant</b> <span data-heute-zeiten={JSON.stringify(zeiten.restaurant.tage)}>Di–So ab 12 Uhr</span></span>
+          <small class="tipp__stand">Platzstatus vom {status.stand} Uhr</small>
+        </span>
       </li>
       {[['cart', 'Cart', 'Golf Cart'], ['trolley', 'Trolley', 'Golf Trolley'], ['bag', 'Bag', 'Golf Bag']].map(([id, kurz, lang]) => (
         <li class="werkzeug werkzeug--erlaubt">
