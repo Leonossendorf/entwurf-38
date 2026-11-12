@@ -22,7 +22,7 @@ const damen = bahnen.bahnen.reduce((s, b) => s + b.damen, 0);
 const neues = (await getCollection('aktuelles')).sort((a, b) => b.data.datum.getTime() - a.data.datum.getTime()).slice(0, 3);
 ---
 <Basis titel="Start" startseite>
-  <section class="held" aria-labelledby="held-titel">
+  <section class="held" aria-label="Imagefilm des Golfclub Euregio">
     <div class="held__medien">
       <!-- Imagefilm des Clubs (Original 4K, fürs Web auf 1080p und 720p verkleinert, schwarze Abspanntafel am Ende weggelassen) -->
       <video class="held__film" autoplay muted loop playsinline preload="auto" poster="/film/standbild.webp" aria-hidden="true" tabindex="-1" data-film>
@@ -43,6 +43,9 @@ const neues = (await getCollection('aktuelles')).sort((a, b) => b.data.datum.get
       <button type="button" class="filmknopf" data-film-ton><span class="filmknopf__symbol" data-zeige="stumm" set:html={faStumm} /><span class="filmknopf__symbol" data-zeige="ton" set:html={faTon} /><span data-film-ton-text>Ton an</span></button>
       <button type="button" class="filmknopf" data-film-vollbild><span class="filmknopf__symbol" set:html={faVollbild} /><span>Film<span class="nur-breit"> mit Ton</span> ansehen</span></button>
     </div>
+  </section>
+
+  <section class="einstieg" aria-labelledby="held-titel">
     <div class="held__inhalt">
       <div>
         <p class="held__ort">Bad Bentheim · Euregio</p>
@@ -50,7 +53,7 @@ const neues = (await getCollection('aktuelles')).sort((a, b) => b.data.datum.get
         <p class="held__satz">{club.claim} 18 Bahnen an der deutsch-niederländischen Grenze, offen für Neugierige, Gäste und Mitglieder.</p>
         <div class="knopfreihe">
           <a class="knopf knopf--voll" href="/golf-entdecken/">Golf kostenlos ausprobieren</a>
-          <a class="knopf knopf--rand" style="color:#fff" href={club.pccaddie.startzeit} rel="noopener">Startzeit buchen</a>
+          <a class="knopf knopf--rand" href={club.pccaddie.startzeit} rel="noopener">Startzeit buchen</a>
         </div>
       </div>
     </div>
