@@ -586,3 +586,13 @@ html[data-schrift='gross'] { font-size: 131.25%; }
   .statuszeile svg, .statuszeile .altsymbol { width: 1.15rem; height: 1.15rem; }
   .statuszeile b { width: 0.9rem; height: 0.9rem; font-size: 0.6rem; }
 }
+
+/* Bedienhilfen: fest und mindestens so groß wie die übrigen Knöpfe (12.11.) */
+.werkzeug--zugang > button { width: 100px; min-width: 100px; height: 84px; min-height: 84px; }
+.werkzeug--zugang .werkzeug__symbol { width: 42px; height: 42px; }
+.werkzeug--zugang .werkzeug__text { font-size: 16px; }
+@media (max-width: 760px) { .werkzeug--zugang > button { width: 88px; min-width: 88px; height: 74px; min-height: 74px; } .werkzeug--zugang .werkzeug__symbol { width: 36px; height: 36px; } .werkzeug--zugang .werkzeug__text { font-size: 14px; } }
+@media (max-width: 440px) { .werkzeug--zugang > button { width: 82px; min-width: 82px; } .werkzeug--zugang .werkzeug__text { font-size: 13px; } }
+@media (max-width: 440px) { .werkzeug--zugang > button { width: 90px; min-width: 90px; } .werkzeug--zugang .werkzeug__text { font-size: 14px; letter-spacing: -0.01em; } .logo img { width: 84px; } }
+@media (max-width: 440px) { .kopf .innen.kopf__zeile { width: calc(100% - 0.8rem); } .werkzeug > a, .werkzeug > button { min-width: 3rem; } .werkzeug--zugang > button { width: 96px; min-width: 96px; } }
+@media (max-width: 370px) { .logo img { width: 72px; } .werkzeug > a, .werkzeug > button { min-width: 2.85rem; } }
