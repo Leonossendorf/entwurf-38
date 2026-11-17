@@ -153,9 +153,29 @@ export function monatsSchluessel(isoDatum) {
 function esc(s) {
   return String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 }
+// Zeitraum über mehrere Tage, z. B. "11.–30. November" (gleicher Monat) oder "28. November – 3. Dezember"
+export function zeitraumText(t) {
+  const a = datumTeile(t.datum), b = datumTeile(t.bis);
+  return a.monat === b.monat && a.jahr === b.jahr ? `${a.tag}.–${b.tag}. ${b.monat}` : `${a.tag}. ${a.monat} – ${b.tag}. ${b.monat}`;
+}
 export function terminHtml(t) {
   const d = datumTeile(t.datum);
-  const zeit = t.uhrzeit ? `${t.uhrzeit}${t.ende ? `–${t.ende}` : ''} Uhr` : (t.bis ? `bis ${datumTeile(t.bis).tag}. ${datumTeile(t.bis).monat}` : 'ganztägig');
+  const zeitraum = t.bis && t.bis > t.datum;
+  if (zeitraum) {
+    const b = datumTeile(t.bis);
+    const tageText = d.monat === b.monat ? `${d.tag}.–${b.tag}.` : `${d.tag}.${String(MONATE.indexOf(d.monat) + 1)}.–${b.tag}.${String(MONATE.indexOf(b.monat) + 1)}.`;
+    const knopf = t.link ? `<a class="termin__link" href="${esc(t.link)}"${/^https?:/.test(t.link) ? ' rel="noopener"' : ''}>${esc(t.linktext || 'Mehr erfahren')}</a>` : '';
+    return `<li class="termin termin--zeitraum" data-kategorie="${esc(t.kategorie)}">
+  <p class="termin__datum" aria-hidden="true"><span class="termin__tag">${tageText}</span><span class="termin__monat">${d.monat === b.monat ? d.monatKurz : `${d.monatKurz}–${b.monatKurz}`}</span></p>
+  <div class="termin__inhalt">
+    <p class="termin__meta"><span class="marke marke--${esc(t.kategorie)}">${esc(kategorieName(t.kategorie))}</span> <span class="visuell-versteckt">Zeitraum ${d.tag}. ${d.monat} bis ${b.tag}. ${b.monat} ${b.jahr},</span><span aria-hidden="true">${esc(zeitraumText(t))}</span>${t.uhrzeit ? ` · ${t.uhrzeit}${t.ende ? `–${t.ende}` : ''} Uhr` : ''}</p>
+    <h3 class="termin__titel">${esc(t.titel)}</h3>
+    ${t.text ? `<p class="termin__text">${esc(t.text)}</p>` : ''}
+    <p class="termin__aktionen">${knopf}<button type="button" class="termin__kalender" data-id="${esc(t.id)}">In meinen Kalender</button></p>
+  </div>
+</li>`;
+  }
+  const zeit = t.uhrzeit ? `${t.uhrzeit}${t.ende ? `–${t.ende}` : ''} Uhr` : 'ganztägig';
   const knopf = t.link ? `<a class="termin__link" href="${esc(t.link)}"${/^https?:/.test(t.link) ? ' rel="noopener"' : ''}>${esc(t.linktext || 'Mehr erfahren')}</a>` : '';
   return `<li class="termin" data-kategorie="${esc(t.kategorie)}">
   <p class="termin__datum" aria-hidden="true"><span class="termin__tag">${d.tag}</span><span class="termin__monat">${d.monatKurz}</span></p>
@@ -191,7 +211,7 @@ export function terminAlsIcs(t) {
     ende = `DTEND;TZID=Europe/Berlin:${y}${m}${d}T${p(eh)}${p(emi)}00`;
   } else {
     start = `DTSTART;VALUE=DATE:${y}${m}${d}`;
-    const n = new Date(`${t.datum}T12:00:00Z`);
+    const n = new Date(`${t.bis && t.bis > t.datum ? t.bis : t.datum}T12:00:00Z`);
     n.setUTCDate(n.getUTCDate() + 1);
     ende = `DTEND;VALUE=DATE:${n.toISOString().slice(0, 10).replace(/-/g, '')}`;
   }
