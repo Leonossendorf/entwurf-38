@@ -717,3 +717,14 @@ html[data-schrift="gross"] .werkzeug__symbol { width: 42px; height: 42px; }
   .nav__liste { gap: 0.2rem; margin-left: -0.9rem; }
   .nav { padding: 0.25rem 0 0.3rem; }
 }
+
+/* --- Runde 20.11. (2): obere Leiste etwas kleiner, damit die Menüzeile klar führt (Handy unverändert) --- */
+@media (min-width: 761px) {
+  .werkzeug__symbol, html[data-schrift="gross"] .werkzeug__symbol { width: 2rem; height: 2rem; }
+  .werkzeug__text { font-size: 0.8rem; }
+  .werkzeug > a, .werkzeug > button { min-height: 4.2rem; }
+  .werkzeug--zugang .werkzeug__symbol { width: 36px; height: 36px; }
+  .werkzeug--zugang .werkzeug__text { font-size: 14.4px; }
+  .werkzeug--zugang > button { min-height: 76px; }
+  .werkzeug__marke { width: 1.05rem; height: 1.05rem; font-size: 0.68rem; }
+}
