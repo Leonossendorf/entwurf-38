@@ -27,6 +27,28 @@ const vorhanden = KATEGORIEN.filter((k) => liste.some((t) => t.kategorie === k.i
 
 <script>
   import { FEEDS, parseICS, zusammenfuehren, listeHtml, terminAlsIcs } from '../lib/termine.js';
+
+  // Ein gemeinsames Fenster für Bilder zu Terminen
+  function bildZeigen(src: string, titel: string, zurueck: HTMLElement | null) {
+    let d = document.getElementById('termin-bild') as HTMLDialogElement | null;
+    if (!d) {
+      d = document.createElement('dialog');
+      d.id = 'termin-bild';
+      d.className = 'bildfenster';
+      d.innerHTML = '<div class="bildfenster__kopf"><strong class="bildfenster__titel"></strong><button type="button" class="schliessen" data-schliessen>Schließen</button></div><img class="bildfenster__bild" alt="" />';
+      document.body.append(d);
+      d.addEventListener('click', (e) => {
+        if (e.target === d || (e.target as HTMLElement).closest('[data-schliessen]')) d!.close();
+      });
+      d.addEventListener('close', () => (d as any)._zurueck?.focus());
+    }
+    d.querySelector('.bildfenster__titel')!.textContent = titel;
+    const img = d.querySelector<HTMLImageElement>('.bildfenster__bild')!;
+    img.src = src;
+    img.alt = titel;
+    (d as any)._zurueck = zurueck;
+    d.showModal();
+  }
   document.querySelectorAll<HTMLElement>('[data-termine]').forEach(async (box) => {
     const eigene = JSON.parse(box.dataset.eigene || '[]');
     const anzahl = Number(box.dataset.anzahl || 0);
@@ -76,6 +98,15 @@ const vorhanden = KATEGORIEN.filter((k) => liste.some((t) => t.kategorie === k.i
       a.download = `${t.titel.replace(/[^\wäöüÄÖÜß -]/g, '').slice(0, 40).trim() || 'termin'}.ics`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    });
+
+    // Termine mit Bild (z. B. Restaurantbote): Klick auf den Eintrag oder „Mehr Informationen“ zeigt das Bild groß
+    box.addEventListener('click', (e) => {
+      const ziel = e.target as HTMLElement;
+      const eintrag = ziel.closest<HTMLElement>('.termin[data-bild]');
+      if (!eintrag) return;
+      if (ziel.closest('a, button') && !ziel.closest('.termin__bildknopf')) return;
+      bildZeigen(eintrag.dataset.bild!, eintrag.dataset.bildtitel || '', eintrag.querySelector<HTMLElement>('.termin__bildknopf'));
     });
 
     // Live aus PC CADDIE laden, sonst Schnappschuss behalten

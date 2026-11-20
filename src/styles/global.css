@@ -700,3 +700,20 @@ html[data-schrift="gross"] .werkzeug__symbol { width: 42px; height: 42px; }
 /* Termine über mehrere Tage (z. B. Restaurant-Aktion 11.–30. November): Zeitraum im Datumsfeld */
 .termin--zeitraum .termin__tag { font-size: 0.92rem; letter-spacing: -0.02em; white-space: nowrap; }
 .termin--zeitraum .termin__monat { white-space: nowrap; }
+
+/* --- Runde 20.11.: Restaurantbote hinter den Restaurant-Terminen --- */
+.termin--bild { cursor: pointer; }
+.termin--bild:hover .termin__titel { text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 2px; }
+.bildfenster { border: 0; padding: 0; max-width: min(46rem, calc(100vw - 1.5rem)); max-height: calc(100dvh - 1.5rem); background: #fff; border-radius: 10px; box-shadow: 0 30px 70px rgba(10, 25, 30, 0.5); overflow: auto; }
+.bildfenster::backdrop { background: rgba(14, 30, 36, 0.78); }
+.bildfenster__kopf { position: sticky; top: 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.6rem 0.6rem 0.6rem 1.1rem; background: var(--petrol); color: #fff; }
+.bildfenster__titel { font-family: var(--schrift-titel); font-size: 0.95rem; }
+.bildfenster__bild { display: block; width: 100%; height: auto; }
+
+/* --- Runde 20.11.: Menüzeile klar größer als die Symbolleiste darüber --- */
+@media (min-width: 1241px) {
+  .nav__knopf, .nav__link { font-size: 1.2rem; padding: 0.65rem 0.9rem; }
+  .nav__knopf svg { width: 0.8em; height: 0.8em; }
+  .nav__liste { gap: 0.2rem; margin-left: -0.9rem; }
+  .nav { padding: 0.25rem 0 0.3rem; }
+}

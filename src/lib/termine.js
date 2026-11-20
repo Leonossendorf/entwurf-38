@@ -158,14 +158,21 @@ export function zeitraumText(t) {
   const a = datumTeile(t.datum), b = datumTeile(t.bis);
   return a.monat === b.monat && a.jahr === b.jahr ? `${a.tag}.–${b.tag}. ${b.monat}` : `${a.tag}. ${a.monat} – ${b.tag}. ${b.monat}`;
 }
+// Knöpfe eines Termins. Mit Bild (z. B. Restaurantbote) zuerst „Mehr Informationen“, das Bild öffnet sich groß.
+function aktionen(t) {
+  const info = t.bild ? `<button type="button" class="termin__link termin__bildknopf" aria-haspopup="dialog">Mehr Informationen</button>` : '';
+  const link = t.link ? `<a class="termin__link${t.bild ? ' termin__link--zweit' : ''}" href="${esc(t.link)}"${/^https?:/.test(t.link) ? ' rel="noopener"' : ''}>${esc(t.linktext || 'Mehr erfahren')}</a>` : '';
+  return info + link;
+}
+const bildDaten = (t) => (t.bild ? ` data-bild="${esc(t.bild)}" data-bildtitel="${esc(t.bildtitel || t.titel)}"` : '');
 export function terminHtml(t) {
   const d = datumTeile(t.datum);
   const zeitraum = t.bis && t.bis > t.datum;
   if (zeitraum) {
     const b = datumTeile(t.bis);
+    const knopf = aktionen(t);
     const tageText = d.monat === b.monat ? `${d.tag}.–${b.tag}.` : `${d.tag}.${String(MONATE.indexOf(d.monat) + 1)}.–${b.tag}.${String(MONATE.indexOf(b.monat) + 1)}.`;
-    const knopf = t.link ? `<a class="termin__link" href="${esc(t.link)}"${/^https?:/.test(t.link) ? ' rel="noopener"' : ''}>${esc(t.linktext || 'Mehr erfahren')}</a>` : '';
-    return `<li class="termin termin--zeitraum" data-kategorie="${esc(t.kategorie)}">
+    return `<li class="termin termin--zeitraum${t.bild ? ' termin--bild' : ''}" data-kategorie="${esc(t.kategorie)}"${bildDaten(t)}>
   <p class="termin__datum" aria-hidden="true"><span class="termin__tag">${tageText}</span><span class="termin__monat">${d.monat === b.monat ? d.monatKurz : `${d.monatKurz}–${b.monatKurz}`}</span></p>
   <div class="termin__inhalt">
     <p class="termin__meta"><span class="marke marke--${esc(t.kategorie)}">${esc(kategorieName(t.kategorie))}</span> <span class="visuell-versteckt">Zeitraum ${d.tag}. ${d.monat} bis ${b.tag}. ${b.monat} ${b.jahr},</span><span aria-hidden="true">${esc(zeitraumText(t))}</span>${t.uhrzeit ? ` · ${t.uhrzeit}${t.ende ? `–${t.ende}` : ''} Uhr` : ''}</p>
@@ -176,8 +183,8 @@ export function terminHtml(t) {
 </li>`;
   }
   const zeit = t.uhrzeit ? `${t.uhrzeit}${t.ende ? `–${t.ende}` : ''} Uhr` : 'ganztägig';
-  const knopf = t.link ? `<a class="termin__link" href="${esc(t.link)}"${/^https?:/.test(t.link) ? ' rel="noopener"' : ''}>${esc(t.linktext || 'Mehr erfahren')}</a>` : '';
-  return `<li class="termin" data-kategorie="${esc(t.kategorie)}">
+  const knopf = aktionen(t);
+  return `<li class="termin${t.bild ? ' termin--bild' : ''}" data-kategorie="${esc(t.kategorie)}"${bildDaten(t)}>
   <p class="termin__datum" aria-hidden="true"><span class="termin__tag">${d.tag}</span><span class="termin__monat">${d.monatKurz}</span></p>
   <div class="termin__inhalt">
     <p class="termin__meta"><span class="marke marke--${esc(t.kategorie)}">${esc(kategorieName(t.kategorie))}</span> <span class="visuell-versteckt">${d.wochentag}, ${d.tag}. ${d.monat} ${d.jahr},</span><span aria-hidden="true">${d.wochentag}</span> · ${esc(zeit)}</p>
