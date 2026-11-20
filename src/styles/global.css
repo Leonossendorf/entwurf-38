@@ -728,3 +728,7 @@ html[data-schrift="gross"] .werkzeug__symbol { width: 42px; height: 42px; }
   .werkzeug--zugang > button { min-height: 76px; }
   .werkzeug__marke { width: 1.05rem; height: 1.05rem; font-size: 0.68rem; }
 }
+
+/* --- Runde 20.11. (3): „Ihr Weg auf den Platz“ auf Sand statt fast Weiß (wie Bunker und Clubhaus) --- */
+.abschnitt--sand { background: #e6dfcf; }
+.abschnitt--sand .weg { border-color: transparent; }
