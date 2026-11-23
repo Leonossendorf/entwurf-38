@@ -732,3 +732,8 @@ html[data-schrift="gross"] .werkzeug__symbol { width: 42px; height: 42px; }
 /* --- Runde 20.11. (3): „Ihr Weg auf den Platz“ auf Sand statt fast Weiß (wie Bunker und Clubhaus) --- */
 .abschnitt--sand { background: #e3d9c4; }
 .abschnitt--sand .weg { border-color: transparent; background: #faf6ee; }
+/* --- Runde 23.11.: Platzstatus live aus dem Platzwart-Portal --- */
+.kachel__wert > span { display: contents; }
+.kachel--ja .wert-nein, .kachel--nein .wert-ja { display: none; }
+.status__kacheln .kachel { min-width: 0; }
+.status__kacheln .kachel__wert { max-width: 100%; justify-content: center; text-align: center; line-height: 1.15; font-size: 0.78rem; padding: 0.22rem 0.45rem; }

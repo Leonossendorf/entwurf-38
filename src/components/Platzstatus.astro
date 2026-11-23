@@ -10,19 +10,18 @@ const Titel = ueberschrift;
 <section class:list={['status', { 'status--hell': hell }]} id={id} aria-labelledby={`${id ?? 'status'}-titel`}>
   <div class="status__kopf">
     <Titel class="status__titel" id={`${id ?? 'status'}-titel`}>Heute auf dem Platz</Titel>
-    <p class="status__stand">Stand: {daten.stand} Uhr</p>
+    <p class="status__stand" data-ps-stand="Stand: {} Uhr">Stand: {daten.stand} Uhr</p>
   </div>
   <ul class="status__kacheln">
     {KACHELN.map((k) => {
       const ok = z[k.id as keyof typeof z];
       return (
-        <li class:list={['kachel', ok ? 'kachel--ja' : 'kachel--nein']}>
+        <li class:list={['kachel', ok ? 'kachel--ja' : 'kachel--nein']} data-ps-kachel={k.id}>
           {['cart', 'trolley', 'bag'].includes(k.id) ? <span class={`kachel__symbol altsymbol altsymbol--${k.id}`} aria-hidden="true"></span> : <Symbol name={k.symbol} klasse="kachel__symbol" />}
           <span class="kachel__name">{k.name}</span>
-          <span class="kachel__wert"><Symbol name={ok ? 'haken' : 'kreuz'} />{ok ? k.ja : k.nein}</span>
+          <span class="kachel__wert"><span class="wert-ja"><Symbol name="haken" />{k.ja}</span><span class="wert-nein"><Symbol name="kreuz" />{k.nein}</span></span>
         </li>
       );
     })}
   </ul>
-  <p class="status__demo">Demo mit dem Stand der bisherigen Seite. Später stellt der Platzwart den Zustand selbst ein.</p>
 </section>

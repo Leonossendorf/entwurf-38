@@ -40,27 +40,27 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
     <ul class="werkzeuge" aria-label="Schnellzugriff">
       <li class="werkzeug werkzeug--platz">
         <a href="/platz/#platzstatus" aria-describedby="tipp-platz">
-          <span class="werkzeug__symbol"><Symbol name="flagge" /><span class:list={['werkzeug__marke', z.platz ? 'werkzeug__marke--ja' : 'werkzeug__marke--nein']} aria-hidden="true">{z.platz ? '✓' : '✕'}</span></span>
-          <span class="werkzeug__text">Platz {z.platz ? 'offen' : 'zu'}</span>
+          <span class="werkzeug__symbol"><Symbol name="flagge" /><span class:list={['werkzeug__marke', z.platz ? 'werkzeug__marke--ja' : 'werkzeug__marke--nein']} aria-hidden="true" data-ps-marke="platz">{z.platz ? '✓' : '✕'}</span></span>
+          <span class="werkzeug__text" data-ps-text="platz" data-ja="Platz offen" data-nein="Platz zu">Platz {z.platz ? 'offen' : 'zu'}</span>
         </a>
         <span class="tipp tipp--platz" role="tooltip" id="tipp-platz">
           <strong class="tipp__titel">Heute auf dem Platz</strong>
-          <span class="tipp__zeile"><b>Golfplatz:</b> {z.platz ? 'geöffnet' : 'gesperrt'}</span>
-          <span class="tipp__zeile"><b>Driving Range:</b> {z.range ? 'geöffnet' : 'gesperrt'} <small>(jede Woche Mi 18 Uhr bis Do 9 Uhr geschlossen)</small></span>
-          <span class="tipp__zeile"><b>Golf Cart:</b> {z.cart ? 'erlaubt' : 'nicht erlaubt'} · <b>Trolley:</b> {z.trolley ? 'erlaubt' : 'nicht erlaubt'} · <b>Bag:</b> {z.bag ? 'erlaubt' : 'nicht erlaubt'}</span>
+          <span class="tipp__zeile"><b>Golfplatz:</b> <span data-ps-text="platz" data-ja="geöffnet" data-nein="gesperrt">{z.platz ? 'geöffnet' : 'gesperrt'}</span></span>
+          <span class="tipp__zeile"><b>Driving Range:</b> <span data-ps-text="range" data-ja="geöffnet" data-nein="gesperrt">{z.range ? 'geöffnet' : 'gesperrt'}</span> <small>(jede Woche Mi 18 Uhr bis Do 9 Uhr geschlossen)</small></span>
+          <span class="tipp__zeile"><b>Golf Cart:</b> <span data-ps-text="cart" data-ja="erlaubt" data-nein="nicht erlaubt">{z.cart ? 'erlaubt' : 'nicht erlaubt'}</span> · <b>Trolley:</b> <span data-ps-text="trolley" data-ja="erlaubt" data-nein="nicht erlaubt">{z.trolley ? 'erlaubt' : 'nicht erlaubt'}</span> · <b>Bag:</b> <span data-ps-text="bag" data-ja="erlaubt" data-nein="nicht erlaubt">{z.bag ? 'erlaubt' : 'nicht erlaubt'}</span></span>
           <strong class="tipp__titel">Heute geöffnet</strong>
           <span class="tipp__zeile"><b>Service-Pavillon</b> <span data-heute-zeiten={JSON.stringify(zeiten.servicePavillon.tage)}>Mo–Fr ab 9 Uhr</span></span>
           <span class="tipp__zeile"><b>Restaurant</b> <span data-heute-zeiten={JSON.stringify(zeiten.restaurant.tage)}>Di–So ab 12 Uhr</span></span>
-          <small class="tipp__stand">Platzstatus vom {status.stand} Uhr</small>
+          <small class="tipp__stand" data-ps-stand="Platzstatus vom {} Uhr">Platzstatus vom {status.stand} Uhr</small>
         </span>
       </li>
       {[['cart', 'Cart', 'Golf Cart'], ['trolley', 'Trolley', 'Golf Trolley'], ['bag', 'Bag', 'Golf Bag']].map(([id, kurz, lang]) => (
         <li class="werkzeug werkzeug--erlaubt">
-          <a href="/platz/#platzstatus" aria-label={`${lang} heute ${z[id] ? 'erlaubt' : 'nicht erlaubt'}`}>
-            <span class="werkzeug__symbol"><span class={`altsymbol altsymbol--${id}`} aria-hidden="true"></span><span class:list={['werkzeug__marke', z[id] ? 'werkzeug__marke--ja' : 'werkzeug__marke--nein']} aria-hidden="true">{z[id] ? '✓' : '✕'}</span></span>
+          <a href="/platz/#platzstatus" aria-label={`${lang} heute ${z[id] ? 'erlaubt' : 'nicht erlaubt'}`} data-ps-label={id} data-vorlage={`${lang} heute {}`}>
+            <span class="werkzeug__symbol"><span class={`altsymbol altsymbol--${id}`} aria-hidden="true"></span><span class:list={['werkzeug__marke', z[id] ? 'werkzeug__marke--ja' : 'werkzeug__marke--nein']} aria-hidden="true" data-ps-marke={id}>{z[id] ? '✓' : '✕'}</span></span>
             <span class="werkzeug__text">{kurz}</span>
           </a>
-          <span class="tipp" role="tooltip">{lang} heute {z[id] ? 'erlaubt' : 'nicht erlaubt'}</span>
+          <span class="tipp" role="tooltip" data-ps-text={id} data-ja={`${lang} heute erlaubt`} data-nein={`${lang} heute nicht erlaubt`}>{lang} heute {z[id] ? 'erlaubt' : 'nicht erlaubt'}</span>
         </li>
       ))}
       <li class="werkzeug werkzeug--wetter">
@@ -108,9 +108,9 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
     </ul>
   </div>
   <ul class="statuszeile" aria-label="Heute auf dem Platz">
-    <li><a href="/platz/#platzstatus"><Symbol name="flagge" /><span aria-hidden="true">Platz</span><span class="visuell-versteckt">{z.platz ? ' geöffnet' : ' gesperrt'}</span><b class:list={[z.platz ? 'ja' : 'nein']} aria-hidden="true">{z.platz ? '✓' : '✕'}</b></a></li>
+    <li><a href="/platz/#platzstatus"><Symbol name="flagge" /><span aria-hidden="true">Platz</span><span class="visuell-versteckt" data-ps-text="platz" data-ja=" geöffnet" data-nein=" gesperrt">{z.platz ? ' geöffnet' : ' gesperrt'}</span><b class:list={[z.platz ? 'ja' : 'nein']} aria-hidden="true" data-ps-b="platz">{z.platz ? '✓' : '✕'}</b></a></li>
     {[['cart', 'Cart', 'Golf Cart'], ['trolley', 'Trolley', 'Golf Trolley'], ['bag', 'Bag', 'Golf Bag']].map(([id, kurz, lang]) => (
-      <li><a href="/platz/#platzstatus" aria-label={`${lang} heute ${z[id] ? 'erlaubt' : 'nicht erlaubt'}`}><span class={`altsymbol altsymbol--${id}`} aria-hidden="true"></span><span aria-hidden="true">{kurz}</span><b class:list={[z[id] ? 'ja' : 'nein']} aria-hidden="true">{z[id] ? '✓' : '✕'}</b></a></li>
+      <li><a href="/platz/#platzstatus" aria-label={`${lang} heute ${z[id] ? 'erlaubt' : 'nicht erlaubt'}`} data-ps-label={id} data-vorlage={`${lang} heute {}`}><span class={`altsymbol altsymbol--${id}`} aria-hidden="true"></span><span aria-hidden="true">{kurz}</span><b class:list={[z[id] ? 'ja' : 'nein']} aria-hidden="true" data-ps-b={id}>{z[id] ? '✓' : '✕'}</b></a></li>
     ))}
   </ul>
 </header>
@@ -124,7 +124,7 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
     <ul class="menue__schnell">
       <li><a href="/termine/"><Symbol name="kalender" />Alle Termine</a></li>
       <li><a href={club.pccaddie.startzeit} rel="noopener"><Symbol name="start" />Startzeit buchen</a></li>
-      <li><a href="/platz/#platzstatus"><Symbol name="flagge" />Platz: {z.platz ? 'offen' : 'gesperrt'}</a></li>
+      <li><a href="/platz/#platzstatus"><Symbol name="flagge" /><span data-ps-text="platz" data-ja="Platz: offen" data-nein="Platz: gesperrt">Platz: {z.platz ? 'offen' : 'gesperrt'}</span></a></li>
       <li><a href={`tel:${club.telefonLink}`}><Symbol name="telefon" />Anrufen</a></li>
     </ul>
     {nav.gruppen.map((g) => (
@@ -138,3 +138,8 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
     <p class="menue__fuss"><a href="/kontakt/">Kontakt und Anfahrt</a></p>
   </div>
 </dialog>
+
+<script>
+  import { platzstatusLive } from '../lib/platzstatus-live.js';
+  platzstatusLive();
+</script>
