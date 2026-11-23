@@ -19,6 +19,6 @@ const e = await getEntry('texte', seite!);
 ---
 <Basis titel={e!.data.titel}>
   <Seitenkopf titel={e!.data.titel} text={e!.data.einleitung} bild={bild || undefined} bildAlt="" />
-  <section class="abschnitt"><div class="innen"><Text name={seite!} /></div></section>
+  <section class="abschnitt"><div class:list={['innen', { rechtstext: seite !== 'golf-und-gesundheit' }]}><Text name={seite!} /></div></section>
   <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular /></div></section>
 </Basis>

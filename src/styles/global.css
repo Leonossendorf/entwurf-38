@@ -737,3 +737,37 @@ html[data-schrift="gross"] .werkzeug__symbol { width: 42px; height: 42px; }
 .kachel--ja .wert-nein, .kachel--nein .wert-ja { display: none; }
 .status__kacheln .kachel { min-width: 0; }
 .status__kacheln .kachel__wert { max-width: 100%; justify-content: center; text-align: center; line-height: 1.15; font-size: 0.78rem; padding: 0.22rem 0.45rem; }
+
+/* --- Runde 23.11.: Symbolleiste und Menüzeile klarer getrennt, Logo berührt die Linie nicht mehr --- */
+@media (min-width: 1241px) {
+  .kopf .logo { margin-bottom: 0.7rem; }
+  .kopf__zeile { padding-top: 0.6rem; }
+  html[data-trenner='1'] .nav { border-top: 3px solid rgba(255, 255, 255, 0.32); }
+  html[data-trenner='2'] .nav { border-top: 1px solid #e5455d; }
+  html[data-trenner='3'] .nav { border-top: 0; background: var(--tief); box-shadow: 0 0 0 100vmax var(--tief), inset 0 1px 0 rgba(255, 255, 255, 0.06); clip-path: inset(0 -100vmax); }
+}
+@media (max-width: 760px) {
+  html[data-trenner='1'] .statuszeile { border-top: 3px solid rgba(255, 255, 255, 0.32); background: var(--petrol); }
+  html[data-trenner='2'] .statuszeile { border-top: 1px solid #e5455d; background: var(--petrol); }
+  html[data-trenner='3'] .statuszeile { border-top: 0; }
+}
+
+/* --- Testschalter (nur zum Testen, vor Livegang entfernen) --- */
+.testschalter { position: fixed; left: 0.6rem; bottom: 0.6rem; z-index: 300; display: flex; align-items: center; gap: 0.25rem; padding: 0.3rem 0.35rem 0.3rem 0.7rem; background: #fff; color: var(--text); border: 2px solid #e5455d; border-radius: 999px; box-shadow: 0 8px 24px rgba(10, 25, 30, 0.3); font: 700 0.78rem/1 var(--schrift); }
+.testschalter__titel { margin-right: 0.2rem; color: #a3243a; }
+.testschalter button { width: 2rem; height: 2rem; border-radius: 50%; border: 1px solid var(--linie); background: #fff; color: var(--petrol); font: inherit; font-size: 0.95rem; cursor: pointer; }
+.testschalter button[aria-pressed='true'] { background: var(--petrol); color: #fff; border-color: var(--petrol); }
+@media print { .testschalter { display: none; } }
+
+/* --- Runde 23.11.: Kontaktformular mit Postfächern --- */
+.formular__ziel { margin: 0.6rem 0 0; font-size: 0.92rem; color: var(--text-leise); }
+.formular__ziel b { color: var(--text); font-weight: 700; overflow-wrap: anywhere; }
+.formular__falle { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.formular__fehler a { font-weight: 700; }
+.chips span { min-height: 2.6rem; padding: 0.4rem 0.9rem; }
+
+/* Impressum, Datenschutz, Barrierefreiheit: ruhige Zwischenüberschriften, gut lesbare Zeilenlänge */
+.rechtstext > * { max-width: 52rem; }
+.rechtstext h2 { font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.65rem); margin: 2.2rem 0 0.5rem; }
+.rechtstext h2:first-child { margin-top: 0; }
+.rechtstext p, .rechtstext li { font-size: 1.05rem; }

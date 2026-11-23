@@ -264,24 +264,65 @@ document.addEventListener('keydown', (e) => {
 $$('.werkzeug').forEach((w) => w.addEventListener('mouseleave', () => w.classList.remove('tipp-aus')));
 $$('.werkzeug').forEach((w) => w.addEventListener('focusout', () => w.classList.remove('tipp-aus')));
 
-// --- Formulare (Entwurf: zeigt nur die Bestätigung)
+// --- Formulare: Thema wählt das Postfach, Versand über den Worker „golfclub-euregio-kontakt“
 $$('[data-formular]').forEach((f) => {
-  f.addEventListener('submit', (e) => {
+  const geladen = Date.now();
+  const zielWorum = f.querySelector('[data-ziel-worum]');
+  const zielAn = f.querySelector('[data-ziel-an]');
+  const gewaehlt = () => f.querySelector('[name="thema"]:checked');
+  f.addEventListener('change', (e) => {
+    if (e.target.name !== 'thema') return;
+    zielWorum.textContent = e.target.dataset.worum;
+    zielAn.textContent = e.target.dataset.an;
+  });
+  const knopf = f.querySelector('[type="submit"]');
+  f.addEventListener('submit', async (e) => {
     e.preventDefault();
     const kontakt = f.querySelector('[name="kontakt"]');
     const fehler = f.querySelector('.formular__fehler');
-    if (!kontakt.value.trim()) {
-      fehler.textContent = 'Bitte geben Sie eine Telefonnummer oder E-Mail-Adresse an, damit der Club antworten kann.';
+    const wert = kontakt.value.trim();
+    const istMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(wert);
+    const istTel = /^\+?[\d\s().\/-]{6,}$/.test(wert);
+    if (!istMail && !istTel) {
+      fehler.textContent = wert ? 'Bitte eine gültige E-Mail-Adresse oder Telefonnummer eintragen.' : 'Bitte geben Sie eine Telefonnummer oder E-Mail-Adresse an, damit der Club antworten kann.';
       kontakt.setAttribute('aria-invalid', 'true');
       kontakt.focus();
       return;
     }
     kontakt.removeAttribute('aria-invalid');
     fehler.textContent = '';
-    const ok = f.parentElement.querySelector('[data-bestaetigung]');
+    const t = gewaehlt();
+    const titel = t.parentElement.textContent.trim();
+    const daten = {
+      thema: t.value, name: f.elements.name.value.trim(), kontakt: wert, nachricht: f.elements.nachricht.value.trim(),
+      firma: f.elements.firma.value, dauer: Date.now() - geladen, seite: location.pathname,
+      id: (window.crypto && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random()),
+    };
+    knopf.disabled = true;
+    knopf.textContent = 'Wird gesendet …';
+    let ok = false, meldung = '';
+    try {
+      const r = await fetch(f.dataset.endpunkt, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(daten) });
+      ok = r.ok;
+      if (!ok) meldung = ((await r.json().catch(() => ({}))).error) || '';
+    } catch (x) { ok = false; }
+    knopf.disabled = false;
+    knopf.textContent = 'Nachricht senden';
+    if (!ok) {
+      const betreff = encodeURIComponent('Anfrage über die Website: ' + titel);
+      const text = encodeURIComponent((daten.nachricht || '') + '\n\n' + (daten.name ? daten.name + '\n' : '') + daten.kontakt);
+      fehler.textContent = (meldung || 'Der Versand hat gerade nicht geklappt.') + ' ';
+      const a = document.createElement('a');
+      a.href = `mailto:${t.dataset.an}?subject=${betreff}&body=${text}`;
+      a.textContent = `Nachricht stattdessen als E-Mail an ${t.dataset.an} senden`;
+      fehler.append(a);
+      return;
+    }
+    const best = f.parentElement.querySelector('[data-bestaetigung]');
+    best.querySelector('[data-bestaetigung-an]').textContent = `${titel} (${t.dataset.an})`;
     f.hidden = true;
-    ok.hidden = false;
-    ok.focus();
+    best.hidden = false;
+    best.focus();
   });
 });
 

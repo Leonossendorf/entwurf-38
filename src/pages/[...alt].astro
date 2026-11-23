@@ -1,0 +1,52 @@
+---
+// Weiterleitungen von den Adressen der bisherigen WordPress-Seite auf die neuen Seiten (GitHub Pages kann keine Server-Weiterleitung).
+export function getStaticPaths() {
+  const ZIELE: Record<string, string> = {
+    'anfahrt': '/kontakt/#anfahrt',
+    'bildergalerie': '/aktuelles/',
+    'category/allgemein': '/aktuelles/',
+    '2026/10/03/restaurantbote-10-11-2026': '/aktuelles/2026-10-03-restaurantbote/',
+    'captains-becher': '/wettspiele/',
+    'damen-pokal': '/wettspiele/',
+    'rosen-pokal': '/wettspiele/',
+    'team-cup': '/wettspiele/',
+    'turnierkalender': '/termine/',
+    'damengolf': '/damen-und-herrengolf/',
+    'herrengolf': '/damen-und-herrengolf/',
+    'datenschutzerklaerung': '/datenschutz/',
+    'download-center': '/downloads/',
+    'einzelunterricht': '/golfschule/',
+    'golflehrer': '/golfschule/',
+    'kursangebot': '/golfschule/',
+    'fitting-termin-buchen': '/service-pavillon/',
+    'golf-spielen': '/platz/',
+    'golf-ueben': '/platz/#ueben',
+    'golf-und-natur': '/platz/#natur',
+    'rundflug': '/platz/',
+    'golfplatz-kg': '/club/',
+    'historie-und-chronik': '/club/',
+    'vorstand': '/club/',
+    'greenfee-euregio': '/gaeste/',
+    'greenfeeverbund-muensterland': '/gaeste/',
+    'hotelkooperation': '/gaeste/',
+    'hospitality-chain': '/gaeste/',
+    'kinder-und-jugendtraining': '/kinder-und-jugend/',
+    'platzwart': '/platz/#platzstatus',
+  };
+  return Object.entries(ZIELE).map(([alt, ziel]) => ({ params: { alt }, props: { ziel } }));
+}
+const { ziel } = Astro.props;
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Weiterleitung · Golfclub Euregio Bad Bentheim</title>
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${ziel}`} />
+    <link rel="canonical" href={ziel} />
+  </head>
+  <body>
+    <p>Diese Seite ist umgezogen: <a href={ziel}>weiter zur neuen Seite</a>.</p>
+  </body>
+</html>

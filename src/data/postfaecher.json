@@ -1,0 +1,15 @@
+{
+  "hinweis": "Themen im Kontaktformular, eins je Postfach des Clubs. Die Zuordnung Thema → Adresse steht zusätzlich im Worker tools/worker/kontakt.js (dort entscheidet sie). Beide gleich halten.",
+  "endpunkt": "https://golfclub-euregio-kontakt.leon-ossendorf.workers.dev/anfrage",
+  "themen": [
+    { "id": "service", "titel": "Service-Pavillon", "worum": "Startzeit, Greenfee, Golf ausprobieren, Mitgliedschaft, Shop und Fitting", "an": "service@golfclub-euregio.de" },
+    { "id": "golfschule", "titel": "Golfschule", "worum": "Unterricht, Kurse und Platzreife", "an": "rehbock-golfschule@web.de" },
+    { "id": "restaurant", "titel": "Restaurant", "worum": "Tisch reservieren, Feiern und Gutscheine", "an": "restaurant@golfclub-euregio.de" },
+    { "id": "spielbetrieb", "titel": "Spielbetrieb", "worum": "Wettspiele, Mannschaften, Damen- und Herrengolf, Handicap", "an": "spielfuehrer@golfclub-euregio.de" },
+    { "id": "jugend", "titel": "Kinder und Jugend", "worum": "Training und Anmeldung für Kinder und Jugendliche", "an": "jugendwart@golfclub-euregio.de" },
+    { "id": "buchhaltung", "titel": "Beitrag und Rechnung", "worum": "Mitgliedsbeitrag, Rechnungen und Bankverbindung", "an": "buchhaltung@golfclub-euregio.de" },
+    { "id": "presse", "titel": "Fotos und Berichte", "worum": "Fotos, Berichte und Neuigkeiten für die Website", "an": "pressewart@golfclub-euregio.de" },
+    { "id": "vorstand", "titel": "Vorstand", "worum": "Anliegen an den Vorstand und Sponsoring", "an": "vorstand@golfclub-euregio.de" },
+    { "id": "info", "titel": "Allgemeine Frage", "worum": "Alles andere rund um den Club", "an": "info@golfclub-euregio.de" }
+  ]
+}

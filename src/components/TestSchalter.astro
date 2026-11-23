@@ -1,0 +1,23 @@
+---
+// NUR ZUM TESTEN (23.11.): schaltet drei Varianten der Trennung zwischen Symbolleiste und Menüzeile durch.
+// Vor dem Livegang entfernen: diese Datei, die Zeile in Basis.astro und den Block „Testschalter“ in global.css.
+---
+<div class="testschalter" role="group" aria-label="Test: Trennung der Kopfleiste">
+  <span class="testschalter__titel">Test Trennung</span>
+  <button type="button" data-trenner-wahl="1" title="Linie dicker">1</button>
+  <button type="button" data-trenner-wahl="2" title="Linie dünn in Rot">2</button>
+  <button type="button" data-trenner-wahl="3" title="Menüzeile als eigenes dunkles Band">3</button>
+</div>
+<script is:inline>
+  (function () {
+    var h = document.documentElement;
+    var wahl = localStorage.getItem('gce-trenner') || '3';
+    function setze(w) {
+      h.setAttribute('data-trenner', w);
+      localStorage.setItem('gce-trenner', w);
+      document.querySelectorAll('[data-trenner-wahl]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.trennerWahl === w ? 'true' : 'false'); });
+    }
+    setze(wahl);
+    document.querySelectorAll('[data-trenner-wahl]').forEach(function (b) { b.addEventListener('click', function () { setze(b.dataset.trennerWahl); }); });
+  })();
+</script>

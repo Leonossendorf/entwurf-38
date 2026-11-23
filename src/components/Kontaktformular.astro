@@ -1,45 +1,44 @@
 ---
-// Kurzes Formular. Im Entwurf wird nichts verschickt; später geht es an info@golfclub-euregio.de.
-interface Props { themen?: string[]; vorwahl?: string; titel?: string; id?: string }
-const {
-  themen = ['Allgemeine Frage', 'Golf ausprobieren', 'Platzreife', 'Mitgliedschaft', 'Startzeit oder Greenfee', 'Golfschule'],
-  vorwahl = themen[0],
-  titel = 'Frage an den Club',
-  id = 'anfrage',
-} = Astro.props;
+// Kontaktformular: ein Thema je Postfach des Clubs (src/data/postfaecher.json). Die Nachricht geht über den Worker
+// „golfclub-euregio-kontakt“ an die passende Adresse; klappt der Versand nicht, bietet das Formular eine fertige E-Mail an.
+import p from '../data/postfaecher.json';
+interface Props { vorwahl?: string; titel?: string; id?: string }
+const { vorwahl = 'info', titel = 'Frage an den Club', id = 'anfrage' } = Astro.props;
+const start = p.themen.find((t) => t.id === vorwahl) ?? p.themen[p.themen.length - 1];
 ---
 <div class="formular-huelle" id={id}>
-  <form class="formular" data-formular novalidate aria-labelledby={`${id}-titel`}>
+  <form class="formular" data-formular data-endpunkt={p.endpunkt} novalidate aria-labelledby={`${id}-titel`}>
     <h2 class="fahne" id={`${id}-titel`}>{titel}</h2>
     <fieldset class="feld">
-      <legend>Worum geht es?</legend>
+      <legend>An wen geht Ihre Nachricht?</legend>
       <div class="chips">
-        {themen.map((t) => (
-          <label><input type="radio" name="thema" value={t} checked={t === vorwahl} /><span>{t}</span></label>
+        {p.themen.map((t) => (
+          <label title={t.worum}><input type="radio" name="thema" value={t.id} checked={t.id === start.id} data-an={t.an} data-worum={t.worum} /><span>{t.titel}</span></label>
         ))}
       </div>
+      <p class="formular__ziel" aria-live="polite" data-ziel><span data-ziel-worum>{start.worum}</span> · geht an <b data-ziel-an>{start.an}</b></p>
     </fieldset>
     <div class="zeile-2">
       <div class="feld">
         <label for={`${id}-name`}>Name <span class="hilfe">(Angabe optional)</span></label>
-        <input id={`${id}-name`} name="name" autocomplete="name" />
+        <input id={`${id}-name`} name="name" autocomplete="name" maxlength="80" />
       </div>
       <div class="feld">
         <label for={`${id}-kontakt`}>Telefon oder E-Mail <span class="hilfe">(damit wir antworten können)</span></label>
-        <input id={`${id}-kontakt`} name="kontakt" autocomplete="email" required aria-describedby={`${id}-fehler`} />
+        <input id={`${id}-kontakt`} name="kontakt" autocomplete="email" required maxlength="160" aria-describedby={`${id}-fehler`} />
       </div>
     </div>
     <div class="feld">
       <label for={`${id}-nachricht`}>Ihre Nachricht <span class="hilfe">(Angabe optional)</span></label>
-      <textarea id={`${id}-nachricht`} name="nachricht"></textarea>
+      <textarea id={`${id}-nachricht`} name="nachricht" maxlength="4000"></textarea>
     </div>
+    <div class="formular__falle" aria-hidden="true"><label>Firma <input name="firma" tabindex="-1" autocomplete="off" /></label></div>
     <p class="formular__fehler" id={`${id}-fehler`} aria-live="polite"></p>
     <div><button class="knopf knopf--voll" type="submit">Nachricht senden</button></div>
-    <p class="formular__hinweis">Entwurf: Das Formular verschickt noch nichts. Später geht Ihre Nachricht an {`info@golfclub-euregio.de`}.</p>
+    <p class="formular__hinweis">Ihre Angaben gehen nur als E-Mail an den Club und werden auf der Website nicht gespeichert. Mehr dazu im <a href="/datenschutz/#formular">Datenschutz</a>.</p>
   </form>
   <div class="bestaetigung" hidden tabindex="-1" data-bestaetigung>
     <h3>Danke, Ihre Nachricht ist angekommen.</h3>
-    <p>So würde es auf der fertigen Seite weitergehen: Die Nachricht geht an das Team im Service-Pavillon, und Sie bekommen eine Antwort an die angegebene Adresse oder Nummer.</p>
-    <p style="margin:0"><strong>Entwurf:</strong> Es wurde nichts verschickt.</p>
+    <p style="margin:0">Sie ging an <b data-bestaetigung-an></b>. Der Club antwortet Ihnen an die angegebene Adresse oder Nummer.</p>
   </div>
 </div>

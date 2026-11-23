@@ -11,8 +11,7 @@ import d from '../data/club-daten.json';
       <ul class="raster raster--4" style="list-style:none;padding:0">
         {d.sponsoren.map((s) => <li class="karte" style="padding:1rem 1.1rem">{s.web ? <a href={s.web} rel="noopener">{s.name}</a> : s.name}</li>)}
       </ul>
-      <p class="leise">Im Entwurf stehen hier die Webadressen. Auf der fertigen Seite zeigen wir die Logos der Sponsoren.</p>
     </div>
   </section>
-  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular titel="Sponsor werden" themen={['Sponsoring', 'Allgemeine Frage']} /></div></section>
+  <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular titel="Sponsor werden" vorwahl="vorstand" /></div></section>
 </Basis>
