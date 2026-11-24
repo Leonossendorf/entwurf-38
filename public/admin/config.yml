@@ -11,7 +11,7 @@ backend:
     uploadMedia: 'Bild hochgeladen: {{path}}'
     deleteMedia: 'Bild gelöscht: {{path}}'
 
-site_url: https://golfeuregio.leonossendorf.de
+site_url: https://www.golfclub-euregio.de
 locale: de
 media_folder: public/bilder/neu
 public_folder: /bilder/neu
