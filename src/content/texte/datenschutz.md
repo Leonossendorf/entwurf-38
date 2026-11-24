@@ -25,7 +25,9 @@ Eine Einwilligung können Sie jederzeit für die Zukunft widerrufen. Sie können
 
 ## Aufruf der Website (Hosting)
 
-Die Website liegt bei **GitHub Pages** (GitHub, Inc., 88 Colin P Kelly Jr Street, San Francisco, CA 94107, USA). Bei jedem Aufruf verarbeitet der Server technisch notwendige Daten: Ihre IP-Adresse, Datum und Uhrzeit, die aufgerufene Seite, die zuvor besuchte Seite und die Art Ihres Browsers. Ohne diese Daten kann die Seite nicht ausgeliefert werden. GitHub speichert sie kurzzeitig in Protokollen, um den Dienst sicher zu betreiben.
+Die Website liegt bei **Cloudflare Pages** (Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA). Bei jedem Aufruf verarbeitet der Server technisch notwendige Daten: Ihre IP-Adresse, Datum und Uhrzeit, die aufgerufene Seite, die zuvor besuchte Seite und die Art Ihres Browsers. Ohne diese Daten kann die Seite nicht ausgeliefert werden. Cloudflare speichert sie kurzzeitig in Protokollen, um den Dienst sicher zu betreiben.
+
+Wer die Adresse ohne „www“ aufruft (golfclub-euregio.de), wird über **GitHub Pages** (GitHub, Inc., 88 Colin P Kelly Jr Street, San Francisco, CA 94107, USA) auf www.golfclub-euregio.de weitergeleitet. Dabei verarbeitet GitHub dieselben technischen Daten.
 
 Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und schnellen Website (Art. 6 Abs. 1 lit. f DSGVO). Die Übermittlung in die USA stützt sich auf den Angemessenheitsbeschluss der EU-Kommission zum EU-US Data Privacy Framework, soweit der Anbieter danach zertifiziert ist, sonst auf Standardvertragsklauseln der EU-Kommission.
 

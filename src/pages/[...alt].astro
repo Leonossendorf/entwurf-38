@@ -1,5 +1,5 @@
 ---
-// Weiterleitungen von den Adressen der bisherigen WordPress-Seite auf die neuen Seiten (GitHub Pages kann keine Server-Weiterleitung).
+// Weiterleitungen von den Adressen der bisherigen WordPress-Seite auf die neuen Seiten (Rückfall; Cloudflare Pages leitet über public/_redirects schon mit 301 um).
 export function getStaticPaths() {
   const ZIELE: Record<string, string> = {
     'anfahrt': '/kontakt/#anfahrt',
