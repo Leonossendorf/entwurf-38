@@ -27,7 +27,7 @@ Eine Einwilligung können Sie jederzeit für die Zukunft widerrufen. Sie können
 
 Die Website liegt bei **Cloudflare Pages** (Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA). Bei jedem Aufruf verarbeitet der Server technisch notwendige Daten: Ihre IP-Adresse, Datum und Uhrzeit, die aufgerufene Seite, die zuvor besuchte Seite und die Art Ihres Browsers. Ohne diese Daten kann die Seite nicht ausgeliefert werden. Cloudflare speichert sie kurzzeitig in Protokollen, um den Dienst sicher zu betreiben.
 
-Wer die Adresse ohne „www“ aufruft (golfclub-euregio.de), wird über **GitHub Pages** (GitHub, Inc., 88 Colin P Kelly Jr Street, San Francisco, CA 94107, USA) auf www.golfclub-euregio.de weitergeleitet. Dabei verarbeitet GitHub dieselben technischen Daten.
+Wer die Adresse ohne „www“ aufruft (golfclub-euregio.de), wird vom Webserver des Clubs bei der **Hetzner Online GmbH** (Industriestr. 25, 91710 Gunzenhausen) auf www.golfclub-euregio.de weitergeleitet. Dabei verarbeitet Hetzner dieselben technischen Daten auf Servern in Deutschland.
 
 Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und schnellen Website (Art. 6 Abs. 1 lit. f DSGVO). Die Übermittlung in die USA stützt sich auf den Angemessenheitsbeschluss der EU-Kommission zum EU-US Data Privacy Framework, soweit der Anbieter danach zertifiziert ist, sonst auf Standardvertragsklauseln der EU-Kommission.
 
