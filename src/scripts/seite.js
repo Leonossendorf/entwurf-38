@@ -207,7 +207,11 @@ if (kopf && kopf.dataset.startseite && held) {
 const bhKnopf = $('[data-bedienhilfen]');
 const bhFeld = $('#bedienhilfen');
 if (bhKnopf && bhFeld) {
-  const auf = (offen) => { bhFeld.hidden = !offen; bhKnopf.setAttribute('aria-expanded', String(offen)); };
+  const auf = (offen) => {
+    // Auf dem Handy liegt das Feld fest über die ganze Breite direkt unter der Kopfleiste
+    if (offen) bhFeld.style.setProperty('--bh-oben', `${Math.round(bhKnopf.getBoundingClientRect().bottom + 6)}px`);
+    bhFeld.hidden = !offen; bhKnopf.setAttribute('aria-expanded', String(offen));
+  };
   bhKnopf.addEventListener('click', () => auf(bhFeld.hidden));
   $('[data-bedienhilfen-zu]', bhFeld).addEventListener('click', () => { auf(false); bhKnopf.focus(); });
   document.addEventListener('click', (e) => {
@@ -400,3 +404,19 @@ if (grossKnoepfe.length) {
   });
   window.addEventListener('resize', () => { if (d.open) einpassen(); });
 }
+
+// --- Runde 24.11.: Handy und große Schrift
+// Echte Höhe der Kopfleiste merken, damit Sprungziele (z. B. #platzstatus) nicht darunter verschwinden
+if (kopf) {
+  const kopfMessen = () => html.style.setProperty('--kopf-echt', `${kopf.offsetHeight}px`);
+  kopfMessen();
+  if ('ResizeObserver' in window) new ResizeObserver(kopfMessen).observe(kopf);
+}
+// Tabellen werden auf dem Handy zu Karten: jede Zelle bekommt ihren Spaltennamen
+$$('.tabelle-huelle table').forEach((t) => {
+  if (t.closest('[data-nicht-stapeln]')) return;
+  const namen = $$('thead th', t).map((th) => th.textContent.trim());
+  if (namen.length < 2) return;
+  t.classList.add('stapelbar');
+  $$('tbody tr', t).forEach((tr) => [...tr.children].forEach((z, i) => { if (namen[i] && z.tagName === 'TD') z.setAttribute('data-spalte', namen[i]); }));
+});

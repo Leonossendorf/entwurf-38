@@ -761,3 +761,54 @@ html[data-schrift="gross"] .werkzeug__symbol { width: 42px; height: 42px; }
 .rechtstext h2 { font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.65rem); margin: 2.2rem 0 0.5rem; }
 .rechtstext h2:first-child { margin-top: 0; }
 .rechtstext p, .rechtstext li { font-size: 1.05rem; }
+
+/* --- Runde 24.11.: Handy und große Schrift --- */
+html { scroll-padding-top: calc(var(--kopf-echt, var(--kopf-h)) + 1rem); }
+/* Lange Wörter und breite Inhalte dürfen Spalten nicht über den Bildschirm drücken */
+:where(main, .held, .seitenkopf, .fuss) :where(*) { min-width: 0; }
+h1, h2, h3, .kachel__name, .karte h3 a, .pfad { overflow-wrap: break-word; hyphens: auto; }
+.held__film-knoepfe { flex-wrap: wrap; }
+.person-karte { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1.2rem; align-items: start; }
+@media (max-width: 520px) { .person-karte { grid-template-columns: 1fr; } .person-karte img { max-width: 9rem; } }
+@media (max-width: 760px) {
+  html[data-schrift='gross'] .person-karte { grid-template-columns: 1fr; }
+  /* Bedienhilfen: festes Feld über die ganze Breite, statt nach links aus dem Bild zu rutschen */
+  .zugang { position: fixed; top: var(--bh-oben, 5.5rem); left: 0.5rem; right: 0.5rem; width: auto; max-height: calc(100dvh - var(--bh-oben, 5.5rem) - 0.5rem); overflow-y: auto; overscroll-behavior: contain; }
+  /* Platzstatus-Kacheln: Text bleibt in der Kachel */
+  .status__kacheln .kachel__wert { white-space: normal; }
+  html[data-schrift='gross'] .status__kacheln { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 420px) { .status__kacheln { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 400px) { html[data-schrift='gross'] .held__film-knoepfe .filmknopf { white-space: normal; } }
+/* Tabellen auf dem Handy als Karten (Spaltenname links, Wert rechts) */
+@media (max-width: 640px) {
+  table.stapelbar thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  table.stapelbar, table.stapelbar tbody, table.stapelbar tr { display: block; width: 100%; }
+  table.stapelbar tr { padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--linie); }
+  table.stapelbar tr:last-child { border-bottom: 0; }
+  table.stapelbar th { display: block; padding: 0 0 0.35rem; text-align: left; border: 0; }
+  table.stapelbar td { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.2rem 0; border: 0; text-align: right; }
+  table.stapelbar td::before { content: attr(data-spalte); flex: 1 1 auto; min-width: 0; white-space: normal; font-weight: 600; color: var(--text-leise); text-align: left; }
+  table.stapelbar td { white-space: nowrap; }
+  table.stapelbar th { font-family: var(--schrift-titel); font-weight: 800; color: var(--petrol); }
+  table.stapelbar td:empty { display: none; }
+}
+a[href^='mailto:'] { overflow-wrap: anywhere; }
+@media (max-width: 420px) { main p, main li, main dd, main td { overflow-wrap: break-word; hyphens: auto; } }
+/* Sehr schmale Handys (unter 360 px, auch mit großer Schrift): Kopfleiste passt in eine Zeile */
+@media (max-width: 359px) {
+  html body .kopf .logo img { width: 72px; }
+  html body .kopf .werkzeuge { gap: 0; }
+  html body .kopf .werkzeug > a, html body .kopf .werkzeug > button { min-width: 2.6rem; padding-inline: 0.1rem; }
+  html body .kopf .werkzeug__text { font-size: 0.62rem; }
+  html body .kopf .werkzeug--zugang > button { width: 70px; min-width: 70px; }
+  html body .kopf .werkzeug--zugang .werkzeug__text { font-size: 11px; letter-spacing: -0.02em; }
+}
+/* Menü und Bedienhilfen am Handy: Seite dahinter bleibt stehen, Feld über die ganze Breite, nichts springt */
+.menue { overscroll-behavior: contain; }
+html:has(dialog.menue[open]) { overflow: hidden; }
+.menue__gruppe summary { -webkit-tap-highlight-color: transparent; }
+@media (max-width: 760px) {
+  .menue { left: 0.5rem; right: 0.5rem; width: auto; max-width: none; }
+  html:has(#bedienhilfen:not([hidden])) { overflow: hidden; }
+}

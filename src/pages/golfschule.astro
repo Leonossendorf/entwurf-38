@@ -16,7 +16,7 @@ const preise = [['30 Minuten', '38 €', '35 €'], ['40 Minuten', '50 €', '47
       <h2 class="fahne visuell-versteckt" id="lehrer-titel">Die Golflehrer</h2>
       <div class="raster raster--2">
         {p.golflehrer.map((l) => (
-          <article class="karte" style="display:grid;grid-template-columns:7.5rem 1fr;gap:1.2rem;align-items:start">
+          <article class="karte person-karte">
             <div class="foto foto--quadrat" style="border-radius:50%"><Bild name={l.bild} alt={`Porträt von ${l.name}`} sizes="8rem" position="50% 25%" /></div>
             <div>
               <h3 style="margin-bottom:.2rem">{l.name}</h3>
