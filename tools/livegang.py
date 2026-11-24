@@ -1,4 +1,4 @@
-"""Schaltet die Website von der Entwurfsadresse auf www.golfclub-euregio.de um.
+"""ERLEDIGT am 24.11.2026. Schaltet die Website von der Entwurfsadresse auf www.golfclub-euregio.de um.
 
 Aufruf im Repo-Ordner:  python tools/livegang.py
 Danach: bauen, prüfen, committen, pushen, dann die Domain in GitHub Pages setzen
@@ -16,6 +16,7 @@ DNS bei Hetzner (Zone golfclub-euregio.de, nur diese Einträge ändern, Mail-Ein
   @    A      185.199.109.153
   @    A      185.199.110.153
   @    A      185.199.111.153
+  @    AAAA   2606:50c0:8000::153 / 8001 / 8002 / 8003 ::153 (alter AAAA 2a01:4f8:d0a:281c::2 weg)
   www  CNAME  leonossendorf.github.io.
 Der Eintrag wwwalt (alter Server) bleibt, damit die alte Seite zum Nachschauen erreichbar ist.
 """
