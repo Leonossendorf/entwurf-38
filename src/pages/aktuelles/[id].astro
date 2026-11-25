@@ -20,7 +20,7 @@ const { Content } = await render(e);
         <Content />
         <p><a class="pfeil-link" href="/aktuelles/">Alle Neuigkeiten</a></p>
       </div>
-      {e.data.bild && <figure class="foto"><Bild name={e.data.bild} alt={e.data.bildtext ?? ''} sizes="(max-width: 900px) 100vw, 45vw" /></figure>}
+      {e.data.originalbild ? <figure class="originalbild"><a href={e.data.originalbild} target="_blank" rel="noopener"><img src={e.data.originalbild} alt={e.data.bildtext ?? ''} loading="lazy" decoding="async" /></a><figcaption class="leise">Zum Vergrößern antippen</figcaption></figure> : e.data.bild && <figure class="foto"><Bild name={e.data.bild} alt={e.data.bildtext ?? ''} sizes="(max-width: 900px) 100vw, 45vw" /></figure>}
     </div>
   </article>
   <section class="abschnitt abschnitt--weiss"><div class="innen innen--schmal"><Kontaktformular /></div></section>

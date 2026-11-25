@@ -16,8 +16,8 @@ const gross = (n: string) => { const b = (bilder as any)[n]; return `/bilder/${n
       <h2 class="fahne" id="neu-titel">Neuigkeiten</h2>
       <div class="raster raster--2">
         {neues.map((n) => (
-          <article class="karte" style="display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:1.2rem;align-items:start">
-            {n.data.bild && <div class="foto foto--quadrat"><Bild name={n.data.bild} alt="" sizes="(max-width: 900px) 40vw, 18vw" /></div>}
+          <article class="karte karte--link" style="display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:1.2rem;align-items:start">
+            {n.data.originalbild ? <div class="foto foto--quadrat foto--oben"><img src={n.data.originalbild} alt="" loading="lazy" decoding="async" /></div> : n.data.bild && <div class="foto foto--quadrat"><Bild name={n.data.bild} alt="" sizes="(max-width: 900px) 40vw, 18vw" /></div>}
             <div>
               <p class="leise" style="margin-bottom:.3rem">{n.data.datum.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
               <h3><a href={`/aktuelles/${n.id}/`}>{n.data.titel}</a></h3>

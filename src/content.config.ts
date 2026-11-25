@@ -18,6 +18,7 @@ const aktuelles = defineCollection({
     datum: z.coerce.date(),
     bild: z.string().optional(),
     bildtext: z.string().optional(),
+    originalbild: z.string().optional(),
     kurz: z.string(),
   }),
 });

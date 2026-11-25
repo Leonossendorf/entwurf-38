@@ -159,29 +159,14 @@ const neues = (await getCollection('aktuelles')).sort((a, b) => b.data.datum.get
     </div>
   </section>
 
-  <section class="abschnitt" aria-labelledby="natur-titel">
-    <div class="innen zwei-spalten zwei-spalten--mitte">
-      <div>
-        <p class="dachzeile">Golf und Natur</p>
-        <h2 class="fahne" id="natur-titel">Ein Platz, der auch Bienen gehört</h2>
-        <p>Am Rand der Fairways blüht es, an Bahn 11 steht ein Insektenhotel, und neben Bahn 14 summen die Bienen aus den Stöcken des Clubs.</p>
-        <a class="pfeil-link" href="/platz/#natur">Mehr über die Natur auf dem Platz</a>
-      </div>
-      <div class="raster raster--2">
-        <figure class="foto foto--hoch einblenden"><Bild name="hummel" alt="Eine Hummel auf einer lila Blüte am Rand des Platzes" sizes="(max-width: 900px) 50vw, 22vw" /></figure>
-        <figure class="foto foto--hoch einblenden"><Bild name="bienenstoecke" alt="Bienenstöcke zwischen hohen Gräsern neben dem Platz" sizes="(max-width: 900px) 50vw, 22vw" position="40% 50%" /></figure>
-      </div>
-    </div>
-  </section>
-
   <section class="abschnitt abschnitt--weiss" aria-labelledby="neues-titel">
     <div class="innen">
       <p class="dachzeile">Aus dem Club</p>
       <h2 class="fahne" id="neues-titel">Aktuelles</h2>
       <div class="raster raster--3">
         {neues.map((n) => (
-          <article class="karte einblenden">
-            {n.data.bild && <div class="foto foto--breit" style="margin:-1.4rem -1.4rem 1rem"><Bild name={n.data.bild} alt="" sizes="(max-width: 900px) 100vw, 30vw" /></div>}
+          <article class="karte karte--link einblenden">
+            {n.data.originalbild ? <div class="foto foto--breit foto--oben" style="margin:-1.4rem -1.4rem 1rem"><img src={n.data.originalbild} alt="" loading="lazy" decoding="async" /></div> : n.data.bild && <div class="foto foto--breit" style="margin:-1.4rem -1.4rem 1rem"><Bild name={n.data.bild} alt="" sizes="(max-width: 900px) 100vw, 30vw" /></div>}
             <p class="leise" style="margin-bottom:.3rem">{n.data.datum.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
             <h3><a href={`/aktuelles/${n.id}/`}>{n.data.titel}</a></h3>
             <p style="margin:0">{n.data.kurz}</p>
