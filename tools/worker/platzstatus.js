@@ -34,10 +34,31 @@ async function aktuell(env) {
   return { greenState: s.greenState, stand: berlin(s.zeit), zeit: s.zeit, quelle: s.quelle || 'neues Portal', text: kurz(s.greenState), platz: !!z[0], cart: !!z[1], trolley: !!z[2], bag: !!z[3], range: !!z[4] };
 }
 
+// Internes Zugriffsprotokoll (nur im Speicher des Workers, im Portal nicht sichtbar).
+// Keine IP-Adresse: nur ein Gerätekürzel (Prüfsumme aus IP und Browser, mit geheimem Zusatz), Gerätetyp, Ort grob, Netzanbieter.
+function geraetTyp(ua) {
+  const os = /iPhone/.test(ua) ? 'iPhone' : /iPad/.test(ua) ? 'iPad' : /Android/.test(ua) ? 'Android' : /Windows/.test(ua) ? 'Windows' : /Mac OS/.test(ua) ? 'Mac' : /Linux/.test(ua) ? 'Linux' : 'unbekannt';
+  const br = /Edg\//.test(ua) ? 'Edge' : /SamsungBrowser/.test(ua) ? 'Samsung' : /Firefox|FxiOS/.test(ua) ? 'Firefox' : /CriOS|Chrome/.test(ua) ? 'Chrome' : /Safari/.test(ua) ? 'Safari' : 'anderer';
+  return `${os}, ${br}`;
+}
+async function protokoll(req, env, art, extra = {}) {
+  try {
+    const ip = req.headers.get('cf-connecting-ip') || '';
+    const ua = req.headers.get('user-agent') || '';
+    const roh = new TextEncoder().encode(`${env.TOKEN}|${ip}|${ua}`);
+    const kuerzel = [...new Uint8Array(await crypto.subtle.digest('SHA-256', roh))].slice(0, 3).map((b) => b.toString(16).padStart(2, '0')).join('');
+    const cf = req.cf || {};
+    const e = { zeit: Date.now(), art, geraet: kuerzel, typ: geraetTyp(ua), ort: [cf.city, cf.country].filter(Boolean).join(', '), netz: cf.asOrganization || '', ...extra };
+    const liste = (await env.PLATZ.get('protokoll', { type: 'json' })) || [];
+    liste.unshift(e);
+    await env.PLATZ.put('protokoll', JSON.stringify(liste.slice(0, 1000)));
+  } catch {}
+}
+
 const json = (d, status = 200) => new Response(JSON.stringify(d), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', ...CORS } });
 
 export default {
-  async fetch(req, env) {
+  async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const pfad = url.pathname.replace(/\/+$/, '') || '/';
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: { ...CORS, 'Access-Control-Allow-Methods': 'GET', 'Access-Control-Allow-Headers': 'Content-Type' } });
@@ -58,8 +79,10 @@ export default {
       const verlauf = (await env.PLATZ.get('verlauf', { type: 'json' })) || [];
       verlauf.unshift(eintrag);
       await env.PLATZ.put('verlauf', JSON.stringify(verlauf.slice(0, 100)));
+      ctx.waitUntil(protokoll(req, env, 'Änderung', { greenState: gs }));
       return json({ ok: true, stand: berlin(eintrag.zeit), text: kurz(gs) });
     }
+    ctx.waitUntil(protokoll(req, env, 'Aufruf'));
     const s = await aktuell(env);
     const verlauf = ((await env.PLATZ.get('verlauf', { type: 'json' })) || []).slice(0, 5);
     return new Response(seite(s, verlauf), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'Referrer-Policy': 'no-referrer' } });
