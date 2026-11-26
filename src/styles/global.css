@@ -836,3 +836,4 @@ html[data-bewegung='aus'] .karte--link { transition: none; transform: none; }
   html body .statuszeile b { position: absolute; top: 0.1rem; left: calc(50% + 0.45rem); width: 0.95rem; height: 0.95rem; font-size: 0.62rem; border: 2px solid var(--tief); box-sizing: content-box; }
 }
 @media (max-width: 960px) { html[data-schrift='gross'] body .statuszeile a { font-size: 0.66rem; } }
+@media (max-width: 400px) { main table th, main table td { white-space: normal; overflow-wrap: anywhere; } main table { width: 100%; table-layout: fixed; } main .tabelle-huelle[data-nicht-stapeln] table { table-layout: auto; width: auto; } }
