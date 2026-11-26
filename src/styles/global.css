@@ -824,3 +824,15 @@ html[data-bewegung='aus'] .karte--link { transition: none; transform: none; }
 .originalbild { margin: 0; }
 .originalbild img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--linie); box-shadow: 0 10px 28px rgba(10, 25, 30, 0.12); }
 .originalbild figcaption { margin-top: 0.5rem; text-align: center; }
+
+/* --- Runde 26.11.: Driving Range oben in der Kopfleiste (Computer) und in der Statuszeile (Handy) --- */
+.werkzeug--range .werkzeug__symbol svg { fill: none; stroke: currentColor; }
+@media (max-width: 960px) { .statuszeile { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+/* Handy-Statuszeile mit fünf Einträgen: Symbol oben, Haken/Kreuz am Symbol, Name klein darunter (wie oben am Computer) */
+@media (max-width: 960px) {
+  html body .statuszeile { gap: 0.1rem; padding: 0.3rem 0.3rem 0.35rem; }
+  html body .statuszeile a { flex-direction: column; gap: 0.12rem; padding: 0.25rem 0.1rem; font-size: 0.74rem; line-height: 1.1; }
+  html body .statuszeile svg, html body .statuszeile .altsymbol { width: 1.45rem; height: 1.45rem; }
+  html body .statuszeile b { position: absolute; top: 0.1rem; left: calc(50% + 0.45rem); width: 0.95rem; height: 0.95rem; font-size: 0.62rem; border: 2px solid var(--tief); box-sizing: content-box; }
+}
+@media (max-width: 960px) { html[data-schrift='gross'] body .statuszeile a { font-size: 0.66rem; } }

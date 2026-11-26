@@ -63,6 +63,13 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
           <span class="tipp" role="tooltip" data-ps-text={id} data-ja={`${lang} heute erlaubt`} data-nein={`${lang} heute nicht erlaubt`}>{lang} heute {z[id] ? 'erlaubt' : 'nicht erlaubt'}</span>
         </li>
       ))}
+      <li class="werkzeug werkzeug--erlaubt werkzeug--range">
+        <a href="/platz/#platzstatus" aria-label={`Driving Range heute ${z.range ? 'geöffnet' : 'gesperrt'}`} data-ps-label="range" data-vorlage="Driving Range heute {}" data-ja-wort="geöffnet" data-nein-wort="gesperrt">
+          <span class="werkzeug__symbol"><Symbol name="range" /><span class:list={['werkzeug__marke', z.range ? 'werkzeug__marke--ja' : 'werkzeug__marke--nein']} aria-hidden="true" data-ps-marke="range">{z.range ? '✓' : '✕'}</span></span>
+          <span class="werkzeug__text">Range</span>
+        </a>
+        <span class="tipp" role="tooltip" data-ps-text="range" data-ja="Driving Range heute geöffnet" data-nein="Driving Range heute gesperrt">Driving Range heute {z.range ? 'geöffnet' : 'gesperrt'}</span>
+      </li>
       <li class="werkzeug werkzeug--wetter">
         <a href={club.wetterLink} rel="noopener" aria-describedby="tipp-wetter" data-wetter-knopf>
           <span class="werkzeug__symbol" data-wetter-symbol set:html={ohneKommentar(faWolkeSonne)} />
@@ -112,6 +119,7 @@ const wetterSymbole = { sonne: faSonne, wolkesonne: faWolkeSonne, wolke: faWolke
     {[['cart', 'Cart', 'Golf Cart'], ['trolley', 'Trolley', 'Golf Trolley'], ['bag', 'Bag', 'Golf Bag']].map(([id, kurz, lang]) => (
       <li><a href="/platz/#platzstatus" aria-label={`${lang} heute ${z[id] ? 'erlaubt' : 'nicht erlaubt'}`} data-ps-label={id} data-vorlage={`${lang} heute {}`}><span class={`altsymbol altsymbol--${id}`} aria-hidden="true"></span><span aria-hidden="true">{kurz}</span><b class:list={[z[id] ? 'ja' : 'nein']} aria-hidden="true" data-ps-b={id}>{z[id] ? '✓' : '✕'}</b></a></li>
     ))}
+    <li><a href="/platz/#platzstatus" aria-label={`Driving Range heute ${z.range ? 'geöffnet' : 'gesperrt'}`} data-ps-label="range" data-vorlage="Driving Range heute {}" data-ja-wort="geöffnet" data-nein-wort="gesperrt"><Symbol name="range" /><span aria-hidden="true">Range</span><b class:list={[z.range ? 'ja' : 'nein']} aria-hidden="true" data-ps-b="range">{z.range ? '✓' : '✕'}</b></a></li>
   </ul>
 </header>
 

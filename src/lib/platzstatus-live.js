@@ -20,7 +20,7 @@ export function platzstatusLive() {
         e.textContent = ok ? '✓' : '✕';
       });
       alle('[data-ps-text]').forEach((e) => { e.textContent = s[e.dataset.psText] ? e.dataset.ja : e.dataset.nein; });
-      alle('[data-ps-label]').forEach((e) => e.setAttribute('aria-label', e.dataset.vorlage.replace('{}', s[e.dataset.psLabel] ? 'erlaubt' : 'nicht erlaubt')));
+      alle('[data-ps-label]').forEach((e) => e.setAttribute('aria-label', e.dataset.vorlage.replace('{}', s[e.dataset.psLabel] ? (e.dataset.jaWort || 'erlaubt') : (e.dataset.neinWort || 'nicht erlaubt'))));
       alle('[data-ps-stand]').forEach((e) => { e.textContent = e.dataset.psStand.replace('{}', s.stand); });
       alle('[data-ps-kachel]').forEach((e) => {
         const ok = !!s[e.dataset.psKachel];
