@@ -22,6 +22,7 @@
     "kurse": "https://www.pccaddie.net/clubs/0493312/app.php?cat=ts_calendar_course",
     "events": "https://www.pccaddie.net/clubs/0493312/app.php?cat=ts_calendar_event",
     "trainer": "https://www.pccaddie.net/clubs/0493312/app.php?cat=tt_timetable_trainer",
+    "fitting": "https://www.pccaddie.net/clubs/0493312/app.php?cat=tt_timetable_simulator",
     "startlisten": "https://www.pccaddie.net/clubs/0493312/app.php?cat=ts_startlist",
     "ergebnisse": "https://www.pccaddie.net/clubs/0493312/app.php?cat=ts_resultlist",
     "gutscheine": "https://www.pccaddie.net/clubs/0493312/app.php?cat=voucher",

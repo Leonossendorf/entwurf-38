@@ -8,4 +8,4 @@ Im Service-Pavillon finden Sie:
 - **Zubehör:** Tees, Handschuhe, Schlägertücher und mehr
 - **Bekleidung:** Oberteile mit Clublogo, Hosen von Alberto, Regenbekleidung und Golfschuhe von FootJoy
 
-Regelmäßig gibt es **Fitting-Demotage** verschiedener Schlägermarken. Ein persönliches Fitting bei Jörg Fehlhaber buchen Sie in PC CADDIE.
+Regelmäßig gibt es **Fitting-Demotage** verschiedener Schlägermarken. Ein persönliches Fitting bei Jörg Fehlhaber buchen Sie online, siehe [Fitting](#fitting).

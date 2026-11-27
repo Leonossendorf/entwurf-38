@@ -31,8 +31,8 @@
 /golflehrer /golfschule/ 301
 /kursangebot/ /golfschule/ 301
 /kursangebot /golfschule/ 301
-/fitting-termin-buchen/ /service-pavillon/ 301
-/fitting-termin-buchen /service-pavillon/ 301
+/fitting-termin-buchen/ /service-pavillon/#fitting 301
+/fitting-termin-buchen /service-pavillon/#fitting 301
 /golf-spielen/ /platz/ 301
 /golf-spielen /platz/ 301
 /golf-ueben/ /platz/#ueben 301

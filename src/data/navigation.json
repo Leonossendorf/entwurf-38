@@ -7,6 +7,7 @@
         { "titel": "Der Platz", "text": "18 Bahnen, Übungsanlagen, Natur", "href": "/platz/" },
         { "titel": "Gäste und Greenfee", "text": "Preise, Partnerclubs, Hotel", "href": "/gaeste/" },
         { "titel": "Startzeit buchen", "text": "Online in PC CADDIE", "href": "https://www.pccaddie.net/clubs/0493312/app.php?cat=tt_timetable_course", "extern": true },
+        { "titel": "Fitting buchen", "text": "Schläger anpassen bei Jörg Fehlhaber", "href": "/service-pavillon/#fitting" },
         { "titel": "Service-Pavillon", "text": "Shop, Fitting, Anmeldung", "href": "/service-pavillon/" },
         { "titel": "Restaurant", "text": "Termühlen im Clubhaus", "href": "/restaurant/" }
       ]

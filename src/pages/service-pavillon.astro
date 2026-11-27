@@ -16,7 +16,7 @@ import club from '../data/club.json';
       <div>
         <Text name="service-pavillon" />
         <div class="knopfreihe">
-          <a class="knopf knopf--voll" href={club.pccaddie.start} rel="noopener">Fitting in PC CADDIE buchen</a>
+          <a class="knopf knopf--voll" href="#fitting">Fitting-Termin buchen</a>
           <a class="knopf knopf--rand" href={`https://wa.me/${club.whatsappService.replace('+', '')}`} rel="noopener"><Symbol name="whatsapp" />WhatsApp</a>
           <a class="knopf knopf--rand" href={`tel:${club.telefonLink}`}><Symbol name="telefon" />{club.telefon}</a>
         </div>
@@ -30,7 +30,23 @@ import club from '../data/club.json';
       </div>
     </div>
   </section>
-  <section class="abschnitt abschnitt--weiss" aria-labelledby="team-titel">
+  <section class="abschnitt abschnitt--weiss" id="fitting" aria-labelledby="fitting-titel">
+    <div class="innen zwei-spalten zwei-spalten--mitte">
+      <div>
+        <p class="dachzeile">Schläger passend machen</p>
+        <h2 class="fahne" id="fitting-titel">Fitting bei Jörg Fehlhaber</h2>
+        <p>Beim Fitting werden Ihre Schläger auf Ihren Schwung abgestimmt. Jörg Fehlhaber berät zu Material und wechselt nach Absprache auch Schlägergriffe.</p>
+        <p>Freie Fitting-Termine sehen und buchen Sie jetzt direkt online in PC CADDIE: Tag wählen, freie Uhrzeit antippen, fertig.</p>
+        <div class="knopfreihe">
+          <a class="knopf knopf--voll" href={club.pccaddie.fitting} rel="noopener">Freie Fitting-Termine ansehen</a>
+          <a class="knopf knopf--rand" href={`tel:${club.telefonLink}`}><Symbol name="telefon" />{club.telefon}</a>
+        </div>
+        <p class="leise" style="margin-top:1rem">Regelmäßig gibt es außerdem Fitting-Demotage verschiedener Schlägermarken. Die Termine stehen unter <a href="/termine/">Termine</a>.</p>
+      </div>
+      {(() => { const j = p.service.find((m) => m.name === 'Jörg Fehlhaber'); return j && j.bild && <figure class="foto foto--hoch" style="max-width:22rem;justify-self:center"><Bild name={j.bild} alt="Porträt von Jörg Fehlhaber" sizes="(max-width: 900px) 80vw, 22rem" position="50% 25%" /></figure>; })()}
+    </div>
+  </section>
+  <section class="abschnitt" aria-labelledby="team-titel">
     <div class="innen">
       <h2 class="fahne" id="team-titel">Das Team</h2>
       <div class="raster raster--3">
